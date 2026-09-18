@@ -52,11 +52,15 @@
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
 
 
-  .ic{width:15px;height:15px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .ic{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
   .eyebrow{display:flex;align-items:center;gap:8px}
-  .card .k .ic{width:15px;height:15px;color:var(--accent);flex:none;display:block}
+  .ib{width:46px;height:46px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;flex:none;
+      background:hsl(210 100% 52% / .10);border:1px solid hsl(210 100% 52% / .22);
+      box-shadow:0 1px 0 hsl(0 0% 100% / .04) inset;transition:background .2s,border-color .2s}
+  .ib .ic{width:21px;height:21px;stroke-width:2.2;color:var(--accent-2);display:block}
+  .card:hover .ib{background:hsl(210 100% 52% / .16);border-color:hsl(210 100% 52% / .38)}
   .chip{display:inline-flex;align-items:center;gap:7px}
-  .b .m .ic{width:16px;height:16px}
+  .b .m .ic{width:21px;height:21px;stroke-width:2.2;color:var(--accent-2)}
   .shothint{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:7px;justify-content:flex-end;margin:0 0 10px}
   .shothint .ic{width:13px;height:13px}
 
@@ -128,7 +132,7 @@
   .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;transition:border-color .2s,transform .2s}
   
-  .card .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px;margin-bottom:11px}
+  .card .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin:14px 0 9px}
   .card h3{font-size:16.5px;margin:0 0 7px;letter-spacing:-.01em}
   .card p{color:var(--muted);font-size:14px;margin:0;text-wrap:pretty}
 
@@ -147,7 +151,8 @@
 
   .band{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px}
   .b{display:flex;gap:13px;align-items:flex-start}
-  .b .m{font-family:var(--mono);color:var(--accent);font-size:15px;margin-top:1px}
+  .b .m{width:46px;height:46px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:1px;
+      background:hsl(210 100% 52% / .10);border:1px solid hsl(210 100% 52% / .22);box-shadow:0 1px 0 hsl(0 0% 100% / .04) inset}
   .b h4{margin:0 0 4px;font-size:15.5px}
   .b p{margin:0;color:var(--muted);font-size:14px;text-wrap:pretty}
 
@@ -231,17 +236,20 @@
     </div>
     <div class="grid3">
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 15h.01M15 9h.01M9 15h.01M12 12h.01"/></svg>iGaming</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 15h.01M15 9h.01M9 15h.01M12 12h.01"/></svg></span>
+        <span class="k">iGaming</span>
         <h3>Гемблинг и беттинг</h3>
         <p>Десятки брендов, зеркал и лендингов. Жёсткое разграничение доступа и мониторинг того, что реально открывается.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg>Affiliate</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg></span>
+        <span class="k">Affiliate</span>
         <h3>Аффилиатные и арбитражные команды</h3>
         <p>Поток доменов и лендингов под кампании – порядок, приватность и проверка гео вместо общей таблицы.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>Portfolio</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
+        <span class="k">Portfolio</span>
         <h3>Большой доменный портфель</h3>
         <p>Сотни доменов, где важны сроки продления, контроль доступа, история изменений и приватность активов.</p>
       </div>
@@ -270,62 +278,74 @@
     </div>
     <div class="grid">
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Реестр</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+        <span class="k">Реестр</span>
         <h3>Единый список доменов</h3>
         <p>Все домены, статусы и сроки – в одном месте. Поиск, фильтры, метки, цветной маркер, свои колонки.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>Лендинги</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span>
+        <span class="k">Лендинги</span>
         <h3>Реестр лендингов рядом с доменами</h3>
         <p>Адреса, гео, языки, заказчик и актуальность. Лендинг связан со своим доменом – видно обе стороны сразу.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7"/></svg>Карточка</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7"/></svg></span>
+        <span class="k">Карточка</span>
         <h3>Всё о домене – в одной карточке</h3>
         <p>Общее, отдел, интеграции, маркетинг, IT, аналитика, партнёрки – и вся история рядом.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Доступность</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span>
+        <span class="k">Доступность</span>
         <h3>Проверка круглосуточно</h3>
         <p>Домены и адреса лендингов проверяются по расписанию. Цепочка редиректов проходится до конца.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>Гео</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
+        <span class="k">Гео</span>
         <h3>Замеры из нужных стран</h3>
         <p>Адреса проверяются через резидентные каналы: видно, где сайт открывается, а где нет.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M12 8v4M12 15h.01"/></svg>Риски</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M12 8v4M12 15h.01"/></svg></span>
+        <span class="k">Риски</span>
         <h3>Блок-листы и статус у реестра</h3>
         <p>Спам-листы и базы угроз плюс RDAP: «домен отключён по жалобе» видно раньше, чем по тишине в трафике.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 3h16z"/><path d="M10 21h4"/></svg>Алерты</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 3h16z"/><path d="M10 21h4"/></svg></span>
+        <span class="k">Алерты</span>
         <h3>Slack и Telegram</h3>
         <p>Сообщение уходит на смену состояния – «лёг» и «снова открывается», без ежечасного спама.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg>Доступы</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg></span>
+        <span class="k">Доступы</span>
         <h3>Роли по проектам</h3>
         <p>Админ, менеджер, редактор, наблюдатель на каждый проект. Каждый видит только своё.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Приватность</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <span class="k">Приватность</span>
         <h3>Приватные папки</h3>
         <p>Чувствительные домены – за ограниченным доступом, точечно кому открыл.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9.5 13h5M9.5 17h5"/></svg>Аудит</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9.5 13h5M9.5 17h5"/></svg></span>
+        <span class="k">Аудит</span>
         <h3>Логируется всё</h3>
         <p>Домены, лендинги, права, роли, папки, доступы. Любое изменение: кто, когда, что.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>Скорость</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+        <span class="k">Скорость</span>
         <h3>Массовые операции и правка в таблице</h3>
         <p>Перенос, папки, метки, архив – сотни строк одним действием. Правка прямо в списке, с протяжкой как в Excel.</p>
       </div>
       <div class="card">
-        <span class="k"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6.4"/><path d="M20 5v6h-6"/></svg>Данные</span>
+        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6.4"/><path d="M20 5v6h-6"/></svg></span>
+        <span class="k">Данные</span>
         <h3>Импорт, экспорт и синхронизация</h3>
         <p>Excel, CSV и Google-таблица заезжают целиком, выгрузка обратно. Namecheap, GoDaddy, NETIM и Cloudflare подтягиваются сами.</p>
       </div>
