@@ -124,7 +124,9 @@
 
   section{padding:96px 0}
   section:nth-of-type(even){background:hsl(221 45% 9%)}
-  section:last-of-type{background:transparent}
+  /* финальный экран отделён от «Поставки» фоном и тонкой линией, иначе две секции подряд сливаются */
+  section:last-of-type{background:hsl(221 45% 9%);border-top:1px solid var(--line-soft);padding:88px 0 96px}
+  section.incl-block{border-top:1px solid var(--line-soft)}
   .sec-head{max-width:42em;margin-bottom:38px}
   .sec-head h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
   .sec-head p{color:var(--muted);margin:0;font-size:16px;text-wrap:balance}
