@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Domain Control Panel</title>
-<meta name="description" content="Self-hosted админка доменов и лендингов: единый реестр по проектам, мониторинг доступности из разных стран, блок-листы и статус у реестра, алерты в Slack и Telegram, роли доступа и полный аудит. Для iGaming, аффилиатных команд и больших портфелей.">
+<title>Domain Control Panel – реестр доменов, зеркал и лендингов</title>
+<meta name="description" content="Self-hosted реестр доменов, зеркал и лендингов: круглосуточная проверка доступности из нужных стран, сертификаты и смена делегирования, расход на продления, блок-листы и статус у реестра, алерты в Slack и Telegram, роли по проектам и полный аудит. Для iGaming, аффилиатных команд и больших портфелей.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://domainoffer-chi.vercel.app/">
-<meta property="og:title" content="Domain Control Panel — админка доменов и лендингов">
-<meta property="og:description" content="Домены и лендинги всех бизнес-юнитов в одной админке. Мониторинг доступности, алерты, роли по проектам, полный аудит. Self-hosted, white-label.">
+<meta property="og:title" content="Domain Control Panel – реестр доменов, зеркал и лендингов">
+<meta property="og:description" content="Реестр доменов, который сам говорит, что сломалось. Домены, зеркала и лендинги в одной панели: проверка из нужных стран, сертификаты, расход на продления, алерты в Telegram, роли по проектам. Self-hosted, white-label.">
 <meta property="og:image" content="https://domainoffer-chi.vercel.app/og.jpg">
 <meta property="og:image:width" content="1800">
 <meta property="og:image:height" content="1037">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Domain Control Panel">
-<meta name="twitter:description" content="Домены и лендинги всех бизнес-юнитов в одной админке. Self-hosted, white-label.">
+<meta name="twitter:description" content="Реестр доменов, который сам говорит, что сломалось. Self-hosted, white-label.">
 <meta name="twitter:image" content="https://domainoffer-chi.vercel.app/og.jpg">
 
 <style>
@@ -100,27 +100,45 @@
   .proofline .pl-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px hsl(135 49% 47% / .18)}
   .proofline .pl-sep{color:var(--faint)}
 
-  /* mock */
-  .mock{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 34px 80px -34px hsl(224 71% 2% / .9),0 0 0 1px hsl(0 0% 100% / .02) inset}
-  .mock .bar{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--panel-2)}
-  .mock .lights{display:flex;gap:6px}
-  .mock .lights i{width:10px;height:10px;border-radius:50%;background:hsl(217 33% 26%);display:block}
-  .mock .search{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-left:6px}
-  .mock .body{display:grid;grid-template-columns:130px 1fr;min-height:302px}
-  .mock .rail{border-right:1px solid var(--line);padding:14px 12px;display:flex;flex-direction:column;gap:6px;background:hsl(224 71% 3%)}
-  .mock .rail .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;margin:6px 2px 2px}
-  .mock .rail .item{font-size:12.5px;color:var(--muted);padding:5px 8px;border-radius:6px}
-  .mock .rail .item.on{background:hsl(210 100% 52% / .16);color:var(--ink)}
-  .mock .list{padding:6px 0}
-  .mock .row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:11px 16px;border-bottom:1px solid var(--line-soft)}
-  .mock .row:last-child{border-bottom:0}
-  .dom{font-family:var(--mono);font-size:13px;color:var(--ink)}
-  .meta{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:3px}
-  .pill{font-family:var(--mono);font-size:10.5px;padding:3px 9px;border-radius:999px;white-space:nowrap}
-  .pill.ok{color:var(--ok);background:hsl(135 49% 47% / .14)}
-  .pill.warn{color:var(--warn);background:hsl(45 74% 57% / .15)}
-  .pill.crit{color:var(--crit);background:hsl(3 91% 63% / .15)}
-  .tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:5px;border:1px solid var(--line);color:var(--muted);margin-left:8px}
+
+  /* числа боевой установки в hero */
+  .stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin:26px 0 0;padding:16px 18px;
+         background:var(--panel);border:1px solid var(--line);border-radius:12px}
+  .stats .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);width:100%;margin:0 0 4px}
+  .stats .s{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+  .stats .s b{font-size:17px;font-weight:700;color:var(--ink);margin-right:5px}
+  .stats .s.crit b{color:var(--crit)} .stats .s.warn b{color:var(--warn)}
+
+  /* сигнатурный блок: одна ночь в двух колонках */
+  .night{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .night .col{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .night .col.good{border-color:hsl(210 100% 52% / .38);background:linear-gradient(160deg,var(--panel),hsl(217 33% 11%))}
+  .night .ttl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 16px}
+  .night .col.good .ttl{color:var(--accent)}
+  .night ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
+  .night li{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:baseline}
+  .night .t{font-family:var(--mono);font-size:12.5px;color:var(--faint)}
+  .night .col.good .t{color:var(--accent-2)}
+  .night .e{font-size:14.5px;color:var(--muted);text-wrap:pretty}
+  .night li.hit .e{color:var(--ink)}
+  .night .sum{margin:18px 0 0;padding:13px 0 0;border-top:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
+  .night .col.good .sum{color:var(--ink)}
+
+  /* шесть блоков-сюжетов вместо каталога карточек */
+  .blocks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .blk{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .blk .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin:0 0 10px}
+  .blk h3{font-size:17.5px;margin:0 0 14px;letter-spacing:-.01em;text-wrap:balance}
+  .blk ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+  .blk li{display:grid;grid-template-columns:14px 1fr;gap:10px;color:var(--muted);font-size:14px;text-wrap:pretty}
+  .blk li::before{content:"";width:5px;height:5px;margin:8px 0 0 4px;border-radius:50%;background:hsl(210 100% 52% / .55)}
+  .more{margin:20px 0 0;font-family:var(--mono);font-size:12.5px;color:var(--faint);line-height:1.9;text-wrap:pretty}
+  .more b{color:var(--muted);font-weight:400}
+
+  /* схема связки редиректор - зеркала */
+  .mirror{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+  .mirror .pic{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px}
+  .mirror svg{width:100%;height:auto;display:block}
 
   section{padding:96px 0}
   section:nth-of-type(even){background:hsl(221 45% 9%)}
@@ -138,18 +156,7 @@
   .card h3{font-size:16.5px;margin:0 0 7px;letter-spacing:-.01em}
   .card p{color:var(--muted);font-size:14px;margin:0;text-wrap:pretty}
 
-  /* domain-card feature band */
   .split{display:grid;grid-template-columns:.92fr 1.08fr;gap:48px;align-items:center}
-  .dcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 30px 70px -34px hsl(224 71% 2% / .9)}
-  .dcard .head{padding:16px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .dcard .head .n{font-family:var(--mono);font-size:15px}
-  .dcard .tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
-  .dcard .tab{font-size:12.5px;color:var(--muted);padding:7px 12px;border-radius:8px 8px 0 0}
-  .dcard .tab.on{color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-bottom-color:transparent}
-  .dcard .fields{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-soft);padding:1px}
-  .dcard .f{background:var(--panel);padding:12px 16px}
-  .dcard .f .fl{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
-  .dcard .f .fv{font-size:13.5px;margin-top:3px}
 
   .band{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px}
   .b{display:flex;gap:13px;align-items:flex-start}
@@ -166,14 +173,21 @@
 
   @media (max-width:900px){
     .grid{grid-template-columns:repeat(2,1fr)}
+    .blocks{grid-template-columns:1fr}
+    .mirror{grid-template-columns:1fr;gap:28px}
     .split{grid-template-columns:1fr;gap:32px}
     .band{grid-template-columns:1fr}
   }
   @media (max-width:640px){
+    /* Узкий экран: 32px по краям съедали седьмую часть ширины, а строка цифр в hero
+       держалась `nowrap` и упиралась в край. Переполнения не было, но воздуха не было тоже. */
+    .wrap{padding:0 20px}
+    header.top{flex-wrap:wrap;gap:12px}
+    .stats .s{white-space:normal}
     .hero{grid-template-columns:1fr;gap:32px;padding:20px 0 8px}
     .grid{grid-template-columns:1fr}
-    .mock .body{grid-template-columns:106px 1fr}
-    .dcard .fields{grid-template-columns:1fr}
+    /* ночь складывается в одну колонку: порядок времени важнее соседства колонок */
+    .night{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -199,14 +213,19 @@
 
   <div class="hero">
     <div>
-      <h1>Домены и лендинги холдинга – <span class="hl">в одной админке</span></h1>
-      <p class="lede">Единый реестр по проектам · Карточка со всеми данными и историей · Мониторинг доступности из нужных стран · Алерты в Slack и Telegram</p>
+      <h1>Реестр доменов, который <span class="hl">сам говорит, что сломалось</span></h1>
+      <p class="lede">Сотни доменов, зеркал и лендингов в одной панели. Проверяется круглосуточно из нужных стран, пишет в Telegram, когда что-то отвалилось, и помнит, кто что менял.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://t.me/denis_pdm">Написать в Telegram <span class="arw">→</span></a>
-        <a class="btn btn-ghost" href="/DCP-guide.pdf" download="DCP-guide.pdf">Скачать гайд (PDF)</a>
         <a class="btn-text" href="#features">Что умеет <span class="arw">↓</span></a>
       </div>
-      <p style="font-size:15px;line-height:1.45;color:var(--muted);border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin:24px 0 0;max-width:34em;text-wrap:pretty">Доменные базы разных бизнес-юнитов – под одной крышей, <span style="color:var(--accent-2)">в&nbsp;единой точке управления</span>, у&nbsp;каждой команды свой уровень доступа</p>
+      <div class="stats">
+        <p class="lab">Обычное утро в боевой установке</p>
+        <span class="s"><b>1546</b>доменов</span>
+        <span class="s crit"><b>149</b>не открылись</span>
+        <span class="s crit"><b>27</b>отключены реестром</span>
+        <span class="s warn"><b>5</b>сроков на неделе</span>
+      </div>
     </div>
     <div>
       <p class="shothint"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
@@ -215,45 +234,42 @@
   </div>
 
   <div class="chips">
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01"/></svg><span><b>Self-hosted</b> · данные у вас</span></span>
+    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg><span><b>Self-hosted</b> · данные у вас</span></span>
     <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg><span>Роли и доступы <b>по проектам</b></span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg><span>Проверка доступности <b>круглосуточно</b></span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 3h16z"/><path d="M10 21h4"/></svg><span>Алерты в <b>Slack и Telegram</b></span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9.5 13h5M9.5 17h5"/></svg><span>Полный <b>аудит</b> изменений</span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v7l9 9 9-9-9-9z"/><path d="M8 8h.01"/></svg><span><b>White-label</b></span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h8M18 8h2M4 16h2M12 16h8"/><circle cx="15" cy="8" r="2.2"/><circle cx="9" cy="16" r="2.2"/></svg><span>Доработки <b>под заказчика</b></span></span>
+    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span><b>White-label</b> под ваш бренд</span></span>
+    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg><span>Доработки <b>под заказчика</b></span></span>
   </div>
 
-  <p class="proofline"><span class="pl-dot"></span>В боевой эксплуатации<span class="pl-sep">·</span>холдинг с несколькими бизнес-юнитами<span class="pl-sep">·</span>сотни доменов и лендингов<span class="pl-sep">·</span>роли и приватность по проектам</p>
+  <p class="proofline"><span class="pl-dot"></span>В боевой эксплуатации<span class="pl-sep">·</span>холдинг с несколькими бизнес-юнитами<span class="pl-sep">·</span>сотни доменов и зеркал</p>
 </div>
-
-<style>.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}@media(max-width:900px){.grid3{grid-template-columns:1fr}}</style>
 
 <section>
   <div class="wrap">
-    <div class="sec-head" style="max-width:60em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3 2.5-5 6-5s6 2 6 5"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21 20c0-2.6-1.8-4.3-4.5-4.9"/></svg>Для кого</p>
-      <h2 style="text-wrap:pretty">Сотни доменов и лендингов без хаоса&nbsp;–<br>единый реестр с контролем доступа</h2>
-      <p>Управляемая система, где каждый бизнес-юнит видит и трогает только своё.</p>
+    <div class="sec-head" style="max-width:62em">
+      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>Зачем это нужно</p>
+      <h2>Домен лёг в 03:12. Когда вы об этом узнаете?</h2>
+      <p>Разница между двумя колонками – это ночь трафика и разговор с байером наутро.</p>
     </div>
-    <div class="grid3">
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h.01M15 15h.01M15 9h.01M9 15h.01M12 12h.01"/></svg></span>
-        <span class="k">iGaming</span>
-        <h3>Гемблинг и беттинг</h3>
-        <p>Десятки брендов, зеркал и лендингов. Жёсткое разграничение доступа и мониторинг того, что реально открывается.</p>
+    <div class="night">
+      <div class="col">
+        <p class="ttl">Как обычно</p>
+        <ol>
+          <li class="hit"><span class="t">03:12</span><span class="e">Зеркало перестало открываться</span></li>
+          <li><span class="t">—</span><span class="e">тишина</span></li>
+          <li><span class="t">—</span><span class="e">тишина</span></li>
+          <li class="hit"><span class="t">09:40</span><span class="e">«почему вчера был ноль?» – в чате от байера</span></li>
+        </ol>
+        <p class="sum">Шесть часов трафика в никуда, и причину ищут с нуля.</p>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></svg></span>
-        <span class="k">Affiliate</span>
-        <h3>Аффилиатные и арбитражные команды</h3>
-        <p>Поток доменов и лендингов под кампании – порядок, приватность и проверка гео вместо общей таблицы.</p>
-      </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
-        <span class="k">Portfolio</span>
-        <h3>Большой доменный портфель</h3>
-        <p>Сотни доменов, где важны сроки продления, контроль доступа, история изменений и приватность активов.</p>
+      <div class="col good">
+        <p class="ttl">С панелью</p>
+        <ol>
+          <li class="hit"><span class="t">03:12</span><span class="e">Зеркало перестало открываться</span></li>
+          <li class="hit"><span class="t">03:13</span><span class="e">Telegram: «bet-x.com не открывается»</span></li>
+          <li class="hit"><span class="t">03:14</span><span class="e">В карточке видно: истёк сертификат, хостинг ни при чём</span></li>
+          <li class="hit"><span class="t">09:20</span><span class="e">Починили до утреннего трафика</span></li>
+        </ol>
+        <p class="sum">Минута на сообщение, утро – уже рабочее.</p>
       </div>
     </div>
   </div>
@@ -262,94 +278,120 @@
 <section>
   <div class="wrap">
     <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 10v10"/></svg>Интерфейс</p>
-      <h2>Дашборд: что горит – видно сразу</h2>
+      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Интерфейс</p>
+      <h2>Что горит – видно за десять секунд</h2>
       <p>Домены, которые не открылись, сроки продления, лендинги на уточнении и последние изменения – на одном экране.</p>
     </div>
-    <p class="shothint"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
     <div class="shot" role="img" aria-label="Скриншот: дашборд"><img src="/shot-dashboard.jpg" alt="Дашборд – Domain Control Panel" loading="lazy"></div>
   </div>
 </section>
 
 <section id="features">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head" style="max-width:62em">
       <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>Что умеет</p>
-      <h2>Всё про домены и лендинги – в одном месте</h2>
-      <p>Не таблица в экселе и не разрозненные вкладки регистраторов. Живой реестр с доступами, историей, проверками и алертами.</p>
+      <h2>Шесть вопросов, на которые панель отвечает сама</h2>
+      <p>Не таблица в экселе и не пятнадцать вкладок регистраторов. Живой реестр с доступами, историей, проверками и алертами.</p>
     </div>
-    <div class="grid">
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
-        <span class="k">Реестр</span>
-        <h3>Единый список доменов</h3>
-        <p>Все домены, статусы и сроки – в одном месте. Поиск, фильтры, метки, цветной маркер, свои колонки.</p>
+    <div class="blocks">
+      <div class="blk">
+        <span class="k">Порядок</span>
+        <h3>Реестр вместо таблицы, которую каждый правит по-своему</h3>
+        <ul>
+        <li>Домены, зеркала и лендинги одним списком: поиск, фильтры, метки, свои колонки</li>
+        <li>Карточка домена со всеми отделами, сроками и историей – видно, кто что менял</li>
+        <li>Лендинг сам находит свой домен: обе стороны связи видны сразу</li>
+        <li>Сотни строк одним действием, правка прямо в списке с протяжкой как в Excel</li>
+        <li>Excel, CSV и Google-таблица заезжают целиком; семь кабинетов регистраторов подтягиваются сами</li>
+        </ul>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span>
-        <span class="k">Лендинги</span>
-        <h3>Реестр лендингов рядом с доменами</h3>
-        <p>Адреса, гео, языки, заказчик и актуальность. Лендинг связан со своим доменом – видно обе стороны сразу.</p>
+      <div class="blk">
+        <span class="k">Поломки</span>
+        <h3>Что сломано снаружи – прямо сейчас, а не по итогам дня</h3>
+        <ul>
+        <li>Домены и адреса проверяются круглосуточно, цепочка редиректов проходится до конца</li>
+        <li>Замеры через резидентные каналы: в DE открывается, в BR – нет</li>
+        <li>Код 200 ещё не значит, что сайт жив: заданная строка на странице ловит заглушку хостера</li>
+        <li>Сертификат истёк или выдан на чужое имя – предупредим за 14, 7 и 1 день</li>
+        <li>Делегирование сменили мимо вас – узнаете в тот же день</li>
+        </ul>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7"/></svg></span>
-        <span class="k">Карточка</span>
-        <h3>Всё о домене – в одной карточке</h3>
-        <p>Общее, отдел, интеграции, маркетинг, IT, аналитика, партнёрки – и вся история рядом.</p>
+      <div class="blk">
+        <span class="k">Деньги</span>
+        <h3>Сколько портфель съест в следующем месяце</h3>
+        <ul>
+        <li>Расход на продления по месяцам и прогноз на год вперёд</li>
+        <li>Справочник цен по зонам подставляет стоимость там, где её не заполняли руками</li>
+        <li>Сроки: что истекает на неделе, что уже истекло, где выключено автопродление</li>
+        </ul>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span>
-        <span class="k">Доступность</span>
-        <h3>Проверка круглосуточно</h3>
-        <p>Домены и адреса лендингов проверяются по расписанию. Цепочка редиректов проходится до конца.</p>
-      </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
-        <span class="k">Гео</span>
-        <h3>Замеры из нужных стран</h3>
-        <p>Адреса проверяются через резидентные каналы: видно, где сайт открывается, а где нет.</p>
-      </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M12 8v4M12 15h.01"/></svg></span>
+      <div class="blk">
         <span class="k">Риски</span>
-        <h3>Блок-листы и статус у реестра</h3>
-        <p>Спам-листы и базы угроз плюс RDAP: «домен отключён по жалобе» видно раньше, чем по тишине в трафике.</p>
+        <h3>То, что отбирает домен, видно раньше, чем падает трафик</h3>
+        <ul>
+        <li>Спам-листы и базы угроз проверяются регулярно, а не когда уже поздно</li>
+        <li>Статус у реестра словами: не «имя не резолвится», а «домен на hold, регистратор такой-то»</li>
+        <li>Защита переноса и whois-приватность: где выключено – видно фильтром</li>
+        </ul>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 3h16z"/><path d="M10 21h4"/></svg></span>
-        <span class="k">Алерты</span>
-        <h3>Slack и Telegram</h3>
-        <p>Сообщение уходит на смену состояния – «лёг» и «снова открывается», без ежечасного спама.</p>
+      <div class="blk">
+        <span class="k">Доступ</span>
+        <h3>Соседняя команда не увидит ваши домены</h3>
+        <ul>
+        <li>Роли на каждый проект: админ, менеджер, редактор, наблюдатель</li>
+        <li>Приватные папки: чувствительные домены – точечно тем, кому открыли</li>
+        <li>Права проверяются на сервере, а не в браузере – «подсмотреть» лишнее нельзя</li>
+        <li>Аудит: любое изменение – кто, когда и что. Второй фактор и список сессий в профиле</li>
+        </ul>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg></span>
-        <span class="k">Доступы</span>
-        <h3>Роли по проектам</h3>
-        <p>Админ, менеджер, редактор, наблюдатель на каждый проект. Каждый видит только своё.</p>
+      <div class="blk">
+        <span class="k">Контур</span>
+        <h3>Встаёт в ваш контур, а не рядом с ним</h3>
+        <ul>
+        <li>Self-hosted: реестр, доступы и история живут на вашей инфраструктуре</li>
+        <li>White-label: название, логотип и цвета – панель выглядит как ваш продукт</li>
+        <li>API-токен только на чтение: скрипт забирает домены по проектам в JSON или CSV</li>
+        <li>Search Console рядом с реестром: клики, показы и CTR по доменам</li>
+        </ul>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
-        <span class="k">Приватность</span>
-        <h3>Приватные папки</h3>
-        <p>Чувствительные домены – за ограниченным доступом, точечно кому открыл.</p>
+    </div>
+    <p class="more"><b>И ещё:</b> горячие клавиши · закрепление строк · архив вместо удаления · цветные маркеры и метки · журнал отправки алертов · утренняя сводка одним сообщением · экспорт в CSV и Excel · история по каждому полю</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head" style="max-width:62em">
+      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h11l-3-3"/><path d="M20 16H9l3 3"/></svg>Ниша</p>
+      <h2>Зеркала и редиректоры – так, как это устроено у вас</h2>
+      <p>Обычная панель управления доменами такого не знает: для неё домен – строка со сроком продления.</p>
+    </div>
+    <div class="mirror">
+      <div class="pic">
+        <svg viewBox="0 0 520 210" role="img" aria-label="Схема: редиректор и привязанные к нему зеркала">
+          <g fill="none" stroke="hsl(217 33% 26%)" stroke-width="1.5">
+            <path d="M186 100 150 55M186 108 150 92M186 116 150 128M186 124 150 164M334 112l40 28"/>
+          </g>
+          <rect x="186" y="88" width="148" height="44" rx="10" fill="hsl(210 100% 52% / .14)" stroke="hsl(210 100% 52% / .5)" stroke-width="1.5"/>
+          <text x="260" y="107" text-anchor="middle" fill="hsl(210 40% 98%)" font-family="ui-monospace,monospace" font-size="13">gsp-r1.com</text>
+          <text x="260" y="123" text-anchor="middle" fill="hsl(210 100% 66%)" font-family="ui-monospace,monospace" font-size="10">РЕДИРЕКТОР</text>
+          <g font-family="ui-monospace,monospace" font-size="11.5">
+            <circle cx="24" cy="52" r="4" fill="#3fb950"/><text x="36" y="56" fill="hsl(215 20% 62%)">gspot973.com</text>
+            <circle cx="24" cy="89" r="4" fill="#3fb950"/><text x="36" y="93" fill="hsl(215 20% 62%)">gspot271.com</text>
+            <circle cx="24" cy="125" r="4" fill="#f85149"/><text x="36" y="129" fill="hsl(215 20% 62%)">game-spot.bet</text>
+            <circle cx="24" cy="161" r="4" fill="#f85149"/><text x="36" y="165" fill="hsl(215 20% 62%)">g-spot.games</text>
+            <circle cx="382" cy="140" r="4" fill="#3fb950"/><text x="394" y="144" fill="hsl(215 20% 62%)">gspot691.com</text>
+          </g>
+          <text x="260" y="186" text-anchor="middle" fill="hsl(215 16% 46%)" font-family="ui-monospace,monospace" font-size="11">живых 3 из 5 · ближайшее истечение 14.10</text>
+        </svg>
       </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9.5 13h5M9.5 17h5"/></svg></span>
-        <span class="k">Аудит</span>
-        <h3>Логируется всё</h3>
-        <p>Домены, лендинги, права, роли, папки, доступы. Любое изменение: кто, когда, что.</p>
-      </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
-        <span class="k">Скорость</span>
-        <h3>Массовые операции и правка в таблице</h3>
-        <p>Перенос, папки, метки, архив – сотни строк одним действием. Правка прямо в списке, с протяжкой как в Excel.</p>
-      </div>
-      <div class="card">
-        <span class="ib"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 6.4"/><path d="M20 5v6h-6"/></svg></span>
-        <span class="k">Данные</span>
-        <h3>Импорт, экспорт и синхронизация</h3>
-        <p>Excel, CSV и Google-таблица заезжают целиком, выгрузка обратно. Namecheap, GoDaddy, NETIM и Cloudflare подтягиваются сами.</p>
+      <div class="blk" style="background:transparent;border:0;padding:0">
+        <ul>
+          <li>Видно, какие зеркала висят на редиректоре и сколько из них живо</li>
+          <li>Одно зеркало может висеть на нескольких редиректорах – так и бывает</li>
+          <li>Ближайшее истечение по связке: домен теряют не только от бана, но и от забытого продления</li>
+          <li>Привязка и снятие – пачкой из реестра, а не по одному</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -358,144 +400,59 @@
 <section>
   <div class="wrap">
     <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Мониторинг</p>
-      <h2>Видно, что сайт лёг, – раньше, чем об этом напишут в чате</h2>
-      <p>Один экран отвечает на вопрос «что сейчас сломано снаружи»: не открываются, уводят на чужой домен, истекают сроки, попали в блок-листы, отключены реестром.</p>
-    </div>
-    <div class="band" style="margin-bottom:38px">
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></span>
-        <div><h4>Проверка идёт сама, по расписанию</h4><p>Домены и адреса лендингов обходятся кронами. Кнопка «Проверить сейчас» есть в каждой строке и карточке.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
-        <div><h4>Замеры по странам</h4><p>Через резидентные каналы видно, что в DE адрес открывается, а в BR – нет. «Канал не дошёл» считается нашей бедой, а не поломкой сайта.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h7"/><path d="M17 14l3 3-3 3"/></svg></span>
-        <div><h4>Редирект проходится до конца</h4><p>Склейка www – норма, увод на чужой домен – тревога. Мёртвый конец цепочки не выглядит как рабочая склейка.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M12 8v4M12 15h.01"/></svg></span>
-        <div><h4>Отключение реестром видно словами</h4><p>Не «имя не резолвится», а «домен на hold, регистратор такой-то» – с кем и о чём писать, понятно сразу.</p></div>
-      </div>
-    </div>
-    <p class="shothint"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
-    <div class="shot" role="img" aria-label="Скриншот: раздел «Доступность»"><img src="/shot-availability.jpg" alt="Доступность – Domain Control Panel" loading="lazy"></div>
-    <p class="shotcap">Плитки проблем, полоса по странам и список сайтов с причиной – на одном экране</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16v-5a6 6 0 0 0-12 0v5l-2 3h16z"/><path d="M10 21h4"/></svg>Алерты</p>
-        <h2 style="font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance">Сообщение приходит туда, где команда и так сидит</h2>
-        <p style="color:var(--muted);margin:0 0 14px">Slack и Telegram подключаются в настройках. Тревога уходит на «лёг», отбой – на «снова открывается»; переходы между рабочими состояниями молчат.</p>
-        <p style="color:var(--muted);margin:0">Упало сразу много – придёт один дайджест по сайтам, а не двести сообщений. Журнал отправок отвечает на вопрос «алерт ушёл или нет» внутри продукта.</p>
-      </div>
-      <div>
-        <p class="shothint"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
-        <div class="shot" role="img" aria-label="Скриншот: настройка алертов"><img src="/shot-settings-alerts.jpg" alt="Алерты – Domain Control Panel" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg>Лендинги</p>
-      <h2>Лендинги и домены – одна система, а не две таблицы</h2>
-      <p>Адрес лендинга сам находит свой домен в реестре. Видно, кто заказчик, в каком гео работает, актуален ли – и открывается ли он вообще.</p>
-    </div>
-    <p class="shothint"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
-    <div class="shot" role="img" aria-label="Скриншот: реестр лендингов"><img src="/shot-landings.jpg" alt="Реестр лендингов – Domain Control Panel" loading="lazy"></div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="split">
-      <div>
-        <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7"/></svg>Карточка домена</p>
-        <h2 style="font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance">Один домен – одна карточка со всем контекстом</h2>
-        <p style="color:var(--muted);margin:0 0 14px">Маркетинг, IT, аналитика, партнёрки, сроки и интеграции – на вкладках одной сущности. Открыл домен и видишь всё, включая привязанные лендинги и то, кто что менял.</p>
-        <p style="color:var(--muted);margin:0">Общие с лендингом поля правятся с любой стороны – значение остаётся одно, а не разъезжается по двум таблицам.</p>
-      </div>
-      <div>
-        <p class="shothint"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
-        <div class="shot" role="img" aria-label="Скриншот: карточка домена"><img src="/shot-card-dept-marketing.jpg" alt="Карточка домена – Domain Control Panel" loading="lazy"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M9 11.5l2 2 4-4"/></svg>Безопасность и контроль</p>
+      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg>Безопасность</p>
       <h2>Ваш сервер, ваши данные, ваши правила доступа</h2>
+      <p>Панель держит домены, доступы и историю – ровно то, что не должно утечь.</p>
     </div>
     <div class="band">
       <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span>
-        <div><h4>Доступ решается на сервере</h4><p>Права и приватность папок проверяются на сервере, а не в браузере – клиенту нельзя «подсмотреть» лишнее.</p></div>
+        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg></span>
+        <div><h4>Два раунда security-ревью</h4><p>Закрыты кросс-тенантный обход прав, XSS, инъекции в экспорт, брутфорс логина и SSRF при проверке адресов. Гейты стоят в пайплайне.</p></div>
       </div>
       <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
-        <div><h4>Второй фактор и сессии на виду</h4><p>Вход с кодом (TOTP), резервные коды, список активных сессий и кнопка «выйти везде» – в профиле, без похода к админу.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M9 11.5l2 2 4-4"/></svg></span>
-        <div><h4>Прошёл два раунда security-ревью</h4><p>Закрыты кросс-тенантный обход прав, XSS, инъекции в экспорт, брутфорс логина и SSRF при проверке адресов. Гейты стоят в пайплайне.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h8M18 8h2M4 16h2M12 16h8"/><circle cx="15" cy="8" r="2.2"/><circle cx="9" cy="16" r="2.2"/></svg></span>
-        <div><h4>Видно, что уходит наружу</h4><p>Внешние проверки выключаются одним рубильником, отдельный домен можно пометить «не светить нигде», а карта исходящего трафика описана в документации.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9.5 13h5M9.5 17h5"/></svg></span>
-        <div><h4>След выгрузки</h4><p>Экспорт и объём вычитанных строк считаются на сервере: «выгрузил весь реестр за один заход» не проходит незаметно.</p></div>
+        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
+        <div><h4>Видно, что уходит наружу</h4><p>Внешние проверки выключаются одним рубильником, отдельный домен можно пометить «не светить нигде», карта исходящего трафика описана в документации.</p></div>
       </div>
       <div class="b">
         <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg></span>
-        <div><h4>Данные только у вас</h4><p>Self-hosted: реестр, доступы и история живут на вашей инфраструктуре, не в чужом облаке.</p></div>
+        <div><h4>След выгрузки</h4><p>Экспорт и объём вычитанных строк считаются на сервере: «выгрузил весь реестр за один заход» не проходит незаметно.</p></div>
+      </div>
+      <div class="b">
+        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+        <div><h4>Доступ решается на сервере</h4><p>Права и приватность папок проверяются на сервере, а не в браузере – клиенту нельзя «подсмотреть» лишнее.</p></div>
       </div>
     </div>
-    <p class="shothint" style="margin-top:38px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
-    <div class="shot" style="margin-top:6px" role="img" aria-label="Скриншот: папки, включая приватные"><img src="/shot-folders.jpg" alt="Папки, включая приватные – Domain Control Panel" loading="lazy"></div>
+    <div class="shot" role="img" aria-label="Скриншот: папки, включая приватные" style="margin-top:40px"><img src="/shot-folders.jpg" alt="Папки, включая приватные – Domain Control Panel" loading="lazy"></div>
     <p class="shotcap">Публичные и приватные папки – доступ к чувствительным доменам только у тех, кому открыт</p>
   </div>
 </section>
 
 <section class="incl-block">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head" style="max-width:62em">
       <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg>Поставка</p>
       <h2>Что входит и как получить</h2>
-      <p>Готовый продукт под ваш бренд — разворачивается на вашей инфраструктуре.</p>
+      <p>Готовый продукт под ваш бренд – разворачивается на вашей инфраструктуре.</p>
     </div>
     <div class="band">
       <div class="b">
         <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg></span>
-        <div><h4>Разворачивается на вашей инфраструктуре</h4><p>Свой сервер или кластер — помогу поднять и настроить под ваше окружение.</p></div>
+        <div><h4>Разворачивается на вашей инфраструктуре</h4><p>Свой сервер или кластер – помогу поднять и настроить под ваше окружение.</p></div>
       </div>
       <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v7l9 9 9-9-9-9z"/><path d="M8 8h.01"/></svg></span>
-        <div><h4>White-label под ваш бренд</h4><p>Название, логотип и цвета — панель выглядит как ваш продукт.</p></div>
+        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+        <div><h4>White-label под ваш бренд</h4><p>Название, логотип и цвета – панель выглядит как ваш продукт.</p></div>
       </div>
       <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h8M18 8h2M4 16h2M12 16h8"/><circle cx="15" cy="8" r="2.2"/><circle cx="9" cy="16" r="2.2"/></svg></span>
-        <div><h4>Доработки под задачи</h4><p>Дополнительные поля, интеграции и логика — под ваши процессы.</p></div>
+        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
+        <div><h4>Доработки под задачи</h4><p>Дополнительные поля, интеграции и логика – под ваши процессы.</p></div>
       </div>
       <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/><path d="M9 11.5l2 2 4-4"/></svg></span>
+        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg></span>
         <div><h4>Перенос данных, запуск и поддержка</h4><p>Помогу перенести реестр из Excel и Google-таблиц, запустить и сопровождать.</p></div>
       </div>
     </div>
-    <p style="margin:28px 0 0;color:var(--muted);font-size:15px">Стоимость — под ваш объём и задачи. Обсудим в Telegram.</p>
+    <p style="margin:28px 0 0;color:var(--muted);font-size:15px">Стоимость – под ваш объём и задачи. Обсудим в Telegram.</p>
   </div>
 </section>
 
@@ -530,145 +487,116 @@
 <script>
 (function(){
   var T={
-  "Домены и лендинги холдинга –":"A holding's domains and landings –",
-  "в одной админке":"in one admin panel",
-  "Единый реестр по проектам · Карточка со всеми данными и историей · Мониторинг доступности из нужных стран · Алерты в Slack и Telegram":"One registry across projects · A card with every detail and its history · Uptime checks from the countries you need · Alerts to Slack and Telegram",
+  "Реестр доменов, который":"A domain registry that",
+  "сам говорит, что сломалось":"tells you what broke",
+  "Сотни доменов, зеркал и лендингов в одной панели. Проверяется круглосуточно из нужных стран, пишет в Telegram, когда что-то отвалилось, и помнит, кто что менял.":"Hundreds of domains, mirrors and landings in one panel. Checked around the clock from the countries you need, messages you on Telegram the moment something drops, and remembers who changed what.",
   "Написать в Telegram":"Message on Telegram",
-  "Скачать гайд (PDF)":"Download guide (PDF)",
-  "Что умеет":"Features",
-  "Доменные базы разных бизнес-юнитов – под одной крышей,":"Domain bases of different business units – under one roof,",
-  "в единой точке управления":"in a single control point",
-  ", у каждой команды свой уровень доступа":", each team with its own access level",
+  "Что умеет":"What it does",
+  "Обычное утро в боевой установке":"An ordinary morning on a live install",
+  "доменов":"domains",
+  "не открылись":"failed to open",
+  "отключены реестром":"suspended by the registry",
+  "сроков на неделе":"renewals this week",
   "клик – смотреть крупнее":"click to enlarge",
-
-  "· данные у вас":"· your data",
-  "Роли и доступы":"Roles & access",
+  "· данные у вас":"· your data stays yours",
+  "Роли и доступы":"Roles and access",
   "по проектам":"per project",
-  "Проверка доступности":"Uptime checks",
-  "круглосуточно":"around the clock",
-  "Алерты в":"Alerts to",
-  "Slack и Telegram":"Slack and Telegram",
-  "Полный":"Full",
-  "аудит":"audit",
-  "изменений":"log",
-  "Доработки":"Customization",
-  "под заказчика":"on request",
-
-  "В боевой эксплуатации":"In production use",
+  "под ваш бренд":"under your brand",
+  "Доработки":"Custom work",
+  "под заказчика":"to your needs",
+  "В боевой эксплуатации":"Running in production",
   "холдинг с несколькими бизнес-юнитами":"a holding with several business units",
-  "сотни доменов и лендингов":"hundreds of domains and landings",
-  "роли и приватность по проектам":"roles and privacy per project",
-
-  "Для кого":"Who it's for",
-  "Сотни доменов и лендингов без хаоса –":"Hundreds of domains and landings without chaos –",
-  "единый реестр с контролем доступа":"one registry with access control",
-  "Управляемая система, где каждый бизнес-юнит видит и трогает только своё.":"A managed system where each business unit sees and touches only its own.",
-  "Гемблинг и беттинг":"Gambling & betting",
-  "Десятки брендов, зеркал и лендингов. Жёсткое разграничение доступа и мониторинг того, что реально открывается.":"Dozens of brands, mirrors and landings. Strict access control and monitoring of what actually opens.",
-  "Аффилиатные и арбитражные команды":"Affiliate & arbitrage teams",
-  "Поток доменов и лендингов под кампании – порядок, приватность и проверка гео вместо общей таблицы.":"A stream of domains and landings for campaigns – order, privacy and geo checks instead of a shared spreadsheet.",
-  "Большой доменный портфель":"Large domain portfolio",
-  "Сотни доменов, где важны сроки продления, контроль доступа, история изменений и приватность активов.":"Hundreds of domains where renewal dates, access control, change history and asset privacy matter.",
-
+  "сотни доменов и зеркал":"hundreds of domains and mirrors",
+  "Зачем это нужно":"Why you need it",
+  "Домен лёг в 03:12. Когда вы об этом узнаете?":"A domain went down at 03:12. When do you find out?",
+  "Разница между двумя колонками – это ночь трафика и разговор с байером наутро.":"The gap between these two columns is a night of traffic and an awkward morning chat with your buyer.",
+  "Как обычно":"The usual way",
+  "Зеркало перестало открываться":"A mirror stops opening",
+  "тишина":"silence",
+  "«почему вчера был ноль?» – в чате от байера":"«why was yesterday a zero?» – from the buyer, in chat",
+  "Шесть часов трафика в никуда, и причину ищут с нуля.":"Six hours of traffic gone, and the cause is hunted from scratch.",
+  "С панелью":"With the panel",
+  "Telegram: «bet-x.com не открывается»":"Telegram: «bet-x.com is not opening»",
+  "В карточке видно: истёк сертификат, хостинг ни при чём":"The card shows it: the certificate expired, hosting is fine",
+  "Починили до утреннего трафика":"Fixed before the morning traffic",
+  "Минута на сообщение, утро – уже рабочее.":"One minute to the alert, and the morning is already a working one.",
   "Интерфейс":"Interface",
-  "Дашборд: что горит – видно сразу":"Dashboard: what's on fire – at a glance",
+  "Что горит – видно за десять секунд":"What is on fire – visible in ten seconds",
   "Домены, которые не открылись, сроки продления, лендинги на уточнении и последние изменения – на одном экране.":"Domains that failed to open, renewal dates, landings pending clarification and the latest changes – on one screen.",
-
-  "Всё про домены и лендинги – в одном месте":"Everything about domains and landings – in one place",
-  "Не таблица в экселе и не разрозненные вкладки регистраторов. Живой реестр с доступами, историей, проверками и алертами.":"Not an Excel sheet or scattered registrar tabs. A live registry with access, history, checks and alerts.",
-  "Реестр":"Registry",
-  "Единый список доменов":"One list of all domains",
-  "Все домены, статусы и сроки – в одном месте. Поиск, фильтры, метки, цветной маркер, свои колонки.":"All domains, statuses and dates in one place. Search, filters, labels, a colour marker, your own columns.",
-  "Лендинги":"Landings",
-  "Реестр лендингов рядом с доменами":"A landing registry next to the domains",
-  "Адреса, гео, языки, заказчик и актуальность. Лендинг связан со своим доменом – видно обе стороны сразу.":"URLs, geo, languages, customer and status. Each landing is linked to its domain – both sides at once.",
-  "Карточка":"Card",
-  "Всё о домене – в одной карточке":"Everything about a domain – in one card",
-  "Общее, отдел, интеграции, маркетинг, IT, аналитика, партнёрки – и вся история рядом.":"General, department, integrations, marketing, IT, analytics, affiliates – with the full history next to it.",
-  "Доступность":"Uptime",
-  "Проверка круглосуточно":"Checks around the clock",
-  "Домены и адреса лендингов проверяются по расписанию. Цепочка редиректов проходится до конца.":"Domains and landing URLs are checked on a schedule. The redirect chain is followed to its end.",
-  "Гео":"Geo",
-  "Замеры из нужных стран":"Measured from the countries you need",
-  "Адреса проверяются через резидентные каналы: видно, где сайт открывается, а где нет.":"URLs are probed through residential channels: you see where the site opens and where it does not.",
+  "Шесть вопросов, на которые панель отвечает сама":"Six questions the panel answers on its own",
+  "Не таблица в экселе и не пятнадцать вкладок регистраторов. Живой реестр с доступами, историей, проверками и алертами.":"Not an Excel sheet and not fifteen registrar tabs. A live registry with access, history, checks and alerts.",
+  "Порядок":"Order",
+  "Реестр вместо таблицы, которую каждый правит по-своему":"A registry instead of a spreadsheet everyone edits their own way",
+  "Домены, зеркала и лендинги одним списком: поиск, фильтры, метки, свои колонки":"Domains, mirrors and landings in one list: search, filters, labels, your own columns",
+  "Карточка домена со всеми отделами, сроками и историей – видно, кто что менял":"A domain card with every department, date and its history – you see who changed what",
+  "Лендинг сам находит свой домен: обе стороны связи видны сразу":"A landing finds its own domain: both sides of the link are visible at once",
+  "Сотни строк одним действием, правка прямо в списке с протяжкой как в Excel":"Hundreds of rows in one action, edited right in the list with Excel-style drag-fill",
+  "Excel, CSV и Google-таблица заезжают целиком; семь кабинетов регистраторов подтягиваются сами":"Excel, CSV and a Google Sheet come in whole; seven registrar accounts sync themselves",
+  "Поломки":"Breakage",
+  "Что сломано снаружи – прямо сейчас, а не по итогам дня":"What is broken from the outside – right now, not at the end of the day",
+  "Домены и адреса проверяются круглосуточно, цепочка редиректов проходится до конца":"Domains and URLs are checked around the clock, and the redirect chain is followed to its end",
+  "Замеры через резидентные каналы: в DE открывается, в BR – нет":"Probes through residential channels: it opens in DE and does not in BR",
+  "Код 200 ещё не значит, что сайт жив: заданная строка на странице ловит заглушку хостера":"HTTP 200 does not mean the site is alive: a string you set on the page catches the hosting stub",
+  "Сертификат истёк или выдан на чужое имя – предупредим за 14, 7 и 1 день":"Certificate expired or issued for another name – you are warned 14, 7 and 1 day ahead",
+  "Делегирование сменили мимо вас – узнаете в тот же день":"Delegation changed behind your back – you find out the same day",
+  "Деньги":"Cost",
+  "Сколько портфель съест в следующем месяце":"What the portfolio will cost you next month",
+  "Расход на продления по месяцам и прогноз на год вперёд":"Renewal spend by month and a forecast a year ahead",
+  "Справочник цен по зонам подставляет стоимость там, где её не заполняли руками":"A per-zone price book fills in the cost wherever nobody entered it by hand",
+  "Сроки: что истекает на неделе, что уже истекло, где выключено автопродление":"Dates: what expires this week, what already expired, where auto-renew is off",
   "Риски":"Risks",
-  "Блок-листы и статус у реестра":"Block lists and registry status",
-  "Спам-листы и базы угроз плюс RDAP: «домен отключён по жалобе» видно раньше, чем по тишине в трафике.":"Spam lists and threat databases plus RDAP: «the domain was suspended on abuse» shows up before the traffic goes quiet.",
-  "Алерты":"Alerts",
-  "Сообщение уходит на смену состояния – «лёг» и «снова открывается», без ежечасного спама.":"A message is sent on a state change – «down» and «back up» – without hourly spam.",
-  "Доступы":"Access",
-  "Роли по проектам":"Roles per project",
-  "Админ, менеджер, редактор, наблюдатель на каждый проект. Каждый видит только своё.":"Admin, manager, editor, viewer on every project. Everyone sees only their own.",
-  "Приватность":"Privacy",
-  "Приватные папки":"Private folders",
-  "Чувствительные домены – за ограниченным доступом, точечно кому открыл.":"Sensitive domains stay behind restricted access, opened to named people only.",
-  "Аудит":"Audit",
-  "Логируется всё":"Everything is logged",
-  "Домены, лендинги, права, роли, папки, доступы. Любое изменение: кто, когда, что.":"Domains, landings, permissions, roles, folders, access. Every change: who, when, what.",
-  "Скорость":"Speed",
-  "Массовые операции и правка в таблице":"Bulk actions and in-table editing",
-  "Перенос, папки, метки, архив – сотни строк одним действием. Правка прямо в списке, с протяжкой как в Excel.":"Move, folders, labels, archive – hundreds of rows in one action. Edit right in the list, with Excel-style fill-down.",
-  "Данные":"Data",
-  "Импорт, экспорт и синхронизация":"Import, export and sync",
-  "Excel, CSV и Google-таблица заезжают целиком, выгрузка обратно. Namecheap, GoDaddy, NETIM и Cloudflare подтягиваются сами.":"Excel, CSV and Google Sheets come in whole, and export goes back out. Namecheap, GoDaddy, NETIM and Cloudflare sync on their own.",
-
-  "Мониторинг":"Monitoring",
-  "Видно, что сайт лёг, – раньше, чем об этом напишут в чате":"You see a site go down before anyone posts about it in chat",
-  "Один экран отвечает на вопрос «что сейчас сломано снаружи»: не открываются, уводят на чужой домен, истекают сроки, попали в блок-листы, отключены реестром.":"One screen answers «what is broken from the outside right now»: not opening, redirecting to someone else's domain, expiring, block-listed, suspended by the registry.",
-  "Проверка идёт сама, по расписанию":"Checks run on their own, on a schedule",
-  "Домены и адреса лендингов обходятся кронами. Кнопка «Проверить сейчас» есть в каждой строке и карточке.":"Domains and landing URLs are walked by cron jobs. A «Check now» button sits in every row and card.",
-  "Замеры по странам":"Country-level measurements",
-  "Через резидентные каналы видно, что в DE адрес открывается, а в BR – нет. «Канал не дошёл» считается нашей бедой, а не поломкой сайта.":"Residential channels show the URL opening in DE but not in BR. «Channel failed» counts as our problem, not the site's.",
-  "Редирект проходится до конца":"Redirects are followed to the end",
-  "Склейка www – норма, увод на чужой домен – тревога. Мёртвый конец цепочки не выглядит как рабочая склейка.":"A www merge is normal, a hop to someone else's domain is an alarm. A dead end no longer looks like a working merge.",
-  "Отключение реестром видно словами":"Registry suspension is spelled out",
-  "Не «имя не резолвится», а «домен на hold, регистратор такой-то» – с кем и о чём писать, понятно сразу.":"Not «name does not resolve» but «domain on hold, registrar X» – so you know who to write to and about what.",
-  "Плитки проблем, полоса по странам и список сайтов с причиной – на одном экране":"Problem tiles, a per-country bar and the list of sites with the reason – on one screen",
-
-  "Сообщение приходит туда, где команда и так сидит":"The message arrives where the team already is",
-  "Slack и Telegram подключаются в настройках. Тревога уходит на «лёг», отбой – на «снова открывается»; переходы между рабочими состояниями молчат.":"Slack and Telegram are connected in settings. An alarm fires on «down», the all-clear on «back up»; transitions between working states stay silent.",
-  "Упало сразу много – придёт один дайджест по сайтам, а не двести сообщений. Журнал отправок отвечает на вопрос «алерт ушёл или нет» внутри продукта.":"If many go down at once, one digest by site arrives instead of two hundred messages. A delivery log answers «did the alert go out» inside the product.",
-
-  "Лендинги и домены – одна система, а не две таблицы":"Landings and domains – one system, not two spreadsheets",
-  "Адрес лендинга сам находит свой домен в реестре. Видно, кто заказчик, в каком гео работает, актуален ли – и открывается ли он вообще.":"A landing URL finds its own domain in the registry. You see the customer, the geo, whether it is still current – and whether it opens at all.",
-
-  "Карточка домена":"Domain card",
-  "Один домен – одна карточка со всем контекстом":"One domain – one card with all the context",
-  "Маркетинг, IT, аналитика, партнёрки, сроки и интеграции – на вкладках одной сущности. Открыл домен и видишь всё, включая привязанные лендинги и то, кто что менял.":"Marketing, IT, analytics, affiliates, dates and integrations – on the tabs of a single entity. Open a domain and you see everything, including linked landings and who changed what.",
-  "Общие с лендингом поля правятся с любой стороны – значение остаётся одно, а не разъезжается по двум таблицам.":"Fields shared with a landing can be edited from either side – the value stays single instead of drifting apart in two tables.",
-
-  "Безопасность и контроль":"Security & control",
+  "То, что отбирает домен, видно раньше, чем падает трафик":"What takes a domain away shows up before the traffic drops",
+  "Спам-листы и базы угроз проверяются регулярно, а не когда уже поздно":"Spam lists and threat databases are checked on a schedule, not when it is already too late",
+  "Статус у реестра словами: не «имя не резолвится», а «домен на hold, регистратор такой-то»":"Registry status in plain words: not «the name does not resolve» but «the domain is on hold, registrar so-and-so»",
+  "Защита переноса и whois-приватность: где выключено – видно фильтром":"Transfer lock and whois privacy: a filter shows where they are switched off",
+  "Доступ":"Access",
+  "Соседняя команда не увидит ваши домены":"The team next door will not see your domains",
+  "Роли на каждый проект: админ, менеджер, редактор, наблюдатель":"Roles per project: admin, manager, editor, viewer",
+  "Приватные папки: чувствительные домены – точечно тем, кому открыли":"Private folders: sensitive domains go only to the people you opened them to",
+  "Права проверяются на сервере, а не в браузере – «подсмотреть» лишнее нельзя":"Permissions are enforced on the server, not in the browser – nothing extra can be peeked at",
+  "Аудит: любое изменение – кто, когда и что. Второй фактор и список сессий в профиле":"Audit: every change – who, when and what. Two-factor and a session list live in the profile",
+  "Контур":"Your stack",
+  "Встаёт в ваш контур, а не рядом с ним":"It fits inside your stack, not beside it",
+  "Self-hosted: реестр, доступы и история живут на вашей инфраструктуре":"Self-hosted: the registry, access and history live on your own infrastructure",
+  "White-label: название, логотип и цвета – панель выглядит как ваш продукт":"White-label: name, logo and colours – the panel looks like your product",
+  "API-токен только на чтение: скрипт забирает домены по проектам в JSON или CSV":"A read-only API token: a script pulls domains per project as JSON or CSV",
+  "Search Console рядом с реестром: клики, показы и CTR по доменам":"Search Console next to the registry: clicks, impressions and CTR per domain",
+  "И ещё:":"Also:",
+  "горячие клавиши · закрепление строк · архив вместо удаления · цветные маркеры и метки · журнал отправки алертов · утренняя сводка одним сообщением · экспорт в CSV и Excel · история по каждому полю":"keyboard shortcuts · pinned rows · archive instead of delete · colour markers and labels · an alert delivery log · a single morning digest · CSV and Excel export · history for every field",
+  "Ниша":"Your niche",
+  "Зеркала и редиректоры – так, как это устроено у вас":"Mirrors and redirectors – the way you actually run them",
+  "Обычная панель управления доменами такого не знает: для неё домен – строка со сроком продления.":"A general-purpose domain manager knows nothing about this: to it a domain is a row with a renewal date.",
+  "Видно, какие зеркала висят на редиректоре и сколько из них живо":"You see which mirrors sit on a redirector and how many are alive",
+  "Одно зеркало может висеть на нескольких редиректорах – так и бывает":"One mirror can sit on several redirectors – that is how it actually works",
+  "Ближайшее истечение по связке: домен теряют не только от бана, но и от забытого продления":"The nearest expiry across the set: domains are lost to a forgotten renewal as often as to a ban",
+  "Привязка и снятие – пачкой из реестра, а не по одному":"Linking and unlinking in bulk from the registry, not one by one",
+  "Безопасность":"Security",
   "Ваш сервер, ваши данные, ваши правила доступа":"Your server, your data, your access rules",
+  "Панель держит домены, доступы и историю – ровно то, что не должно утечь.":"The panel holds domains, access and history – exactly the things that must not leak.",
+  "Два раунда security-ревью":"Two rounds of security review",
+  "Закрыты кросс-тенантный обход прав, XSS, инъекции в экспорт, брутфорс логина и SSRF при проверке адресов. Гейты стоят в пайплайне.":"Cross-tenant permission bypass, XSS, export injection, login brute force and SSRF in URL checks are all closed. Gates run in the pipeline.",
+  "Видно, что уходит наружу":"You can see what leaves the perimeter",
+  "Внешние проверки выключаются одним рубильником, отдельный домен можно пометить «не светить нигде», карта исходящего трафика описана в документации.":"External checks switch off with one toggle, any single domain can be marked «never expose», and the outbound traffic map is documented.",
+  "След выгрузки":"Export leaves a trace",
+  "Экспорт и объём вычитанных строк считаются на сервере: «выгрузил весь реестр за один заход» не проходит незаметно.":"Exports and the number of rows read are counted on the server: «dumped the whole registry in one go» does not pass unnoticed.",
   "Доступ решается на сервере":"Access is decided on the server",
   "Права и приватность папок проверяются на сервере, а не в браузере – клиенту нельзя «подсмотреть» лишнее.":"Permissions and folder privacy are enforced on the server, not in the browser – the client cannot peek at anything extra.",
-  "Второй фактор и сессии на виду":"Two-factor and sessions in plain sight",
-  "Вход с кодом (TOTP), резервные коды, список активных сессий и кнопка «выйти везде» – в профиле, без похода к админу.":"Login with a code (TOTP), backup codes, a list of active sessions and a «sign out everywhere» button – in the profile, without asking an admin.",
-  "Прошёл два раунда security-ревью":"Two rounds of security review passed",
-  "Закрыты кросс-тенантный обход прав, XSS, инъекции в экспорт, брутфорс логина и SSRF при проверке адресов. Гейты стоят в пайплайне.":"Cross-tenant permission bypass, XSS, export injection, login brute force and SSRF in URL checks are closed. Gates run in the pipeline.",
-  "Видно, что уходит наружу":"You can see what leaves the perimeter",
-  "Внешние проверки выключаются одним рубильником, отдельный домен можно пометить «не светить нигде», а карта исходящего трафика описана в документации.":"External checks switch off with one toggle, a single domain can be flagged «never expose», and the outbound-traffic map is documented.",
-  "След выгрузки":"An export leaves a trace",
-  "Экспорт и объём вычитанных строк считаются на сервере: «выгрузил весь реестр за один заход» не проходит незаметно.":"Exports and the volume of rows read are counted on the server: «downloaded the whole registry in one go» does not pass unnoticed.",
-  "Данные только у вас":"The data stays with you",
-  "Self-hosted: реестр, доступы и история живут на вашей инфраструктуре, не в чужом облаке.":"Self-hosted: the registry, access and history live on your infrastructure, not in someone else's cloud.",
-  "Публичные и приватные папки – доступ к чувствительным доменам только у тех, кому открыт":"Public and private folders – sensitive domains are visible only to those given access",
-
+  "Публичные и приватные папки – доступ к чувствительным доменам только у тех, кому открыт":"Public and private folders – sensitive domains are reachable only by the people they were opened to",
   "Поставка":"Delivery",
-  "Что входит и как получить":"What's included and how to get it",
-  "Готовый продукт под ваш бренд — разворачивается на вашей инфраструктуре.":"A finished product under your brand — deployed on your own infrastructure.",
+  "Что входит и как получить":"What you get and how to get it",
+  "Готовый продукт под ваш бренд – разворачивается на вашей инфраструктуре.":"A finished product under your brand – deployed on your own infrastructure.",
   "Разворачивается на вашей инфраструктуре":"Deployed on your infrastructure",
-  "Свой сервер или кластер — помогу поднять и настроить под ваше окружение.":"Your own server or cluster — I'll help set it up for your environment.",
+  "Свой сервер или кластер – помогу поднять и настроить под ваше окружение.":"Your own server or cluster – I will help bring it up and tune it to your environment.",
   "White-label под ваш бренд":"White-label under your brand",
-  "Название, логотип и цвета — панель выглядит как ваш продукт.":"Name, logo and colours — the panel looks like your product.",
-  "Доработки под задачи":"Customization for your tasks",
-  "Дополнительные поля, интеграции и логика — под ваши процессы.":"Extra fields, integrations and logic — tailored to your processes.",
+  "Название, логотип и цвета – панель выглядит как ваш продукт.":"Name, logo and colours – the panel looks like your product.",
+  "Доработки под задачи":"Custom work for your cases",
+  "Дополнительные поля, интеграции и логика – под ваши процессы.":"Extra fields, integrations and logic – shaped to your processes.",
   "Перенос данных, запуск и поддержка":"Data migration, launch and support",
-  "Помогу перенести реестр из Excel и Google-таблиц, запустить и сопровождать.":"I'll help migrate the registry from Excel and Google Sheets, launch it and keep it running.",
-  "Стоимость — под ваш объём и задачи. Обсудим в Telegram.":"Pricing depends on your volume and tasks. Let's discuss it on Telegram.",
-
+  "Помогу перенести реестр из Excel и Google-таблиц, запустить и сопровождать.":"I will help move the registry out of Excel and Google Sheets, launch it and keep it running.",
+  "Стоимость – под ваш объём и задачи. Обсудим в Telegram.":"Pricing depends on your volume and your cases. Let us discuss it on Telegram.",
   "Связаться":"Get in touch",
-  "Покажу вживую и отвечу на вопросы":"I'll show it live and answer your questions",
-  "Напишите в Telegram – договоримся о демо и обсудим, как панель ложится под ваши процессы.":"Message me on Telegram – we'll set up a demo and see how the panel fits your processes."
+  "Покажу вживую и отвечу на вопросы":"I will show it live and answer your questions",
+  "Напишите в Telegram – договоримся о демо и обсудим, как панель ложится под ваши процессы.":"Message me on Telegram – we will set up a demo and see how the panel fits your processes."
   };
   var items=[]; var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null); var n;
   while(n=w.nextNode()){
