@@ -181,6 +181,9 @@
   @media (max-width:640px){
     /* Узкий экран: 32px по краям съедали седьмую часть ширины, а строка цифр в hero
        держалась `nowrap` и упиралась в край. Переполнения не было, но воздуха не было тоже. */
+    /* Восемь секций по 96px сверху и снизу — это почти два лишних экрана прокрутки. */
+    section{padding:60px 0}
+    section:last-of-type{padding:56px 0 60px}
     .wrap{padding:0 20px}
     header.top{flex-wrap:wrap;gap:12px}
     .stats .s{white-space:normal}
@@ -265,7 +268,7 @@
         <p class="ttl">С панелью</p>
         <ol>
           <li class="hit"><span class="t">03:12</span><span class="e">Зеркало перестало открываться</span></li>
-          <li class="hit"><span class="t">03:13</span><span class="e">Telegram: «bet-x.com не открывается»</span></li>
+          <li class="hit"><span class="t">03:13</span><span class="e">Telegram: «harbor-x441.life не открывается»</span></li>
           <li class="hit"><span class="t">03:14</span><span class="e">В карточке видно: истёк сертификат, хостинг ни при чём</span></li>
           <li class="hit"><span class="t">09:20</span><span class="e">Починили до утреннего трафика</span></li>
         </ol>
@@ -283,6 +286,18 @@
       <p>Домены, которые не открылись, сроки продления, лендинги на уточнении и последние изменения – на одном экране.</p>
     </div>
     <div class="shot" role="img" aria-label="Скриншот: дашборд"><img src="/shot-dashboard.jpg" alt="Дашборд – Domain Control Panel" loading="lazy"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head" style="max-width:62em">
+      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Мониторинг</p>
+      <h2>Один экран на вопрос «что сломано снаружи»</h2>
+      <p>Семь плиток — семь способов потерять домен: не открылся, уводит на чужое, истекает срок, попал в блок-лист, пропал маркер со страницы, сертификат, отключён реестром. Клик по плитке оставляет в списке только её строки, а вторая ступень отвечает «почему именно»: не резолвится, таймаут, ошибка сертификата, ответ 4xx.</p>
+    </div>
+    <div class="shot" role="img" aria-label="Скриншот: раздел «Доступность»"><img src="/shot-availability.jpg" alt="Доступность – Domain Control Panel" loading="lazy"></div>
+    <p class="shotcap">В списке первичен домен: если лёг сайт, легли и все адреса на нём — это одна проблема, а не десять</p>
   </div>
 </section>
 
@@ -368,21 +383,21 @@
     </div>
     <div class="mirror">
       <div class="pic">
-        <svg viewBox="0 0 520 210" role="img" aria-label="Схема: редиректор и привязанные к нему зеркала">
-          <g fill="none" stroke="hsl(217 33% 26%)" stroke-width="1.5">
-            <path d="M186 100 150 55M186 108 150 92M186 116 150 128M186 124 150 164M334 112l40 28"/>
+        <svg viewBox="0 0 440 206" role="img" aria-label="Схема: редиректор и привязанные к нему зеркала">
+          <g fill="none" stroke="hsl(217 33% 26%)" stroke-width="1.6">
+            <path d="M176 92 150 48M176 100 150 86M176 112 150 124M176 120 150 162M310 110l34 30"/>
           </g>
-          <rect x="186" y="88" width="148" height="44" rx="10" fill="hsl(210 100% 52% / .14)" stroke="hsl(210 100% 52% / .5)" stroke-width="1.5"/>
-          <text x="260" y="107" text-anchor="middle" fill="hsl(210 40% 98%)" font-family="ui-monospace,monospace" font-size="13">gsp-r1.com</text>
-          <text x="260" y="123" text-anchor="middle" fill="hsl(210 100% 66%)" font-family="ui-monospace,monospace" font-size="10">РЕДИРЕКТОР</text>
-          <g font-family="ui-monospace,monospace" font-size="11.5">
-            <circle cx="24" cy="52" r="4" fill="#3fb950"/><text x="36" y="56" fill="hsl(215 20% 62%)">gspot973.com</text>
-            <circle cx="24" cy="89" r="4" fill="#3fb950"/><text x="36" y="93" fill="hsl(215 20% 62%)">gspot271.com</text>
-            <circle cx="24" cy="125" r="4" fill="#f85149"/><text x="36" y="129" fill="hsl(215 20% 62%)">game-spot.bet</text>
-            <circle cx="24" cy="161" r="4" fill="#f85149"/><text x="36" y="165" fill="hsl(215 20% 62%)">g-spot.games</text>
-            <circle cx="382" cy="140" r="4" fill="#3fb950"/><text x="394" y="144" fill="hsl(215 20% 62%)">gspot691.com</text>
+          <rect x="176" y="86" width="134" height="42" rx="10" fill="hsl(210 100% 52% / .14)" stroke="hsl(210 100% 52% / .5)" stroke-width="1.6"/>
+          <text x="243" y="104" text-anchor="middle" fill="hsl(210 40% 98%)" font-family="ui-monospace,monospace" font-size="14">harbor-x.net</text>
+          <text x="243" y="120" text-anchor="middle" fill="hsl(210 100% 66%)" font-family="ui-monospace,monospace" font-size="11">РЕДИРЕКТОР</text>
+          <g font-family="ui-monospace,monospace" font-size="14">
+            <circle cx="14" cy="44" r="4.5" fill="#3fb950"/><text x="28" y="49" fill="hsl(215 20% 62%)">harborgames.pro</text>
+            <circle cx="14" cy="82" r="4.5" fill="#3fb950"/><text x="28" y="87" fill="hsl(215 20% 62%)">harbor-x441.life</text>
+            <circle cx="14" cy="120" r="4.5" fill="#f85149"/><text x="28" y="125" fill="hsl(215 20% 62%)">harborgames-app.io</text>
+            <circle cx="14" cy="158" r="4.5" fill="#f85149"/><text x="28" y="163" fill="hsl(215 20% 62%)">harbor-x370.bet</text>
+            <circle cx="344" cy="140" r="4.5" fill="#3fb950"/><text x="358" y="145" fill="hsl(215 20% 62%)">harborgames-win293.com</text>
           </g>
-          <text x="260" y="186" text-anchor="middle" fill="hsl(215 16% 46%)" font-family="ui-monospace,monospace" font-size="11">живых 3 из 5 · ближайшее истечение 14.10</text>
+          <text x="220" y="196" text-anchor="middle" fill="hsl(215 16% 46%)" font-family="ui-monospace,monospace" font-size="12.5">живых 3 из 5 · ближайшее истечение 14.10</text>
         </svg>
       </div>
       <div class="blk" style="background:transparent;border:0;padding:0">
@@ -516,7 +531,7 @@
   "«почему вчера был ноль?» – в чате от байера":"«why was yesterday a zero?» – from the buyer, in chat",
   "Шесть часов трафика в никуда, и причину ищут с нуля.":"Six hours of traffic gone, and the cause is hunted from scratch.",
   "С панелью":"With the panel",
-  "Telegram: «bet-x.com не открывается»":"Telegram: «bet-x.com is not opening»",
+  "Telegram: «harbor-x441.life не открывается»":"Telegram: «harbor-x441.life is not opening»",
   "В карточке видно: истёк сертификат, хостинг ни при чём":"The card shows it: the certificate expired, hosting is fine",
   "Починили до утреннего трафика":"Fixed before the morning traffic",
   "Минута на сообщение, утро – уже рабочее.":"One minute to the alert, and the morning is already a working one.",
@@ -594,6 +609,10 @@
   "Перенос данных, запуск и поддержка":"Data migration, launch and support",
   "Помогу перенести реестр из Excel и Google-таблиц, запустить и сопровождать.":"I will help move the registry out of Excel and Google Sheets, launch it and keep it running.",
   "Стоимость – под ваш объём и задачи. Обсудим в Telegram.":"Pricing depends on your volume and your cases. Let us discuss it on Telegram.",
+  "Мониторинг":"Monitoring",
+  "Один экран на вопрос «что сломано снаружи»":"One screen for the question «what is broken from the outside»",
+  "Семь плиток — семь способов потерять домен: не открылся, уводит на чужое, истекает срок, попал в блок-лист, пропал маркер со страницы, сертификат, отключён реестром. Клик по плитке оставляет в списке только её строки, а вторая ступень отвечает «почему именно»: не резолвится, таймаут, ошибка сертификата, ответ 4xx.":"Seven tiles — seven ways to lose a domain: it stopped opening, it redirects somewhere else, the renewal date is near, it landed on a block list, the page marker is gone, the certificate, suspended by the registry. Clicking a tile leaves only its rows in the list, and the second level answers «why exactly»: does not resolve, timeout, certificate error, a 4xx response.",
+  "В списке первичен домен: если лёг сайт, легли и все адреса на нём — это одна проблема, а не десять":"The domain comes first in the list: if a site goes down, every URL on it goes down too — that is one problem, not ten",
   "Связаться":"Get in touch",
   "Покажу вживую и отвечу на вопросы":"I will show it live and answer your questions",
   "Напишите в Telegram – договоримся о демо и обсудим, как панель ложится под ваши процессы.":"Message me on Telegram – we will set up a demo and see how the panel fits your processes."

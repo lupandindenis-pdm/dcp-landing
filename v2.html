@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Domain Control Panel — версия v2</title>
+<meta name="description" content="Тестовая версия страницы: короче и без панелей. Реестр доменов, зеркал и лендингов, который сам говорит, что сломалось.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="robots" content="noindex">
+<style>
+  :root{
+    --ground: hsl(224 71% 4%);
+    --line: hsl(217 33% 19%);
+    --line-soft: hsl(217 33% 14%);
+    --ink: hsl(210 40% 98%);
+    --muted: hsl(215 20% 66%);
+    --faint: hsl(215 16% 48%);
+    --accent: hsl(210 100% 52%);
+    --accent-2: hsl(210 100% 66%);
+    --ok:#3fb950; --crit:#f85149;
+    --mono: ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(54rem 38rem at 82% -12%, hsl(210 100% 52% / .14), transparent 60%);
+    background-repeat:no-repeat}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 28px}
+
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700}
+  .brand .dot{width:24px;height:24px;border-radius:7px;background:linear-gradient(150deg,var(--accent-2),var(--accent));display:flex;align-items:center;justify-content:center}
+  .brand .dot svg{width:14px;height:14px;color:#fff;fill:none;stroke:currentColor;stroke-width:2}
+  .brand .name{font-family:var(--mono);font-size:14px}
+  .langtog{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-family:var(--mono);font-size:12px}
+  .langtog button{background:transparent;border:0;color:var(--faint);padding:6px 12px;cursor:pointer}
+  .langtog button.on{background:hsl(210 100% 52% / .15);color:var(--accent)}
+
+  /* Ритм: одна мысль — один блок, разделённый воздухом и волосяной линией.
+     Панелей с рамками в этой версии нет совсем — ради этого она и собрана. */
+  section{padding:76px 0;border-top:1px solid var(--line-soft)}
+  section:first-of-type{border-top:0}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 16px}
+  h1{font-size:clamp(36px,5.4vw,60px);line-height:1.08;letter-spacing:-.035em;font-weight:800;margin:0 0 22px;text-wrap:balance}
+  h1 .hl{color:var(--accent-2)}
+  h2{font-size:clamp(26px,3.4vw,38px);line-height:1.15;letter-spacing:-.025em;margin:0 0 18px;text-wrap:balance}
+  .lede{font-size:clamp(17px,1.7vw,20px);color:var(--muted);margin:0 0 30px;max-width:30em;text-wrap:balance}
+  .say{font-size:clamp(17px,1.8vw,19px);color:var(--muted);max-width:34em;margin:0;text-wrap:pretty}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:650;font-size:16px;text-decoration:none;padding:14px 24px;border-radius:10px;
+    background:var(--accent);color:#04101f;box-shadow:0 10px 30px hsl(210 100% 52% / .3);transition:background .2s,transform .15s}
+  .btn:hover{background:var(--accent-2);transform:translateY(-1px)}
+
+  .nums{display:flex;flex-wrap:wrap;gap:6px 26px;margin:0 0 32px;font-family:var(--mono);font-size:14px;color:var(--muted)}
+  .nums b{font-size:19px;font-weight:700;color:var(--ink);margin-right:6px}
+  .nums .crit b{color:var(--crit)}
+
+  .shot{border-radius:12px;overflow:hidden;box-shadow:0 36px 80px -30px hsl(224 71% 1% / .95), 0 0 0 1px hsl(210 40% 98% / .07)}
+  .shot img{display:block;width:100%;height:auto}
+  .cap{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin:14px 0 0}
+
+  /* «03:12» — две колонки без рамок, разделённые линией */
+  .night{display:grid;grid-template-columns:1fr 1fr;gap:0 48px;margin-top:8px}
+  .night .col{padding:0 0 0 0}
+  .night .col+.col{border-left:1px solid var(--line-soft);padding-left:48px}
+  .night .ttl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin:0 0 18px}
+  .night .col+.col .ttl{color:var(--accent)}
+  .night ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  .night li{display:grid;grid-template-columns:54px 1fr;gap:12px;align-items:baseline}
+  .night .t{font-family:var(--mono);font-size:13px;color:var(--faint)}
+  .night .col+.col .t{color:var(--accent-2)}
+  .night .e{font-size:16px;color:var(--muted)}
+  .night .sum{margin:22px 0 0;font-size:15px;color:var(--faint)}
+  .night .col+.col .sum{color:var(--ink)}
+
+  /* три мысли вместо шести панелей */
+  .three{display:flex;flex-direction:column;gap:46px}
+  .three h3{font-size:clamp(20px,2.3vw,24px);letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+  .three p{margin:0 0 7px;color:var(--muted);font-size:16.5px;max-width:46em;text-wrap:pretty}
+  .three .tag{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:block;margin:0 0 10px}
+
+  .deliver{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 48px;margin-top:6px}
+  .deliver h4{margin:0 0 5px;font-size:16.5px}
+  .deliver p{margin:0;color:var(--muted);font-size:15px}
+
+  .close{text-align:center}
+  .close p{color:var(--muted);margin:0 auto 26px;max-width:30em}
+  footer{padding:30px 0 52px;color:var(--faint);font-family:var(--mono);font-size:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line-soft)}
+
+  @media (max-width:760px){
+    .night{grid-template-columns:1fr;gap:34px}
+    .night .col+.col{border-left:0;border-top:1px solid var(--line-soft);padding-left:0;padding-top:30px}
+    .deliver{grid-template-columns:1fr}
+    section{padding:52px 0}
+    .wrap{padding:0 20px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="dot" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
+      <span class="name">Domain&nbsp;Control&nbsp;Panel</span>
+    </div>
+    <div class="langtog"><button data-l="ru" class="on">RU</button><button data-l="en">EN</button></div>
+  </header>
+</div>
+
+<section>
+  <div class="wrap">
+    <h1>Реестр доменов, который <span class="hl">сам говорит, что сломалось</span></h1>
+    <p class="lede">Сотни доменов, зеркал и лендингов в одной панели. Проверяется круглосуточно, пишет в Telegram, когда что-то отвалилось, и помнит, кто что менял.</p>
+    <p class="nums">
+      <span><b>1546</b>доменов</span>
+      <span class="crit"><b>149</b>не открылись</span>
+      <span class="crit"><b>27</b>отключены реестром</span>
+    </p>
+    <p style="margin:0 0 34px"><a class="btn" href="https://t.me/denis_pdm">Написать в Telegram <span>→</span></a></p>
+    <div class="shot"><img src="/shot-registry.jpg" alt="Реестр доменов – Domain Control Panel"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Зачем это нужно</p>
+    <h2>Домен лёг в 03:12. Когда вы об этом узнаете?</h2>
+    <p class="say" style="margin-bottom:38px">Разница между колонками — это ночь трафика и разговор с байером наутро.</p>
+    <div class="night">
+      <div class="col">
+        <p class="ttl">Как обычно</p>
+        <ol>
+          <li><span class="t">03:12</span><span class="e">Зеркало перестало открываться</span></li>
+          <li><span class="t">—</span><span class="e">тишина</span></li>
+          <li><span class="t">09:40</span><span class="e">«почему вчера был ноль?» — в чате от байера</span></li>
+        </ol>
+        <p class="sum">Шесть часов трафика в никуда.</p>
+      </div>
+      <div class="col">
+        <p class="ttl">С панелью</p>
+        <ol>
+          <li><span class="t">03:13</span><span class="e">Telegram: «harbor-x441.life не открывается»</span></li>
+          <li><span class="t">03:14</span><span class="e">В карточке видно: истёк сертификат, хостинг ни при чём</span></li>
+          <li><span class="t">09:20</span><span class="e">Починили до утреннего трафика</span></li>
+        </ol>
+        <p class="sum">Минута на сообщение, утро — уже рабочее.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Что умеет</p>
+    <h2>Три вещи, ради которых это ставят</h2>
+    <div class="three" style="margin-top:34px">
+      <div>
+        <span class="tag">Порядок</span>
+        <h3>Реестр вместо таблицы, которую каждый правит по-своему</h3>
+        <p>Домены, зеркала и лендинги одним списком — с историей, кто что менял, и правкой сотен строк одним действием.</p>
+        <p>Семь кабинетов регистраторов подтягивают сроки и цены сами.</p>
+      </div>
+      <div>
+        <span class="tag">Поломки</span>
+        <h3>Что сломано снаружи — прямо сейчас, а не по итогам дня</h3>
+        <p>Проверка круглосуточно и из нужных стран. Код 200 не значит, что сайт жив: заданная строка на странице ловит заглушку хостера.</p>
+        <p>Сертификат, смена делегирования, блок-листы и статус у реестра — всё в том же экране.</p>
+      </div>
+      <div>
+        <span class="tag">Контроль</span>
+        <h3>Соседняя команда не увидит ваши домены</h3>
+        <p>Роли на каждый проект и приватные папки, права проверяются на сервере. Любое изменение видно в аудите.</p>
+        <p>Self-hosted и white-label: данные и бренд остаются вашими.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Мониторинг</p>
+    <h2>Один экран на вопрос «что сломано снаружи»</h2>
+    <p class="say" style="margin-bottom:34px">Семь плиток — семь способов потерять домен. Клик по плитке оставляет в списке только её строки, а вторая ступень отвечает «почему именно»: не резолвится, таймаут, ошибка сертификата.</p>
+    <div class="shot"><img src="/shot-availability.jpg" alt="Доступность – Domain Control Panel" loading="lazy"></div>
+    <p class="cap">Первичен домен: лёг сайт — легли и все адреса на нём, это одна проблема, а не десять</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Поставка</p>
+    <h2>Что входит и как получить</h2>
+    <div class="deliver">
+      <div><h4>На вашей инфраструктуре</h4><p>Свой сервер или кластер — помогу поднять и настроить.</p></div>
+      <div><h4>White-label под ваш бренд</h4><p>Название, логотип и цвета — панель выглядит как ваш продукт.</p></div>
+      <div><h4>Доработки под задачи</h4><p>Дополнительные поля, интеграции и логика — под ваши процессы.</p></div>
+      <div><h4>Перенос, запуск и поддержка</h4><p>Помогу перевезти реестр из Excel и Google-таблиц.</p></div>
+    </div>
+    <p class="cap" style="margin-top:26px">Стоимость — под ваш объём и задачи. Обсудим в Telegram.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="close">
+      <h2>Покажу вживую и отвечу на вопросы</h2>
+      <p>Напишите в Telegram — договоримся о демо и обсудим, как панель ложится под ваши процессы.</p>
+      <a class="btn" href="https://t.me/denis_pdm">Написать в Telegram <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><footer><span>Domain Control Panel</span><span>self-hosted · white-label</span></footer></div>
+
+<script>
+(function(){
+  var T={
+  "Реестр доменов, который":"A domain registry that",
+  "сам говорит, что сломалось":"tells you what broke",
+  "Сотни доменов, зеркал и лендингов в одной панели. Проверяется круглосуточно, пишет в Telegram, когда что-то отвалилось, и помнит, кто что менял.":"Hundreds of domains, mirrors and landings in one panel. Checked around the clock, messages you on Telegram the moment something drops, and remembers who changed what.",
+  "доменов":"domains",
+  "не открылись":"failed to open",
+  "отключены реестром":"suspended by the registry",
+  "Написать в Telegram":"Message on Telegram",
+  "Зачем это нужно":"Why you need it",
+  "Домен лёг в 03:12. Когда вы об этом узнаете?":"A domain went down at 03:12. When do you find out?",
+  "Разница между колонками — это ночь трафика и разговор с байером наутро.":"The gap between these columns is a night of traffic and an awkward morning chat with your buyer.",
+  "Как обычно":"The usual way",
+  "Зеркало перестало открываться":"A mirror stops opening",
+  "тишина":"silence",
+  "«почему вчера был ноль?» — в чате от байера":"«why was yesterday a zero?» – from the buyer, in chat",
+  "Шесть часов трафика в никуда.":"Six hours of traffic gone.",
+  "С панелью":"With the panel",
+  "Telegram: «harbor-x441.life не открывается»":"Telegram: «harbor-x441.life is not opening»",
+  "В карточке видно: истёк сертификат, хостинг ни при чём":"The card shows it: the certificate expired, hosting is fine",
+  "Починили до утреннего трафика":"Fixed before the morning traffic",
+  "Минута на сообщение, утро — уже рабочее.":"One minute to the alert, and the morning is already a working one.",
+  "Что умеет":"What it does",
+  "Три вещи, ради которых это ставят":"Three reasons people install it",
+  "Порядок":"Order",
+  "Реестр вместо таблицы, которую каждый правит по-своему":"A registry instead of a spreadsheet everyone edits their own way",
+  "Домены, зеркала и лендинги одним списком — с историей, кто что менял, и правкой сотен строк одним действием.":"Domains, mirrors and landings in one list — with a history of who changed what, and hundreds of rows edited in one action.",
+  "Семь кабинетов регистраторов подтягивают сроки и цены сами.":"Seven registrar accounts pull in dates and prices on their own.",
+  "Поломки":"Breakage",
+  "Что сломано снаружи — прямо сейчас, а не по итогам дня":"What is broken from the outside – right now, not at the end of the day",
+  "Проверка круглосуточно и из нужных стран. Код 200 не значит, что сайт жив: заданная строка на странице ловит заглушку хостера.":"Checked around the clock and from the countries you need. HTTP 200 does not mean the site is alive: a string you set on the page catches the hosting stub.",
+  "Сертификат, смена делегирования, блок-листы и статус у реестра — всё в том же экране.":"The certificate, a delegation change, block lists and registry status — all on the same screen.",
+  "Контроль":"Control",
+  "Соседняя команда не увидит ваши домены":"The team next door will not see your domains",
+  "Роли на каждый проект и приватные папки, права проверяются на сервере. Любое изменение видно в аудите.":"Roles per project and private folders, with permissions enforced on the server. Every change shows up in the audit log.",
+  "Self-hosted и white-label: данные и бренд остаются вашими.":"Self-hosted and white-label: the data and the brand stay yours.",
+  "Мониторинг":"Monitoring",
+  "Один экран на вопрос «что сломано снаружи»":"One screen for the question «what is broken from the outside»",
+  "Семь плиток — семь способов потерять домен. Клик по плитке оставляет в списке только её строки, а вторая ступень отвечает «почему именно»: не резолвится, таймаут, ошибка сертификата.":"Seven tiles — seven ways to lose a domain. Clicking a tile leaves only its rows in the list, and the second level answers «why exactly»: does not resolve, timeout, certificate error.",
+  "Первичен домен: лёг сайт — легли и все адреса на нём, это одна проблема, а не десять":"The domain comes first: if a site goes down, every URL on it goes down too — that is one problem, not ten",
+  "Поставка":"Delivery",
+  "Что входит и как получить":"What you get and how to get it",
+  "На вашей инфраструктуре":"On your infrastructure",
+  "Свой сервер или кластер — помогу поднять и настроить.":"Your own server or cluster — I will help bring it up and tune it.",
+  "White-label под ваш бренд":"White-label under your brand",
+  "Название, логотип и цвета — панель выглядит как ваш продукт.":"Name, logo and colours — the panel looks like your product.",
+  "Доработки под задачи":"Custom work for your cases",
+  "Дополнительные поля, интеграции и логика — под ваши процессы.":"Extra fields, integrations and logic — shaped to your processes.",
+  "Перенос, запуск и поддержка":"Migration, launch and support",
+  "Помогу перевезти реестр из Excel и Google-таблиц.":"I will help move the registry out of Excel and Google Sheets.",
+  "Стоимость — под ваш объём и задачи. Обсудим в Telegram.":"Pricing depends on your volume and your cases. Let us discuss it on Telegram.",
+  "Покажу вживую и отвечу на вопросы":"I will show it live and answer your questions",
+  "Напишите в Telegram — договоримся о демо и обсудим, как панель ложится под ваши процессы.":"Message me on Telegram – we will set up a demo and see how the panel fits your processes."
+  };
+  var items=[]; var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null); var n;
+  while(n=w.nextNode()){
+    var raw=n.nodeValue; if(!raw||!raw.trim()) continue;
+    var pn=n.parentNode&&n.parentNode.nodeName; if(pn==='SCRIPT'||pn==='STYLE') continue;
+    var key=raw.trim().replace(/\u00A0/g,' ');
+    if(Object.prototype.hasOwnProperty.call(T,key)) items.push({node:n,raw:raw,core:raw.trim(),en:T[key]});
+  }
+  function apply(lang){
+    items.forEach(function(o){ o.node.nodeValue = lang==='en' ? o.raw.replace(o.core,o.en) : o.raw; });
+    document.documentElement.lang=lang;
+    document.querySelectorAll('.langtog button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-l')===lang); });
+    try{localStorage.setItem('lp_lang_v2',lang);}catch(e){}
+  }
+  document.querySelectorAll('.langtog button').forEach(function(b){ b.addEventListener('click',function(){ apply(b.getAttribute('data-l')); }); });
+  var saved='ru'; try{saved=localStorage.getItem('lp_lang_v2')||'ru';}catch(e){}
+  apply(saved==='en'?'en':'ru');
+})();
+</script>
+</body>
+</html>
