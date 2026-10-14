@@ -3,620 +3,769 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Domain Control Panel – реестр доменов, зеркал и лендингов</title>
-<meta name="description" content="Self-hosted реестр доменов, зеркал и лендингов: круглосуточная проверка доступности из нужных стран, сертификаты и смена делегирования, расход на продления, блок-листы и статус у реестра, алерты в Slack и Telegram, роли по проектам и полный аудит. Для iGaming, аффилиатных команд и больших портфелей.">
+<title>Domain Control Panel — портфель доменов, который следит за собой сам</title>
+<meta name="description" content="Self-hosted портфель доменов, зеркал и лендингов: массовые правки, доступ по командам и отделам, журнал каждого изменения, проверка доступности из нужных стран, алерты в Telegram и Slack, SEO, деньги и сроки продления. Ставится на вашем сервере, под вашим брендом.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://domainoffer-chi.vercel.app/">
-<meta property="og:title" content="Domain Control Panel – реестр доменов, зеркал и лендингов">
-<meta property="og:description" content="Реестр доменов, который сам говорит, что сломалось. Домены, зеркала и лендинги в одной панели: проверка из нужных стран, сертификаты, расход на продления, алерты в Telegram, роли по проектам. Self-hosted, white-label.">
+<meta property="og:title" content="Портфель доменов, который следит за собой сам">
+<meta property="og:description" content="Массовые правки, доступ по командам, журнал каждого изменения — и алерт, если что-то перестало открываться. Self-hosted, white-label.">
 <meta property="og:image" content="https://domainoffer-chi.vercel.app/og.jpg">
-<meta property="og:image:width" content="1800">
-<meta property="og:image:height" content="1037">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Domain Control Panel">
-<meta name="twitter:description" content="Реестр доменов, который сам говорит, что сломалось. Self-hosted, white-label.">
+<meta name="twitter:title" content="Портфель доменов, который следит за собой сам">
+<meta name="twitter:description" content="Self-hosted, white-label панель для портфеля доменов, зеркал и лендингов.">
 <meta name="twitter:image" content="https://domainoffer-chi.vercel.app/og.jpg">
+<link rel="preload" href="/fonts/inter-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-cyrillic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/shots/registry.jpg" as="image">
 
 <style>
+  /* Шрифты продукта, раздаются со своего домена — как и в самой панели */
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:400;src:url(/fonts/inter-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/inter-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:600;src:url(/fonts/inter-cyrillic-600-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:700;src:url(/fonts/inter-cyrillic-700-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:800;src:url(/fonts/inter-cyrillic-800-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:400;src:url(/fonts/inter-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/inter-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:600;src:url(/fonts/inter-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:700;src:url(/fonts/inter-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:Inter;font-style:normal;font-display:swap;font-weight:800;src:url(/fonts/inter-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"JetBrains Mono";font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/jetbrains-mono-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"JetBrains Mono";font-style:normal;font-display:swap;font-weight:500;src:url(/fonts/jetbrains-mono-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+  /* Токены — один в один из продукта (src/index.css, Dashboard.tsx, button.tsx) */
   :root{
-    --ground: hsl(224 71% 4%);
-    --panel: hsl(222 47% 8%);
-    --panel-2: hsl(217 33% 13%);
-    --line: hsl(217 33% 19%);
-    --line-soft: hsl(217 33% 15%);
-    --ink: hsl(210 40% 98%);
-    --muted: hsl(215 20% 62%);
-    --faint: hsl(215 16% 46%);
-    --accent: hsl(210 100% 52%);
-    --accent-2: hsl(210 100% 66%);
-    --ok:#3fb950; --warn:#e3b341; --crit:#f85149;
-    --mono: ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
-    --sans: system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --bg:#030711; --card:#040a1a; --sec:#0f172a;
+    --fg:#f8fafc; --fg-2:rgb(248 250 252 / .85); --muted:#94a3b8; --dim:rgb(148 163 184 / .78); --faint:rgb(148 163 184 / .62);
+    --primary:hsl(210 100% 52%); --primary-2:#60a5fa;
+    --b1:rgb(255 255 255 / .10); --b2:rgb(255 255 255 / .14); --b3:rgb(255 255 255 / .19);
+    --s1:rgb(255 255 255 / .025); --s2:rgb(255 255 255 / .045);
+    --panel:linear-gradient(135deg,var(--card) 0%,var(--sec) 100%);
+    --hair:linear-gradient(90deg,transparent,rgb(255 255 255 / .08),transparent);
+    --shadow:0 8px 30px rgb(0 0 0 / .3);
+    --ok:#34d399; --warn:#fb923c; --crit:#f87171;
+    --sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --wrap:1200px;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none!important} }
-  body{
-    margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    background-image:
-      radial-gradient(58rem 40rem at 80% -10%, hsl(210 100% 52% / .16), transparent 60%),
-      radial-gradient(46rem 38rem at -6% 4%, hsl(210 100% 52% / .07), transparent 55%);
-    background-repeat:no-repeat;
+  html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:1.5;
+       -webkit-font-smoothing:antialiased;font-feature-settings:"rlig","calt";overflow-x:hidden}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--primary-2);outline-offset:3px;border-radius:8px}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .ic{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* фон страницы: два мягких пятна как на шапках продукта */
+  .bgfx{position:absolute;inset:0 0 auto;height:1100px;overflow:hidden;pointer-events:none;z-index:0}
+  .bgfx i{position:absolute;border-radius:50%;filter:blur(90px)}
+  .bgfx i:nth-child(1){width:620px;height:620px;left:50%;top:-260px;transform:translateX(-80%);background:#7c3aed;opacity:.16}
+  .bgfx i:nth-child(2){width:560px;height:560px;left:50%;top:-180px;transform:translateX(10%);background:#2563eb;opacity:.16}
+  main,header,footer{position:relative;z-index:1}
+
+  /* панель продукта: диагональный градиент, рамка, блик сверху */
+  .panel{position:relative;overflow:hidden;border-radius:16px;border:1px solid var(--b1);background:var(--panel)}
+  .panel::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:var(--hair);z-index:1}
+
+  /* кнопки продукта */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:48px;padding:0 22px;border-radius:12px;
+       font-weight:600;font-size:15px;border:1px solid transparent;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s,transform .15s;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{color:#fff;background:linear-gradient(rgb(255 255 255 / .14),transparent),var(--primary);
+       box-shadow:inset 0 1px 0 rgb(255 255 255 / .22),0 10px 26px -8px hsl(210 100% 52% / .7)}
+  .btn-primary:hover{background:linear-gradient(rgb(255 255 255 / .2),transparent),var(--primary)}
+  .btn-outline{color:var(--fg);border-color:var(--b1);background:linear-gradient(rgb(255 255 255 / .09),rgb(255 255 255 / .03));
+       box-shadow:inset 0 1px 0 rgb(255 255 255 / .07),0 6px 16px rgb(0 0 0 / .3)}
+  .btn-outline:hover{border-color:var(--b2);background:linear-gradient(rgb(255 255 255 / .13),rgb(255 255 255 / .05))}
+  .btn-sm{height:38px;padding:0 15px;font-size:14px;border-radius:10px}
+  .btn .ic{width:17px;height:17px}
+
+  /* шапка */
+  .top{position:sticky;top:0;z-index:50;border-bottom:1px solid transparent;transition:background .2s,border-color .2s}
+  .top.scrolled{background:rgb(3 7 17 / .82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom-color:var(--b1)}
+  .top .wrap{display:flex;align-items:center;gap:28px;height:68px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+  .mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;
+        background:linear-gradient(135deg,#60a5fa,#2563eb);box-shadow:inset 0 1px 0 rgb(255 255 255 / .25),0 6px 18px -4px rgb(37 99 235 / .6)}
+  .mark .ic{width:17px;height:17px}
+  .nav{display:flex;gap:26px;margin-left:12px}
+  .nav a{font-size:14px;font-weight:500;color:var(--muted);transition:color .15s}
+  .nav a:hover{color:var(--fg)}
+  .top .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .langtog{display:inline-flex;height:38px;padding:3px;border:1px solid var(--b1);border-radius:10px;background:var(--s1)}
+  .langtog button{border:0;background:transparent;color:var(--faint);font:500 13px var(--mono);padding:0 10px;border-radius:7px;cursor:pointer}
+  .langtog button.on{background:hsl(210 100% 52% / .18);color:#93c5fd}
+
+  /* общие заголовки секций */
+  section{padding:88px 0}
+  .head{max-width:760px;margin:0 0 44px}
+  .head.center{margin-inline:auto;text-align:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font:600 12.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--primary-2);margin:0 0 16px}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px rgb(96 165 250 / .15)}
+  h1,h2,h3{margin:0;text-wrap:balance}
+  h2{font-size:clamp(30px,3.6vw,44px);line-height:1.12;letter-spacing:-.03em;font-weight:700}
+  .head p{margin:16px 0 0;font-size:18px;line-height:1.55;color:var(--muted);text-wrap:pretty}
+
+  /* герой */
+  .hero{padding:72px 0 0;text-align:center}
+  .hero h1{font-size:clamp(40px,6.4vw,76px);line-height:1.02;letter-spacing:-.045em;font-weight:800;max-width:15ch;margin:0 auto}
+  .hero h1 .grad{background:linear-gradient(100deg,#93c5fd 0%,#60a5fa 40%,#a78bfa 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero .lede{max-width:640px;margin:26px auto 0;font-size:clamp(17px,1.7vw,20px);line-height:1.55;color:var(--muted);text-wrap:balance}
+  .hero .cta{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin:36px 0 0}
+  .proof{display:inline-flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 22px;margin:40px auto 0;padding:12px 20px;
+         border:1px solid var(--b1);border-radius:999px;background:var(--s1);font-size:14px;color:var(--muted)}
+  .proof .lab{color:var(--faint)}
+  .proof b{font:600 15px var(--mono);color:var(--fg-2);margin-right:5px;font-variant-numeric:tabular-nums}
+  .proof .crit b{color:var(--crit)} .proof .warn b{color:var(--warn)}
+
+  /* окно браузера вокруг скрина — кадры показываются целиком */
+  .stage{position:relative;margin:64px auto 0}
+  .stage::before{content:"";position:absolute;inset:8% 6% -4%;background:radial-gradient(closest-side,rgb(124 58 237 / .45),transparent),radial-gradient(closest-side at 70% 40%,rgb(37 99 235 / .45),transparent);filter:blur(60px);z-index:-1}
+  .window{border-radius:16px;border:1px solid var(--b2);background:#060b18;overflow:hidden;box-shadow:0 40px 120px -30px rgb(0 0 0 / .8),inset 0 1px 0 rgb(255 255 255 / .06)}
+  .window .bar{display:flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-bottom:1px solid var(--b1);background:linear-gradient(rgb(255 255 255 / .045),rgb(255 255 255 / .015))}
+  .window .bar i{width:11px;height:11px;border-radius:50%;background:rgb(255 255 255 / .12)}
+  .window .url{margin:0 auto;transform:translateX(-24px);min-width:0;max-width:62%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+        font:500 12px var(--mono);color:var(--faint);padding:5px 14px;border-radius:7px;background:rgb(0 0 0 / .3);border:1px solid var(--b1)}
+  .window .shot{aspect-ratio:16/10;background:#030711}
+  .window .shot img{width:100%;height:100%;object-fit:cover;object-position:top left}
+  .hero .window .shot{-webkit-mask-image:linear-gradient(#000 72%,transparent);mask-image:linear-gradient(#000 72%,transparent)}
+
+  /* тезисы — плитки по образцу KPI-плиток продукта */
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tile{padding:24px 22px 26px;transition:border-color .3s}
+  .tile:hover{border-color:var(--b3)}
+  .tile .glow{position:absolute;top:-44px;right:-44px;width:140px;height:140px;border-radius:50%;background:rgb(var(--c) / .32);filter:blur(56px);opacity:.45;transition:opacity .3s}
+  .tile:hover .glow{opacity:.8}
+  .tile::after{content:"";position:absolute;inset:auto 0 0;height:2px;background:linear-gradient(90deg,rgb(var(--c)),var(--cl));opacity:0;transition:opacity .3s}
+  .tile:hover::after{opacity:.45}
+  .chip{position:relative;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgb(var(--c) / .15);color:var(--cl);
+        box-shadow:inset 0 0 0 1px rgb(var(--c) / .22)}
+  .tile h3{position:relative;font-size:17px;line-height:1.35;font-weight:600;letter-spacing:-.01em;margin:20px 0 8px}
+  .tile p{position:relative;margin:0;font-size:14.5px;line-height:1.55;color:var(--muted)}
+  .c-blue{--c:59 130 246;--cl:#60a5fa} .c-violet{--c:139 92 246;--cl:#a78bfa} .c-indigo{--c:99 102 241;--cl:#818cf8}
+  .c-red{--c:239 68 68;--cl:#f87171} .c-orange{--c:249 115 22;--cl:#fb923c} .c-pink{--c:236 72 153;--cl:#f472b6}
+  .c-amber{--c:234 179 8;--cl:#facc15} .c-emerald{--c:16 185 129;--cl:#34d399}
+
+  /* слайдер интерфейса */
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;overflow-x:auto;scroll-snap-type:x proximity;padding:2px 2px 4px;margin:0 0 18px;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:none;scroll-snap-align:start;height:38px;padding:0 11px;border-radius:10px;border:1px solid var(--b1);background:var(--s1);
+        font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;transition:background .15s,border-color .15s,color .15s}
+  .tabs button:hover{color:var(--fg);border-color:var(--b2)}
+  .tabs button[aria-selected=true]{background:hsl(210 100% 52% / .16);border-color:hsl(210 100% 52% / .45);color:#bfdbfe}
+  .slider .window .shot{cursor:zoom-in;position:relative;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+  .slider .window .shot img{-webkit-user-drag:none;pointer-events:none}
+  .slider .window .shot img{transition:opacity .25s}
+  .slider .window .shot img.fading{opacity:.15}
+  .cap{display:flex;align-items:center;gap:24px;margin:22px 0 0}
+  .cap .txt{flex:1;min-width:0}
+  .cap h3{font-size:20px;line-height:1.3;font-weight:600;letter-spacing:-.015em}
+  .cap p{margin:6px 0 0;font-size:15.5px;color:var(--muted);max-width:60ch}
+  .cap .ctl{display:flex;align-items:center;gap:10px;flex:none}
+  .cap .num{font:500 13px var(--mono);color:var(--faint);min-width:56px;text-align:center;font-variant-numeric:tabular-nums}
+  .round{width:44px;height:44px;padding:0;border-radius:12px}
+  .hint{display:none;margin:10px 0 0;font-size:13px;color:var(--faint);text-align:center}
+
+  /* ночь — компактная хроника */
+  .night{padding:40px}
+  .steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+  .steps3::before{content:"";position:absolute;left:8px;right:8px;top:9px;height:1px;background:linear-gradient(90deg,rgb(248 113 113 / .5),rgb(251 146 60 / .5),rgb(52 211 153 / .5))}
+  .step{position:relative;padding-top:34px}
+  .step .pt{position:absolute;top:2px;left:0;width:15px;height:15px;border-radius:50%;background:var(--bg);border:2px solid var(--k);box-shadow:0 0 0 5px rgb(3 7 17),0 0 18px var(--k)}
+  .step time{display:block;font:500 30px/1 var(--mono);letter-spacing:-.03em;color:var(--fg)}
+  .step h3{font-size:16.5px;font-weight:600;line-height:1.4;margin:14px 0 6px}
+  .step p{margin:0;font-size:14.5px;color:var(--muted)}
+  .without{margin:34px 0 0;padding:18px 0 0;border-top:1px solid var(--b1);font-size:15px;color:var(--muted)}
+  .without b{font:500 11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--crit);margin-right:10px}
+
+  /* поставка */
+  .give{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .list{display:grid;gap:26px}
+  .item{display:grid;grid-template-columns:44px 1fr;gap:18px}
+  .item h3{font-size:17px;font-weight:600;line-height:1.35;margin:2px 0 6px}
+  .item p{margin:0;font-size:15px;color:var(--muted)}
+  .brandshot .window .shot{aspect-ratio:auto}
+  .brandshot .note{margin:14px 0 0;font-size:14px;color:var(--faint);text-align:center}
+
+  /* цена и старт */
+  .price{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .price .panel{padding:32px}
+  .price h3{font-size:24px;font-weight:700;letter-spacing:-.02em}
+  .price .sub{margin:10px 0 24px;color:var(--muted);font-size:15.5px}
+  .checks{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .checks li{display:flex;gap:12px;font-size:15px;color:var(--fg-2)}
+  .checks .ic{width:18px;height:18px;color:var(--ok);margin-top:2px}
+  .extra{margin:24px 0 0;padding:18px 0 0;border-top:1px solid var(--b1);font-size:14.5px;color:var(--muted)}
+  .flow{list-style:none;margin:20px 0 0;padding:0;counter-reset:s;display:grid;gap:22px}
+  .flow li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:16px}
+  .flow li::before{content:counter(s);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font:500 14px var(--mono);
+        color:#93c5fd;background:hsl(210 100% 52% / .14);box-shadow:inset 0 0 0 1px hsl(210 100% 52% / .3)}
+  .flow b{display:block;font-size:16px;font-weight:600;margin:2px 0 4px}
+  .flow span{font-size:14.5px;color:var(--muted)}
+
+  /* результаты — собраны, но выключены до цифр (атрибут hidden) */
+  .gains{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .gain{padding:24px}
+  .gain .n{font:700 34px/1.1 var(--sans);letter-spacing:-.03em}
+  .gain p{margin:10px 0 0;color:var(--muted);font-size:14.5px}
+  .quote{margin:14px 0 0;padding:26px 28px}
+  .quote p{margin:0;font-size:19px;line-height:1.5}
+  .quote cite{display:block;margin-top:12px;font:500 13px var(--mono);font-style:normal;color:var(--faint)}
+
+  /* вопросы */
+  .faq{max-width:840px;margin:0 auto}
+  .faq details{border-bottom:1px solid var(--b1)}
+  .faq details:first-child{border-top:1px solid var(--b1)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:22px 2px;font-size:17px;font-weight:500}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .pl{margin-left:auto;width:28px;height:28px;border-radius:8px;flex:none;display:grid;place-items:center;border:1px solid var(--b1);color:var(--muted);transition:transform .2s}
+  .faq details[open] summary .pl{transform:rotate(45deg)}
+  .faq .a{padding:0 50px 24px 2px;color:var(--muted);font-size:15.5px;line-height:1.6}
+
+  /* финальный призыв — как шапка дашборда продукта */
+  .final{text-align:center;padding:72px 32px;border-color:rgb(139 92 246 / .22)}
+  .final .blob{position:absolute;border-radius:50%;filter:blur(64px);pointer-events:none}
+  .final .b1{width:300px;height:300px;right:-90px;top:-110px;background:#7c3aed;opacity:.22}
+  .final .b2{width:200px;height:200px;left:38%;top:-20px;background:#6366f1;opacity:.12}
+  .final .b3{width:240px;height:240px;left:-60px;bottom:-90px;background:#7e22ce;opacity:.17}
+  .final h2,.final p,.final .btn{position:relative}
+  .final p{max-width:540px;margin:16px auto 30px;text-wrap:balance;color:rgb(221 214 254 / .8);font-size:17.5px}
+
+  footer{padding:36px 0 56px}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13.5px;color:var(--faint)}
+
+  /* полноэкранный просмотр */
+  .lb{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:24px;background:rgb(2 4 10 / .92);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  .lb.open{display:grid}
+  .lb img{max-width:min(96vw,2160px);max-height:90vh;width:auto;border-radius:12px;border:1px solid var(--b2);box-shadow:0 30px 90px rgb(0 0 0 / .7)}
+  .lb .x{position:absolute;top:18px;right:18px}
+
+  @media (max-width:1240px){
+    .tabs{flex-wrap:nowrap;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
   }
-  .wrap{max-width:1320px;margin:0 auto;padding:0 32px}
-  a{color:inherit}
-  :focus-visible{outline:2px solid var(--accent-2);outline-offset:3px;border-radius:4px}
-  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
-
-
-  .ic{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
-  .eyebrow{display:flex;align-items:center;gap:8px}
-  .ib{width:46px;height:46px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;flex:none;
-      background:hsl(210 100% 52% / .10);border:1px solid hsl(210 100% 52% / .22);
-      box-shadow:0 1px 0 hsl(0 0% 100% / .04) inset;transition:background .2s,border-color .2s}
-  .ib .ic{width:21px;height:21px;stroke-width:2.2;color:var(--accent-2);display:block}
-  .card:hover .ib{background:hsl(210 100% 52% / .16);border-color:hsl(210 100% 52% / .38)}
-  .chip{display:inline-flex;align-items:center;gap:7px}
-  .b .m .ic{width:21px;height:21px;stroke-width:2.2;color:var(--accent-2)}
-  .shothint{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:flex;align-items:center;gap:7px;justify-content:flex-end;margin:0 0 10px}
-  .shothint .ic{width:13px;height:13px}
-
-
-  .btn-text{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-weight:650;font-size:15px;text-decoration:none;padding:13px 8px;transition:color .2s}
-  .btn-text:hover{color:var(--ink)}
-  .brand .dot{display:flex;align-items:center;justify-content:center}
-  .brand .dot .ic{width:14px;height:14px;color:#fff;stroke-width:2}
-
-  .langtog{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-family:var(--mono);font-size:12px}
-  .langtog button{background:transparent;border:0;color:var(--faint);padding:6px 12px;cursor:pointer;transition:background .2s,color .2s}
-  .langtog button.on{background:hsl(210 100% 52% / .15);color:var(--accent)}
-  .langtog button:not(.on):hover{color:var(--ink)}
-  header.top{display:flex;align-items:center;justify-content:space-between;padding:22px 0;gap:16px}
-  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em}
-  .brand .dot{width:24px;height:24px;border-radius:7px;background:linear-gradient(150deg,var(--accent-2),var(--accent));box-shadow:0 0 0 1px hsl(0 0% 100% / .09) inset,0 6px 18px hsl(210 100% 52% / .4)}
-  .brand .name{font-family:var(--mono);font-size:14px;letter-spacing:.02em}
-  .top .self{font-family:var(--mono);font-size:11.5px;color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
-
-  .hero{display:grid;grid-template-columns:1fr 1.08fr;gap:56px;align-items:center;padding:38px 0 44px}
-  .hero h1{font-size:clamp(34px,4.7vw,56px);line-height:1.14;letter-spacing:-.03em;font-weight:800;margin:0 0 20px;text-wrap:balance}
-  .hero h1 .hl{color:var(--accent-2)}
-  .hero p.lede{font-size:clamp(16px,1.6vw,19px);color:var(--muted);margin:0 0 30px;max-width:34em;text-wrap:balance}
-  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:650;font-size:15px;text-decoration:none;padding:13px 22px;border-radius:10px;transition:transform .15s,box-shadow .2s,background .2s,border-color .2s;cursor:pointer}
-  .btn-primary{background:var(--accent);color:#04101f;box-shadow:0 10px 30px hsl(210 100% 52% / .34)}
-  .btn-primary:hover{background:var(--accent-2);transform:translateY(-1px)}
-  .btn-ghost{color:var(--ink);border:1px solid var(--line)}
-  .btn-ghost:hover{border-color:var(--accent)}
-  .btn .arw{font-family:var(--mono)}
-
-  /* chips */
-  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 0 60px}
-  .chip{font-family:var(--mono);font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
-  .chip b{color:var(--accent-2);font-weight:600}
-  .proofline{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 56px;padding:0;font-family:var(--mono);font-size:12px;color:var(--muted)}
-  .proofline .pl-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px hsl(135 49% 47% / .18)}
-  .proofline .pl-sep{color:var(--faint)}
-
-
-  /* числа боевой установки в hero */
-  .stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;margin:26px 0 0;padding:16px 18px;
-         background:var(--panel);border:1px solid var(--line);border-radius:12px}
-  .stats .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);width:100%;margin:0 0 4px}
-  .stats .s{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
-  .stats .s b{font-size:17px;font-weight:700;color:var(--ink);margin-right:5px}
-  .stats .s.crit b{color:var(--crit)} .stats .s.warn b{color:var(--warn)}
-
-  /* сигнатурный блок: одна ночь в двух колонках */
-  .night{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .night .col{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
-  .night .col.good{border-color:hsl(210 100% 52% / .38);background:linear-gradient(160deg,var(--panel),hsl(217 33% 11%))}
-  .night .ttl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin:0 0 16px}
-  .night .col.good .ttl{color:var(--accent)}
-  .night ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:13px}
-  .night li{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:baseline}
-  .night .t{font-family:var(--mono);font-size:12.5px;color:var(--faint)}
-  .night .col.good .t{color:var(--accent-2)}
-  .night .e{font-size:14.5px;color:var(--muted);text-wrap:pretty}
-  .night li.hit .e{color:var(--ink)}
-  .night .sum{margin:18px 0 0;padding:13px 0 0;border-top:1px solid var(--line-soft);font-size:14px;color:var(--muted)}
-  .night .col.good .sum{color:var(--ink)}
-
-  /* шесть блоков-сюжетов вместо каталога карточек */
-  .blocks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-  .blk{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px}
-  .blk .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin:0 0 10px}
-  .blk h3{font-size:17.5px;margin:0 0 14px;letter-spacing:-.01em;text-wrap:balance}
-  .blk ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
-  .blk li{display:grid;grid-template-columns:14px 1fr;gap:10px;color:var(--muted);font-size:14px;text-wrap:pretty}
-  .blk li::before{content:"";width:5px;height:5px;margin:8px 0 0 4px;border-radius:50%;background:hsl(210 100% 52% / .55)}
-  .more{margin:20px 0 0;font-family:var(--mono);font-size:12.5px;color:var(--faint);line-height:1.9;text-wrap:pretty}
-  .more b{color:var(--muted);font-weight:400}
-
-  /* схема связки редиректор - зеркала */
-  .mirror{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
-  .mirror .pic{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px}
-  .mirror svg{width:100%;height:auto;display:block}
-
-  section{padding:96px 0}
-  section:nth-of-type(even){background:hsl(221 45% 9%)}
-  /* финальный экран отделён от «Поставки» фоном и тонкой линией, иначе две секции подряд сливаются */
-  section:last-of-type{background:hsl(221 45% 9%);border-top:1px solid var(--line-soft);padding:88px 0 96px}
-  section.incl-block{border-top:1px solid var(--line-soft)}
-  .sec-head{max-width:42em;margin-bottom:38px}
-  .sec-head h2{font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
-  .sec-head p{color:var(--muted);margin:0;font-size:16px;text-wrap:balance}
-
-  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;transition:border-color .2s,transform .2s}
-  
-  .card .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);display:block;margin:14px 0 9px}
-  .card h3{font-size:16.5px;margin:0 0 7px;letter-spacing:-.01em}
-  .card p{color:var(--muted);font-size:14px;margin:0;text-wrap:pretty}
-
-  .split{display:grid;grid-template-columns:.92fr 1.08fr;gap:48px;align-items:center}
-
-  .band{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 40px}
-  .b{display:flex;gap:13px;align-items:flex-start}
-  .b .m{width:46px;height:46px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;flex:none;margin-top:1px;
-      background:hsl(210 100% 52% / .10);border:1px solid hsl(210 100% 52% / .22);box-shadow:0 1px 0 hsl(0 0% 100% / .04) inset}
-  .b h4{margin:0 0 4px;font-size:15.5px}
-  .b p{margin:0;color:var(--muted);font-size:14px;text-wrap:pretty}
-
-  .close{text-align:center;padding:8px 24px 8px}
-  .close h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em;margin:0 0 14px;text-wrap:balance}
-  .close p{color:var(--muted);margin:0 auto 28px;max-width:32em}
-
-  footer{padding:32px 0 54px;color:var(--faint);font-family:var(--mono);font-size:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-
-  @media (max-width:900px){
-    .grid{grid-template-columns:repeat(2,1fr)}
-    .blocks{grid-template-columns:1fr}
-    .mirror{grid-template-columns:1fr;gap:28px}
-    .split{grid-template-columns:1fr;gap:32px}
-    .band{grid-template-columns:1fr}
+  @media (max-width:1040px){
+    .tiles{grid-template-columns:repeat(2,1fr)}
+    .give{grid-template-columns:1fr;gap:40px}
   }
-  @media (max-width:640px){
-    /* Узкий экран: 32px по краям съедали седьмую часть ширины, а строка цифр в hero
-       держалась `nowrap` и упиралась в край. Переполнения не было, но воздуха не было тоже. */
-    /* Восемь секций по 96px сверху и снизу — это почти два лишних экрана прокрутки. */
+  @media (max-width:860px){
+    .nav{display:none}
     section{padding:60px 0}
-    section:last-of-type{padding:56px 0 60px}
-    .wrap{padding:0 20px}
-    header.top{flex-wrap:wrap;gap:12px}
-    .stats .s{white-space:normal}
-    .hero{grid-template-columns:1fr;gap:32px;padding:20px 0 8px}
-    .grid{grid-template-columns:1fr}
-    /* ночь складывается в одну колонку: порядок времени важнее соседства колонок */
-    .night{grid-template-columns:1fr}
+    .price,.gains{grid-template-columns:1fr}
+    .steps3{grid-template-columns:1fr;gap:28px}
+    .steps3::before{left:7px;right:auto;top:8px;bottom:8px;width:1px;height:auto;background:linear-gradient(rgb(248 113 113 / .5),rgb(251 146 60 / .5),rgb(52 211 153 / .5))}
+    .step{padding:0 0 0 38px}
+    .night{padding:28px 24px}
+    .cap{flex-direction:column;align-items:stretch;gap:16px}
+    .cap .ctl{justify-content:space-between}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 16px}
+    .top .wrap{gap:12px;height:60px}
+    .brand .name{display:none}
+    .top .btn-sm{padding:0 13px}
+    .hero{padding-top:44px}
+    .hero .cta .btn{flex:1 1 100%}
+    .proof{border-radius:16px;justify-content:flex-start;text-align:left;padding:14px 16px}
+    .proof .lab{width:100%}
+    .stage{margin-top:44px}
+    .window .bar{height:30px;padding:0 10px;gap:5px}
+    .window .bar i{width:8px;height:8px}
+    .window .url{font-size:10.5px;padding:3px 10px;transform:none}
+    .tiles{grid-template-columns:1fr;gap:10px}
+    .tile{display:grid;grid-template-columns:44px 1fr;column-gap:16px;padding:18px}
+    .tile .chip{grid-row:1 / span 2}
+    .tile h3{margin:0 0 4px;font-size:16px}
+    .tile p{font-size:14px}
+    .hint{display:block}
+    .price .panel{padding:24px}
+    .final{padding:52px 20px}
+    .faq .a{padding-right:2px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{transition:none!important;animation:none!important}
   }
 </style>
 </head>
 <body>
-<style>
-  .shot{border-radius:12px;overflow:hidden;box-shadow:0 40px 90px -30px hsl(224 71% 1% / .95), 0 30px 80px -24px hsl(210 100% 52% / .38), 0 0 0 1px hsl(210 40% 98% / .08);transition:box-shadow .25s}
-  .shot:hover{box-shadow:0 40px 90px -30px hsl(224 71% 1% / .95), 0 34px 90px -22px hsl(210 100% 52% / .55), 0 0 0 1px hsl(210 100% 52% / .6)}
-  .shot img{display:block;width:100%;height:auto;cursor:zoom-in}
-  .shotcap{font-family:var(--mono);font-size:12px;color:var(--faint);text-align:center;margin:16px auto 0}
-  .lb{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:24px;background:hsl(224 71% 2% / .93);cursor:zoom-out}
-  .lb.open{display:flex}
-  .lb img{max-width:96vw;max-height:92vh;border-radius:10px;box-shadow:0 40px 120px -20px #000}
-</style>
+<div class="bgfx" aria-hidden="true"><i></i><i></i></div>
 
-<div class="wrap">
-  <header class="top">
-    <div class="brand">
-      <span class="dot" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
-      <span class="name">Domain&nbsp;Control&nbsp;Panel</span>
-    </div>
-    <div class="langtog"><button data-l="ru" class="on">RU</button><button data-l="en">EN</button></div>
-  </header>
-
-  <div class="hero">
-    <div>
-      <h1>Реестр доменов, который <span class="hl">сам говорит, что сломалось</span></h1>
-      <p class="lede">Сотни доменов, зеркал и лендингов в одной панели. Проверяется круглосуточно из нужных стран, пишет в Telegram, когда что-то отвалилось, и помнит, кто что менял.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="https://t.me/denis_pdm">Написать в Telegram <span class="arw">→</span></a>
-        <a class="btn-text" href="#features">Что умеет <span class="arw">↓</span></a>
-      </div>
-      <div class="stats">
-        <p class="lab">Обычное утро в боевой установке</p>
-        <span class="s"><b>1546</b>доменов</span>
-        <span class="s crit"><b>149</b>не открылись</span>
-        <span class="s crit"><b>27</b>отключены реестром</span>
-        <span class="s warn"><b>5</b>сроков на неделе</span>
-      </div>
-    </div>
-    <div>
-      <p class="shothint"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M8 11h6M11 8v6"/></svg>клик – смотреть крупнее</p>
-      <div class="shot" role="img" aria-label="Скриншот: реестр доменов"><img src="/shot-registry.jpg" alt="Реестр доменов – Domain Control Panel"></div>
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#hero" aria-label="Domain Control Panel">
+      <span class="mark"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg></span>
+      <span class="name">Domain Control Panel</span>
+    </a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#features">Возможности</a>
+      <a href="#ui">Интерфейс</a>
+      <a href="#delivery">Поставка</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="right">
+      <span class="langtog" role="group" aria-label="Язык"><button type="button" data-l="ru">RU</button><button type="button" data-l="en">EN</button></span>
+      <a class="btn btn-primary btn-sm" href="https://t.me/denis_pdm">Обсудить</a>
     </div>
   </div>
+</header>
 
-  <div class="chips">
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg><span><b>Self-hosted</b> · данные у вас</span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg><span>Роли и доступы <b>по проектам</b></span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span><b>White-label</b> под ваш бренд</span></span>
-    <span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg><span>Доработки <b>под заказчика</b></span></span>
-  </div>
+<main>
+  <!-- ГЕРОЙ -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span class="dot"></span>Self-hosted · white-label</p>
+      <h1>Портфель доменов, который <span class="grad">следит за собой сам</span></h1>
+      <p class="lede">Массовые правки, доступ по командам, журнал каждого изменения — и алерт, если что-то перестало открываться.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="https://t.me/denis_pdm">Обсудить в Telegram <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-outline" href="#ui">Смотреть интерфейс</a>
+      </div>
+      <p class="proof">
+        <span class="lab">Обычное утро в боевой установке</span>
+        <span><b>1546</b>доменов</span>
+        <span class="crit"><b>149</b>не открылись</span>
+        <span class="crit"><b>27</b>отключены реестром</span>
+        <span class="warn"><b>5</b>сроков на неделе</span>
+      </p>
+      <div class="stage">
+        <div class="window">
+          <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="url">panel.your-brand.com/domains</span></div>
+          <div class="shot"><img src="/shots/registry.jpg" width="2160" height="1350" alt="Реестр доменов: все домены портфеля с проектами, типами и статусами"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <p class="proofline"><span class="pl-dot"></span>В боевой эксплуатации<span class="pl-sep">·</span>холдинг с несколькими бизнес-юнитами<span class="pl-sep">·</span>сотни доменов и зеркал</p>
+  <!-- ТЕЗИСЫ -->
+  <section id="features">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot"></span>Возможности</p>
+        <h2>Всё, что обычно живёт в пяти таблицах и трёх чатах</h2>
+      </div>
+      <div class="tiles">
+        <article class="tile panel c-blue"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></span>
+          <h3>Массовое управление</h3><p>Сотни строк одним действием: правка в строке, метки, папки, перенос между проектами.</p></article>
+        <article class="tile panel c-violet"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+          <h3>Доступы и роли</h3><p>Роли по проектам и отделам. Приватные папки не видит даже соседняя команда.</p></article>
+        <article class="tile panel c-indigo"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg></span>
+          <h3>Журнал изменений</h3><p>Кто, когда, что было и что стало — по каждому полю каждого домена.</p></article>
+        <article class="tile panel c-red"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+          <h3>Контроль доступности</h3><p>Проверка из нужных стран. Семь причин потерять домен — на одном экране.</p></article>
+        <article class="tile panel c-orange"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+          <h3>Алерты</h3><p>Telegram и Slack — сразу с причиной, по своим проектам, без лишнего шума.</p></article>
+        <article class="tile panel c-pink"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/></svg></span>
+          <h3>SEO и Search Console</h3><p>Клики, показы и позиции по каждому домену — рядом с его статусом.</p></article>
+        <article class="tile panel c-amber"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg></span>
+          <h3>Деньги и сроки</h3><p>Расход на продления по проектам и регистраторам, сроки — из кабинетов, а не из памяти.</p></article>
+        <article class="tile panel c-emerald"><span class="glow"></span><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 9v3a3 3 0 0 0 3 3h6M15 6H9"/></svg></span>
+          <h3>Лендинги, зеркала, редиректоры</h3><p>Связи видны с обеих сторон: какой лендинг на каком домене, какие зеркала на редиректоре.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ИНТЕРФЕЙС -->
+  <section id="ui">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot"></span>Интерфейс продукта</p>
+        <h2>Тринадцать экранов, ни одного макета</h2>
+        <p>Скриншоты живой установки на демонстрационных данных. Вместо логотипа — место под ваш.</p>
+      </div>
+      <div class="slider" id="slider" tabindex="-1">
+        <div class="tabs" role="tablist" aria-label="Экраны продукта" id="tabs"></div>
+        <div class="stage" style="margin-top:0">
+          <div class="window">
+            <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="url" id="s-url">panel.your-brand.com</span></div>
+            <div class="shot" id="s-shot" role="tabpanel"><img id="s-img" draggable="false" src="/shots/dashboard.jpg" width="2160" height="1350" alt=""></div>
+          </div>
+        </div>
+        <p class="hint">Нажмите на экран, чтобы рассмотреть</p>
+        <div class="cap">
+          <div class="txt"><h3 id="s-title">Дашборд</h3><p id="s-text"></p></div>
+          <div class="ctl">
+            <button type="button" class="btn btn-outline round" id="s-prev" aria-label="Предыдущий экран"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <span class="num" id="s-num">01 / 13</span>
+            <button type="button" class="btn btn-outline round" id="s-next" aria-label="Следующий экран"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+          </div>
+        </div>
+      </div>
+      <!-- подписи слайдов — в разметке, чтобы их подхватил словарь RU/EN -->
+      <ul hidden id="slides">
+        <li data-img="dashboard" data-url=""><b>Дашборд</b><i>Дашборд</i><span>Что требует решения, что истекает и что менялось — на первом экране.</span></li>
+        <li data-img="registry" data-url="domains"><b>Реестр</b><i>Реестр доменов</i><span>Все домены одним списком: фильтры, метки, свои колонки, массовые правки.</span></li>
+        <li data-img="card" data-url="domains/harborgames-app897.net"><b>Карточка</b><i>Карточка домена</i><span>Проект, статус, гео, ответственный — и зеркала редиректора с их состоянием.</span></li>
+        <li data-img="dept-it" data-url="domains/lumen-app412.net#it"><b>IT</b><i>Отдел IT</i><span>Хостинг, NS, регистратор, SSL, блок-листы и статус у реестра — в одной вкладке.</span></li>
+        <li data-img="dept-analytics" data-url="domains/kestrel719.partners#analytics"><b>Аналитика</b><i>Отдел аналитики</i><span>Счётчики GA и GTM сверяются со страницей — чужой счётчик всплывает сам.</span></li>
+        <li data-img="dept-partnership" data-url="domains/harborgames-partners.casino#partnership"><b>Партнёрка</b><i>Партнёрский отдел</i><span>Программа, ссылка, Media ID и кампания — прямо в карточке домена.</span></li>
+        <li data-img="landings" data-url="landings"><b>Лендинги</b><i>Реестр лендингов</i><span>Лендинги с доменами, гео и статусом работы — связь видна с обеих сторон.</span></li>
+        <li data-img="availability" data-url="availability"><b>Доступность</b><i>Доступность</i><span>Семь плиток — семь способов потерять домен, и причина по каждому.</span></li>
+        <li data-img="seo" data-url="seo"><b>SEO</b><i>SEO и Search Console</i><span>Search Console по всему портфелю: клики, показы, CTR и позиции.</span></li>
+        <li data-img="money" data-url="money"><b>Деньги</b><i>Деньги портфеля</i><span>Сколько портфель стоит в год и что продлевается в ближайший месяц.</span></li>
+        <li data-img="history" data-url="history"><b>История</b><i>История изменений</i><span>Общий журнал правок с фильтрами по людям, доменам и датам.</span></li>
+        <li data-img="users" data-url="users"><b>Доступы</b><i>Пользователи и роли</i><span>Роли по проектам и отделам: каждый видит ровно своё.</span></li>
+        <li data-img="alerts" data-url="settings#alerts"><b>Алерты</b><i>Каналы алертов</i><span>Telegram и Slack: какие события, по каким проектам и как часто.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- НОЧЬ -->
+  <section id="night">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot"></span>Как это выглядит ночью</p>
+        <h2>Домен лёг в 03:12. Починили до утра</h2>
+      </div>
+      <div class="panel night">
+        <div class="steps3">
+          <div class="step" style="--k:#f87171"><span class="pt"></span><time>03:12</time><h3>Зеркало перестало открываться из Германии</h3><p>Проверка идёт из нужных стран, а не из вашего офиса.</p></div>
+          <div class="step" style="--k:#fb923c"><span class="pt"></span><time>03:13</time><h3>В Telegram — сообщение с причиной</h3><p>«Не открывается: ошибка сертификата». Не факт, а диагноз.</p></div>
+          <div class="step" style="--k:#34d399"><span class="pt"></span><time>03:20</time><h3>Починили до утреннего трафика</h3><p>Карточка домена сразу показала, где искать.</p></div>
+        </div>
+        <p class="without"><b>Без панели</b>узнали бы утром — от байера, вопросом «почему вчера был ноль?»</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОСТАВКА -->
+  <section id="delivery">
+    <div class="wrap give">
+      <div>
+        <div class="head" style="margin-bottom:36px">
+          <p class="eyebrow"><span class="dot"></span>Поставка</p>
+          <h2>Готовый продукт, который ставится у вас</h2>
+        </div>
+        <div class="list">
+          <div class="item c-blue"><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span>
+            <div><h3>На вашем сервере</h3><p>Данные не уходят наружу: ни домены, ни проекты, ни история правок.</p></div></div>
+          <div class="item c-violet"><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22a10 10 0 1 1 10-10c0 2.2-1.8 3-3.5 3H16a2 2 0 0 0-1.4 3.4c.6.6.4 1.6-.4 1.6z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></span>
+            <div><h3>Под вашим брендом</h3><p>Имя, логотип и цвет акцента меняются настройкой — без правок кода.</p></div></div>
+          <div class="item c-emerald"><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></svg></span>
+            <div><h3>Переезд из таблиц</h3><p>Excel, CSV и Google-таблица заезжают целиком, кабинеты регистраторов подтягиваются сами.</p></div></div>
+          <div class="item c-amber"><span class="chip"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+            <div><h3>Доработки под процессы</h3><p>Свои поля, интеграции и логика — отдельной работой, с оценкой до старта.</p></div></div>
+        </div>
+      </div>
+      <div class="brandshot">
+        <div class="window">
+          <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span class="url">panel.your-brand.com</span></div>
+          <div class="shot"><img src="/shots/brand.jpg" width="705" height="450" alt="Шапка панели с местом под логотип и название покупателя"></div>
+        </div>
+        <p class="note">Здесь будет ваш логотип и ваше название</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- РЕЗУЛЬТАТЫ: включить (убрать hidden), когда придут цифры -->
+  <section id="results" hidden>
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot"></span>Результат</p>
+        <h2>Что меняется за первый месяц</h2>
+      </div>
+      <div class="gains">
+        <div class="gain panel"><span class="n">—</span><p>поломок поймано до того, как их заметил кто-то снаружи</p></div>
+        <div class="gain panel"><span class="n">—</span><p>на сверку портфеля вместо дня в таблице</p></div>
+        <div class="gain panel"><span class="n">—</span><p>доменов не потеряли по срокам продления</p></div>
+      </div>
+      <blockquote class="quote panel"><p>—</p><cite>Head of Media Buying, iGaming-холдинг</cite></blockquote>
+    </div>
+  </section>
+
+  <!-- ЦЕНА И СТАРТ -->
+  <section id="price">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow"><span class="dot"></span>Цена и старт</p>
+        <h2>Одна покупка — и панель ваша</h2>
+      </div>
+      <div class="price">
+        <div class="panel">
+          <h3>Фиксированная стоимость</h3>
+          <p class="sub">Назову на демо — под ваш объём доменов и проектов. Без подписки и оплаты за пользователей.</p>
+          <ul class="checks">
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Установка на вашем сервере</li>
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Исходный код — без привязки ко мне</li>
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Ваш бренд: имя, логотип, цвет</li>
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Перенос реестра из таблиц</li>
+            <li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Настройка проверок, стран и алертов</li>
+          </ul>
+          <p class="extra">Сопровождение и доработки — отдельно, по оценке. Панель работает и без них.</p>
+        </div>
+        <div class="panel">
+          <h3>Как начать</h3>
+          <ol class="flow">
+            <li><div><b>Демо на живых данных</b><span>Полчаса: показываю работающую установку и отвечаю на вопросы.</span></div></li>
+            <li><div><b>Установка у вас</b><span>Разворачиваю на вашем сервере и ставлю ваш брендинг.</span></div></li>
+            <li><div><b>Перенос и проверки</b><span>Заезжают таблицы и кабинеты регистраторов, включаются проверки и алерты.</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ВОПРОСЫ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="head center">
+        <p class="eyebrow"><span class="dot"></span>Вопросы</p>
+        <h2>Что спрашивают до покупки</h2>
+      </div>
+      <div class="faq">
+        <details><summary>Сколько занимает внедрение?<span class="pl"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <p class="a">Установка — дело одного дня с доступа к серверу. Дольше всего идёт разметка ваших таблиц: шапки у всех разные, её делаем вместе и один раз.</p></details>
+        <details><summary>А если сервер у нас слабый?<span class="pl"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <p class="a">Нагрузку даёт не интерфейс, а проверки: чем больше доменов и чем чаще их опрашивать, тем больше нужно. Конфигурацию под ваш объём считаем до установки.</p></details>
+        <details><summary>Кто видит наши данные?<span class="pl"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <p class="a">Только вы. Панель стоит на вашем сервере и наружу ничего не отправляет. Внутри — роли по проектам и отделам, приватные папки закрыты даже от соседних команд.</p></details>
+        <details><summary>Можно перенести наш Excel?<span class="pl"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <p class="a">Да, вместе с Google-таблицами и выгрузками из кабинетов регистраторов — с предпросмотром того, что заедет, до того как оно заедет.</p></details>
+        <details><summary>Что если нужна доработка?<span class="pl"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+          <p class="a">Делаю — отдельной работой, с оценкой до старта. Исходники у вас, так что доработать может и ваша команда.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФИНАЛ -->
+  <section style="padding-top:24px">
+    <div class="wrap">
+      <div class="panel final">
+        <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+        <h2>Покажу на живых данных</h2>
+        <p>Полчаса созвона: ваш объём, ваши процессы, ответы на вопросы.</p>
+        <a class="btn btn-primary" href="https://t.me/denis_pdm">Обсудить в Telegram <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>Domain Control Panel · self-hosted, white-label</span><span>На скриншотах — демонстрационные данные</span></div>
+</footer>
+
+<div class="lb" id="lb" aria-hidden="true">
+  <button type="button" class="btn btn-outline round x" aria-label="Закрыть"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <img alt="">
 </div>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>Зачем это нужно</p>
-      <h2>Домен лёг в 03:12. Когда вы об этом узнаете?</h2>
-      <p>Разница между двумя колонками – это ночь трафика и разговор с байером наутро.</p>
-    </div>
-    <div class="night">
-      <div class="col">
-        <p class="ttl">Как обычно</p>
-        <ol>
-          <li class="hit"><span class="t">03:12</span><span class="e">Зеркало перестало открываться</span></li>
-          <li><span class="t">—</span><span class="e">тишина</span></li>
-          <li><span class="t">—</span><span class="e">тишина</span></li>
-          <li class="hit"><span class="t">09:40</span><span class="e">«почему вчера был ноль?» – в чате от байера</span></li>
-        </ol>
-        <p class="sum">Шесть часов трафика в никуда, и причину ищут с нуля.</p>
-      </div>
-      <div class="col good">
-        <p class="ttl">С панелью</p>
-        <ol>
-          <li class="hit"><span class="t">03:12</span><span class="e">Зеркало перестало открываться</span></li>
-          <li class="hit"><span class="t">03:13</span><span class="e">Telegram: «harbor-x441.life не открывается»</span></li>
-          <li class="hit"><span class="t">03:14</span><span class="e">В карточке видно: истёк сертификат, хостинг ни при чём</span></li>
-          <li class="hit"><span class="t">09:20</span><span class="e">Починили до утреннего трафика</span></li>
-        </ol>
-        <p class="sum">Минута на сообщение, утро – уже рабочее.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Интерфейс</p>
-      <h2>Что горит – видно за десять секунд</h2>
-      <p>Домены, которые не открылись, сроки продления, лендинги на уточнении и последние изменения – на одном экране.</p>
-    </div>
-    <div class="shot" role="img" aria-label="Скриншот: дашборд"><img src="/shot-dashboard.jpg" alt="Дашборд – Domain Control Panel" loading="lazy"></div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Мониторинг</p>
-      <h2>Один экран на вопрос «что сломано снаружи»</h2>
-      <p>Семь плиток — семь способов потерять домен: не открылся, уводит на чужое, истекает срок, попал в блок-лист, пропал маркер со страницы, сертификат, отключён реестром. Клик по плитке оставляет в списке только её строки, а вторая ступень отвечает «почему именно»: не резолвится, таймаут, ошибка сертификата, ответ 4xx.</p>
-    </div>
-    <div class="shot" role="img" aria-label="Скриншот: раздел «Доступность»"><img src="/shot-availability.jpg" alt="Доступность – Domain Control Panel" loading="lazy"></div>
-    <p class="shotcap">В списке первичен домен: если лёг сайт, легли и все адреса на нём — это одна проблема, а не десять</p>
-  </div>
-</section>
-
-<section id="features">
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg>Что умеет</p>
-      <h2>Шесть вопросов, на которые панель отвечает сама</h2>
-      <p>Не таблица в экселе и не пятнадцать вкладок регистраторов. Живой реестр с доступами, историей, проверками и алертами.</p>
-    </div>
-    <div class="blocks">
-      <div class="blk">
-        <span class="k">Порядок</span>
-        <h3>Реестр вместо таблицы, которую каждый правит по-своему</h3>
-        <ul>
-        <li>Домены, зеркала и лендинги одним списком: поиск, фильтры, метки, свои колонки</li>
-        <li>Карточка домена со всеми отделами, сроками и историей – видно, кто что менял</li>
-        <li>Лендинг сам находит свой домен: обе стороны связи видны сразу</li>
-        <li>Сотни строк одним действием, правка прямо в списке с протяжкой как в Excel</li>
-        <li>Excel, CSV и Google-таблица заезжают целиком; семь кабинетов регистраторов подтягиваются сами</li>
-        </ul>
-      </div>
-      <div class="blk">
-        <span class="k">Поломки</span>
-        <h3>Что сломано снаружи – прямо сейчас, а не по итогам дня</h3>
-        <ul>
-        <li>Домены и адреса проверяются круглосуточно, цепочка редиректов проходится до конца</li>
-        <li>Замеры через резидентные каналы: в DE открывается, в BR – нет</li>
-        <li>Код 200 ещё не значит, что сайт жив: заданная строка на странице ловит заглушку хостера</li>
-        <li>Сертификат истёк или выдан на чужое имя – предупредим за 14, 7 и 1 день</li>
-        <li>Делегирование сменили мимо вас – узнаете в тот же день</li>
-        </ul>
-      </div>
-      <div class="blk">
-        <span class="k">Деньги</span>
-        <h3>Сколько портфель съест в следующем месяце</h3>
-        <ul>
-        <li>Расход на продления по месяцам и прогноз на год вперёд</li>
-        <li>Справочник цен по зонам подставляет стоимость там, где её не заполняли руками</li>
-        <li>Сроки: что истекает на неделе, что уже истекло, где выключено автопродление</li>
-        </ul>
-      </div>
-      <div class="blk">
-        <span class="k">Риски</span>
-        <h3>То, что отбирает домен, видно раньше, чем падает трафик</h3>
-        <ul>
-        <li>Спам-листы и базы угроз проверяются регулярно, а не когда уже поздно</li>
-        <li>Статус у реестра словами: не «имя не резолвится», а «домен на hold, регистратор такой-то»</li>
-        <li>Защита переноса и whois-приватность: где выключено – видно фильтром</li>
-        </ul>
-      </div>
-      <div class="blk">
-        <span class="k">Доступ</span>
-        <h3>Соседняя команда не увидит ваши домены</h3>
-        <ul>
-        <li>Роли на каждый проект: админ, менеджер, редактор, наблюдатель</li>
-        <li>Приватные папки: чувствительные домены – точечно тем, кому открыли</li>
-        <li>Права проверяются на сервере, а не в браузере – «подсмотреть» лишнее нельзя</li>
-        <li>Аудит: любое изменение – кто, когда и что. Второй фактор и список сессий в профиле</li>
-        </ul>
-      </div>
-      <div class="blk">
-        <span class="k">Контур</span>
-        <h3>Встаёт в ваш контур, а не рядом с ним</h3>
-        <ul>
-        <li>Self-hosted: реестр, доступы и история живут на вашей инфраструктуре</li>
-        <li>White-label: название, логотип и цвета – панель выглядит как ваш продукт</li>
-        <li>API-токен только на чтение: скрипт забирает домены по проектам в JSON или CSV</li>
-        <li>Search Console рядом с реестром: клики, показы и CTR по доменам</li>
-        </ul>
-      </div>
-    </div>
-    <p class="more"><b>И ещё:</b> горячие клавиши · закрепление строк · архив вместо удаления · цветные маркеры и метки · журнал отправки алертов · утренняя сводка одним сообщением · экспорт в CSV и Excel · история по каждому полю</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h11l-3-3"/><path d="M20 16H9l3 3"/></svg>Ниша</p>
-      <h2>Зеркала и редиректоры – так, как это устроено у вас</h2>
-      <p>Обычная панель управления доменами такого не знает: для неё домен – строка со сроком продления.</p>
-    </div>
-    <div class="mirror">
-      <div class="pic">
-        <svg viewBox="0 0 440 206" role="img" aria-label="Схема: редиректор и привязанные к нему зеркала">
-          <g fill="none" stroke="hsl(217 33% 26%)" stroke-width="1.6">
-            <path d="M176 92 150 48M176 100 150 86M176 112 150 124M176 120 150 162M310 110l34 30"/>
-          </g>
-          <rect x="176" y="86" width="134" height="42" rx="10" fill="hsl(210 100% 52% / .14)" stroke="hsl(210 100% 52% / .5)" stroke-width="1.6"/>
-          <text x="243" y="104" text-anchor="middle" fill="hsl(210 40% 98%)" font-family="ui-monospace,monospace" font-size="14">harbor-x.net</text>
-          <text x="243" y="120" text-anchor="middle" fill="hsl(210 100% 66%)" font-family="ui-monospace,monospace" font-size="11">РЕДИРЕКТОР</text>
-          <g font-family="ui-monospace,monospace" font-size="14">
-            <circle cx="14" cy="44" r="4.5" fill="#3fb950"/><text x="28" y="49" fill="hsl(215 20% 62%)">harborgames.pro</text>
-            <circle cx="14" cy="82" r="4.5" fill="#3fb950"/><text x="28" y="87" fill="hsl(215 20% 62%)">harbor-x441.life</text>
-            <circle cx="14" cy="120" r="4.5" fill="#f85149"/><text x="28" y="125" fill="hsl(215 20% 62%)">harborgames-app.io</text>
-            <circle cx="14" cy="158" r="4.5" fill="#f85149"/><text x="28" y="163" fill="hsl(215 20% 62%)">harbor-x370.bet</text>
-            <circle cx="344" cy="140" r="4.5" fill="#3fb950"/><text x="358" y="145" fill="hsl(215 20% 62%)">harborgames-win293.com</text>
-          </g>
-          <text x="220" y="196" text-anchor="middle" fill="hsl(215 16% 46%)" font-family="ui-monospace,monospace" font-size="12.5">живых 3 из 5 · ближайшее истечение 14.10</text>
-        </svg>
-      </div>
-      <div class="blk" style="background:transparent;border:0;padding:0">
-        <ul>
-          <li>Видно, какие зеркала висят на редиректоре и сколько из них живо</li>
-          <li>Одно зеркало может висеть на нескольких редиректорах – так и бывает</li>
-          <li>Ближайшее истечение по связке: домен теряют не только от бана, но и от забытого продления</li>
-          <li>Привязка и снятие – пачкой из реестра, а не по одному</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg>Безопасность</p>
-      <h2>Ваш сервер, ваши данные, ваши правила доступа</h2>
-      <p>Панель держит домены, доступы и историю – ровно то, что не должно утечь.</p>
-    </div>
-    <div class="band">
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg></span>
-        <div><h4>Два раунда security-ревью</h4><p>Закрыты кросс-тенантный обход прав, XSS, инъекции в экспорт, брутфорс логина и SSRF при проверке адресов. Гейты стоят в пайплайне.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
-        <div><h4>Видно, что уходит наружу</h4><p>Внешние проверки выключаются одним рубильником, отдельный домен можно пометить «не светить нигде», карта исходящего трафика описана в документации.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg></span>
-        <div><h4>След выгрузки</h4><p>Экспорт и объём вычитанных строк считаются на сервере: «выгрузил весь реестр за один заход» не проходит незаметно.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-        <div><h4>Доступ решается на сервере</h4><p>Права и приватность папок проверяются на сервере, а не в браузере – клиенту нельзя «подсмотреть» лишнее.</p></div>
-      </div>
-    </div>
-    <div class="shot" role="img" aria-label="Скриншот: папки, включая приватные" style="margin-top:40px"><img src="/shot-folders.jpg" alt="Папки, включая приватные – Domain Control Panel" loading="lazy"></div>
-    <p class="shotcap">Публичные и приватные папки – доступ к чувствительным доменам только у тех, кому открыт</p>
-  </div>
-</section>
-
-<section class="incl-block">
-  <div class="wrap">
-    <div class="sec-head" style="max-width:62em">
-      <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg>Поставка</p>
-      <h2>Что входит и как получить</h2>
-      <p>Готовый продукт под ваш бренд – разворачивается на вашей инфраструктуре.</p>
-    </div>
-    <div class="band">
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5v8l9 5 9-5V8z"/><path d="M3 8l9 5 9-5M12 21v-8"/></svg></span>
-        <div><h4>Разворачивается на вашей инфраструктуре</h4><p>Свой сервер или кластер – помогу поднять и настроить под ваше окружение.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
-        <div><h4>White-label под ваш бренд</h4><p>Название, логотип и цвета – панель выглядит как ваш продукт.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></span>
-        <div><h4>Доработки под задачи</h4><p>Дополнительные поля, интеграции и логика – под ваши процессы.</p></div>
-      </div>
-      <div class="b">
-        <span class="m"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.2 8.2-7 10-3.8-1.8-7-5-7-10V6z"/></svg></span>
-        <div><h4>Перенос данных, запуск и поддержка</h4><p>Помогу перенести реестр из Excel и Google-таблиц, запустить и сопровождать.</p></div>
-      </div>
-    </div>
-    <p style="margin:28px 0 0;color:var(--muted);font-size:15px">Стоимость – под ваш объём и задачи. Обсудим в Telegram.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="close">
-      <p class="eyebrow" style="justify-content:center"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>Связаться</p>
-      <h2>Покажу вживую и отвечу на вопросы</h2>
-      <p>Напишите в Telegram – договоримся о демо и обсудим, как панель ложится под ваши процессы.</p>
-      <a class="btn btn-primary" href="https://t.me/denis_pdm">Написать в Telegram <span class="arw">→</span></a>
-    </div>
-  </div>
-</section>
-
-<div class="wrap">
-  <footer><span>Domain Control Panel</span><span>self-hosted · white-label</span></footer>
-</div>
-
-<div class="lb" id="lb" aria-hidden="true"><img alt="Скриншот интерфейса"></div>
 
 <script>
+/* шапка: фон появляется после прокрутки */
 (function(){
-  var lb=document.getElementById('lb'), im=lb.querySelector('img');
-  document.querySelectorAll('.shot img').forEach(function(s){
-    s.addEventListener('click',function(){ im.src=s.currentSrc||s.src; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); });
-  });
-  function close(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); im.removeAttribute('src'); }
-  lb.addEventListener('click',close);
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
+  var top=document.getElementById('top');
+  function on(){ top.classList.toggle('scrolled', window.scrollY>8); }
+  on(); window.addEventListener('scroll',on,{passive:true});
 })();
-</script>
-<script>
+
+/* слайдер интерфейса */
+(function(){
+  var items=[].slice.call(document.querySelectorAll('#slides li'));
+  var tabs=document.getElementById('tabs'), img=document.getElementById('s-img'), shot=document.getElementById('s-shot');
+  var title=document.getElementById('s-title'), text=document.getElementById('s-text'), num=document.getElementById('s-num'), url=document.getElementById('s-url');
+  var cur=0, btns=[];
+  items.forEach(function(li,i){
+    var b=document.createElement('button');
+    b.type='button'; b.setAttribute('role','tab'); b.id='tab-'+i;
+    b.textContent=li.querySelector('b').textContent;
+    b.addEventListener('click',function(){ show(i); });
+    tabs.appendChild(b); btns.push(b);
+  });
+  function pad(n){ return (n<10?'0':'')+n; }
+  function preload(i){ var im=new Image(); im.src='/shots/'+items[(i+items.length)%items.length].dataset.img+'.jpg'; }
+  function show(i,focus){
+    cur=(i+items.length)%items.length;
+    var li=items[cur];
+    btns.forEach(function(b,k){ b.setAttribute('aria-selected',k===cur?'true':'false'); b.tabIndex=k===cur?0:-1; });
+    shot.setAttribute('aria-labelledby','tab-'+cur);
+    var src='/shots/'+li.dataset.img+'.jpg';
+    if(img.getAttribute('src')!==src){
+      img.classList.add('fading');
+      var next=new Image(); next.onload=function(){ img.src=src; img.classList.remove('fading'); }; next.src=src;
+    }
+    img.alt=li.querySelector('i').textContent;
+    title.textContent=li.querySelector('i').textContent;
+    text.textContent=li.querySelector('span').textContent;
+    num.textContent=pad(cur+1)+' / '+pad(items.length);
+    url.textContent='panel.your-brand.com/'+li.dataset.url;
+    var tb=btns[cur]; tabs.scrollTo({left:tb.offsetLeft-tabs.clientWidth/2+tb.clientWidth/2,behavior:'smooth'});
+    if(focus) tb.focus();
+    preload(cur+1); preload(cur-1);
+  }
+  document.getElementById('s-prev').addEventListener('click',function(){ show(cur-1); });
+  document.getElementById('s-next').addEventListener('click',function(){ show(cur+1); });
+  tabs.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){ e.preventDefault(); show(cur+1,true); }
+    if(e.key==='ArrowLeft'){ e.preventDefault(); show(cur-1,true); }
+  });
+  // свайп по кадру
+  var x0=null;
+  shot.addEventListener('pointerdown',function(e){ x0=e.clientX; });
+  shot.addEventListener('pointerup',function(e){
+    if(x0===null) return; var dx=e.clientX-x0; x0=null;
+    if(Math.abs(dx)>40){ show(cur+(dx<0?1:-1)); } else { openLb(img.currentSrc||img.src, img.alt); }
+  });
+  shot.addEventListener('pointercancel',function(){ x0=null; });
+  window.__slider={ refresh:function(){ show(cur); } };
+  show(0);
+
+  // полноэкранный просмотр
+  var lb=document.getElementById('lb'), lbImg=lb.querySelector('img');
+  function openLb(src,alt){ lbImg.src=src; lbImg.alt=alt||''; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); lb.querySelector('.x').focus(); }
+  function closeLb(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); }
+  lb.addEventListener('click',function(e){ if(e.target!==lbImg) closeLb(); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') closeLb();
+    if(lb.classList.contains('open')){ if(e.key==='ArrowRight'){ show(cur+1); lbImg.src='/shots/'+items[cur].dataset.img+'.jpg'; } if(e.key==='ArrowLeft'){ show(cur-1); lbImg.src='/shots/'+items[cur].dataset.img+'.jpg'; } }
+  });
+  document.querySelector('.hero .shot').addEventListener('click',function(){ openLb('/shots/registry.jpg','Реестр доменов'); });
+  document.querySelector('.hero .shot').style.cursor='zoom-in';
+})();
+
+/* RU/EN: словарь по точному тексту узла */
 (function(){
   var T={
-  "Реестр доменов, который":"A domain registry that",
-  "сам говорит, что сломалось":"tells you what broke",
-  "Сотни доменов, зеркал и лендингов в одной панели. Проверяется круглосуточно из нужных стран, пишет в Telegram, когда что-то отвалилось, и помнит, кто что менял.":"Hundreds of domains, mirrors and landings in one panel. Checked around the clock from the countries you need, messages you on Telegram the moment something drops, and remembers who changed what.",
-  "Написать в Telegram":"Message on Telegram",
-  "Что умеет":"What it does",
+  "Domain Control Panel":"Domain Control Panel",
+  "Возможности":"Features",
+  "Интерфейс":"Interface",
+  "Поставка":"Delivery",
+  "Вопросы":"Questions",
+  "Обсудить":"Let's talk",
+  "Self-hosted · white-label":"Self-hosted · white-label",
+  "Портфель доменов, который":"A domain portfolio that",
+  "следит за собой сам":"watches over itself",
+  "Массовые правки, доступ по командам, журнал каждого изменения — и алерт, если что-то перестало открываться.":"Bulk edits, per-team access, a log of every change — and an alert the moment something stops opening.",
+  "Обсудить в Telegram":"Talk on Telegram",
+  "Смотреть интерфейс":"See the interface",
   "Обычное утро в боевой установке":"An ordinary morning on a live install",
   "доменов":"domains",
   "не открылись":"failed to open",
   "отключены реестром":"suspended by the registry",
   "сроков на неделе":"renewals this week",
-  "клик – смотреть крупнее":"click to enlarge",
-  "· данные у вас":"· your data stays yours",
-  "Роли и доступы":"Roles and access",
-  "по проектам":"per project",
-  "под ваш бренд":"under your brand",
-  "Доработки":"Custom work",
-  "под заказчика":"to your needs",
-  "В боевой эксплуатации":"Running in production",
-  "холдинг с несколькими бизнес-юнитами":"a holding with several business units",
-  "сотни доменов и зеркал":"hundreds of domains and mirrors",
-  "Зачем это нужно":"Why you need it",
-  "Домен лёг в 03:12. Когда вы об этом узнаете?":"A domain went down at 03:12. When do you find out?",
-  "Разница между двумя колонками – это ночь трафика и разговор с байером наутро.":"The gap between these two columns is a night of traffic and an awkward morning chat with your buyer.",
-  "Как обычно":"The usual way",
-  "Зеркало перестало открываться":"A mirror stops opening",
-  "тишина":"silence",
-  "«почему вчера был ноль?» – в чате от байера":"«why was yesterday a zero?» – from the buyer, in chat",
-  "Шесть часов трафика в никуда, и причину ищут с нуля.":"Six hours of traffic gone, and the cause is hunted from scratch.",
-  "С панелью":"With the panel",
-  "Telegram: «harbor-x441.life не открывается»":"Telegram: «harbor-x441.life is not opening»",
-  "В карточке видно: истёк сертификат, хостинг ни при чём":"The card shows it: the certificate expired, hosting is fine",
+  "Всё, что обычно живёт в пяти таблицах и трёх чатах":"Everything that usually lives in five spreadsheets and three chats",
+  "Массовое управление":"Bulk management",
+  "Сотни строк одним действием: правка в строке, метки, папки, перенос между проектами.":"Hundreds of rows in one action: inline edits, labels, folders, moving between projects.",
+  "Доступы и роли":"Access and roles",
+  "Роли по проектам и отделам. Приватные папки не видит даже соседняя команда.":"Roles per project and department. Private folders stay hidden even from the team next door.",
+  "Журнал изменений":"Change log",
+  "Кто, когда, что было и что стало — по каждому полю каждого домена.":"Who, when, what it was and what it became — for every field of every domain.",
+  "Контроль доступности":"Availability control",
+  "Проверка из нужных стран. Семь причин потерять домен — на одном экране.":"Checks from the countries that matter. Seven ways to lose a domain — on one screen.",
+  "Алерты":"Alerts",
+  "Telegram и Slack — сразу с причиной, по своим проектам, без лишнего шума.":"Telegram and Slack — with the cause attached, per project, without the noise.",
+  "SEO и Search Console":"SEO and Search Console",
+  "Клики, показы и позиции по каждому домену — рядом с его статусом.":"Clicks, impressions and positions for every domain — right next to its status.",
+  "Деньги и сроки":"Money and renewals",
+  "Расход на продления по проектам и регистраторам, сроки — из кабинетов, а не из памяти.":"Renewal spend by project and registrar, with dates pulled from the accounts, not from memory.",
+  "Лендинги, зеркала, редиректоры":"Landings, mirrors, redirectors",
+  "Связи видны с обеих сторон: какой лендинг на каком домене, какие зеркала на редиректоре.":"Links are visible from both sides: which landing sits on which domain, which mirrors hang on a redirector.",
+  "Интерфейс продукта":"Product interface",
+  "Тринадцать экранов, ни одного макета":"Thirteen screens, not a single mock-up",
+  "Скриншоты живой установки на демонстрационных данных. Вместо логотипа — место под ваш.":"Screenshots of a live install with demo data. Where the logo goes, there is room for yours.",
+  "Дашборд":"Dashboard",
+  "Что требует решения, что истекает и что менялось — на первом экране.":"What needs a decision, what is expiring and what changed — on the first screen.",
+  "Реестр":"Registry",
+  "Реестр доменов":"Domain registry",
+  "Все домены одним списком: фильтры, метки, свои колонки, массовые правки.":"Every domain in one list: filters, labels, your own columns, bulk edits.",
+  "Карточка":"Domain card",
+  "Карточка домена":"Domain card",
+  "Проект, статус, гео, ответственный — и зеркала редиректора с их состоянием.":"Project, status, geo, owner — and the redirector's mirrors with their state.",
+  "IT":"IT",
+  "Отдел IT":"IT department",
+  "Хостинг, NS, регистратор, SSL, блок-листы и статус у реестра — в одной вкладке.":"Hosting, NS, registrar, SSL, block lists and registry status — in one tab.",
+  "Аналитика":"Analytics",
+  "Отдел аналитики":"Analytics department",
+  "Счётчики GA и GTM сверяются со страницей — чужой счётчик всплывает сам.":"GA and GTM tags are checked against the live page — a foreign tag surfaces on its own.",
+  "Партнёрка":"Partnerships",
+  "Партнёрский отдел":"Partnerships department",
+  "Программа, ссылка, Media ID и кампания — прямо в карточке домена.":"Programme, link, Media ID and campaign — right in the domain card.",
+  "Лендинги":"Landings",
+  "Реестр лендингов":"Landing registry",
+  "Лендинги с доменами, гео и статусом работы — связь видна с обеих сторон.":"Landings with their domains, geo and work status — the link is visible from both sides.",
+  "Доступность":"Availability",
+  "Семь плиток — семь способов потерять домен, и причина по каждому.":"Seven tiles — seven ways to lose a domain, and the cause for each one.",
+  "SEO":"SEO",
+  "Search Console по всему портфелю: клики, показы, CTR и позиции.":"Search Console across the whole portfolio: clicks, impressions, CTR and positions.",
+  "Деньги":"Money",
+  "Деньги портфеля":"Portfolio money",
+  "Сколько портфель стоит в год и что продлевается в ближайший месяц.":"What the portfolio costs per year and what renews within the month.",
+  "История":"History",
+  "История изменений":"Change history",
+  "Общий журнал правок с фильтрами по людям, доменам и датам.":"One edit log with filters by person, domain and date.",
+  "Доступы":"Access",
+  "Пользователи и роли":"Users and roles",
+  "Роли по проектам и отделам: каждый видит ровно своё.":"Roles per project and department: everyone sees exactly their own.",
+  "Каналы алертов":"Alert channels",
+  "Telegram и Slack: какие события, по каким проектам и как часто.":"Telegram and Slack: which events, for which projects and how often.",
+  "Как это выглядит ночью":"What a night looks like",
+  "Домен лёг в 03:12. Починили до утра":"A domain went down at 03:12. Fixed before morning",
+  "Зеркало перестало открываться из Германии":"A mirror stopped opening from Germany",
+  "Проверка идёт из нужных стран, а не из вашего офиса.":"Checks run from the countries that matter, not from your office.",
+  "В Telegram — сообщение с причиной":"A Telegram message with the cause",
+  "«Не открывается: ошибка сертификата». Не факт, а диагноз.":"«Not opening: certificate error». Not a fact, a diagnosis.",
   "Починили до утреннего трафика":"Fixed before the morning traffic",
-  "Минута на сообщение, утро – уже рабочее.":"One minute to the alert, and the morning is already a working one.",
-  "Интерфейс":"Interface",
-  "Что горит – видно за десять секунд":"What is on fire – visible in ten seconds",
-  "Домены, которые не открылись, сроки продления, лендинги на уточнении и последние изменения – на одном экране.":"Domains that failed to open, renewal dates, landings pending clarification and the latest changes – on one screen.",
-  "Шесть вопросов, на которые панель отвечает сама":"Six questions the panel answers on its own",
-  "Не таблица в экселе и не пятнадцать вкладок регистраторов. Живой реестр с доступами, историей, проверками и алертами.":"Not an Excel sheet and not fifteen registrar tabs. A live registry with access, history, checks and alerts.",
-  "Порядок":"Order",
-  "Реестр вместо таблицы, которую каждый правит по-своему":"A registry instead of a spreadsheet everyone edits their own way",
-  "Домены, зеркала и лендинги одним списком: поиск, фильтры, метки, свои колонки":"Domains, mirrors and landings in one list: search, filters, labels, your own columns",
-  "Карточка домена со всеми отделами, сроками и историей – видно, кто что менял":"A domain card with every department, date and its history – you see who changed what",
-  "Лендинг сам находит свой домен: обе стороны связи видны сразу":"A landing finds its own domain: both sides of the link are visible at once",
-  "Сотни строк одним действием, правка прямо в списке с протяжкой как в Excel":"Hundreds of rows in one action, edited right in the list with Excel-style drag-fill",
-  "Excel, CSV и Google-таблица заезжают целиком; семь кабинетов регистраторов подтягиваются сами":"Excel, CSV and a Google Sheet come in whole; seven registrar accounts sync themselves",
-  "Поломки":"Breakage",
-  "Что сломано снаружи – прямо сейчас, а не по итогам дня":"What is broken from the outside – right now, not at the end of the day",
-  "Домены и адреса проверяются круглосуточно, цепочка редиректов проходится до конца":"Domains and URLs are checked around the clock, and the redirect chain is followed to its end",
-  "Замеры через резидентные каналы: в DE открывается, в BR – нет":"Probes through residential channels: it opens in DE and does not in BR",
-  "Код 200 ещё не значит, что сайт жив: заданная строка на странице ловит заглушку хостера":"HTTP 200 does not mean the site is alive: a string you set on the page catches the hosting stub",
-  "Сертификат истёк или выдан на чужое имя – предупредим за 14, 7 и 1 день":"Certificate expired or issued for another name – you are warned 14, 7 and 1 day ahead",
-  "Делегирование сменили мимо вас – узнаете в тот же день":"Delegation changed behind your back – you find out the same day",
-  "Деньги":"Cost",
-  "Сколько портфель съест в следующем месяце":"What the portfolio will cost you next month",
-  "Расход на продления по месяцам и прогноз на год вперёд":"Renewal spend by month and a forecast a year ahead",
-  "Справочник цен по зонам подставляет стоимость там, где её не заполняли руками":"A per-zone price book fills in the cost wherever nobody entered it by hand",
-  "Сроки: что истекает на неделе, что уже истекло, где выключено автопродление":"Dates: what expires this week, what already expired, where auto-renew is off",
-  "Риски":"Risks",
-  "То, что отбирает домен, видно раньше, чем падает трафик":"What takes a domain away shows up before the traffic drops",
-  "Спам-листы и базы угроз проверяются регулярно, а не когда уже поздно":"Spam lists and threat databases are checked on a schedule, not when it is already too late",
-  "Статус у реестра словами: не «имя не резолвится», а «домен на hold, регистратор такой-то»":"Registry status in plain words: not «the name does not resolve» but «the domain is on hold, registrar so-and-so»",
-  "Защита переноса и whois-приватность: где выключено – видно фильтром":"Transfer lock and whois privacy: a filter shows where they are switched off",
-  "Доступ":"Access",
-  "Соседняя команда не увидит ваши домены":"The team next door will not see your domains",
-  "Роли на каждый проект: админ, менеджер, редактор, наблюдатель":"Roles per project: admin, manager, editor, viewer",
-  "Приватные папки: чувствительные домены – точечно тем, кому открыли":"Private folders: sensitive domains go only to the people you opened them to",
-  "Права проверяются на сервере, а не в браузере – «подсмотреть» лишнее нельзя":"Permissions are enforced on the server, not in the browser – nothing extra can be peeked at",
-  "Аудит: любое изменение – кто, когда и что. Второй фактор и список сессий в профиле":"Audit: every change – who, when and what. Two-factor and a session list live in the profile",
-  "Контур":"Your stack",
-  "Встаёт в ваш контур, а не рядом с ним":"It fits inside your stack, not beside it",
-  "Self-hosted: реестр, доступы и история живут на вашей инфраструктуре":"Self-hosted: the registry, access and history live on your own infrastructure",
-  "White-label: название, логотип и цвета – панель выглядит как ваш продукт":"White-label: name, logo and colours – the panel looks like your product",
-  "API-токен только на чтение: скрипт забирает домены по проектам в JSON или CSV":"A read-only API token: a script pulls domains per project as JSON or CSV",
-  "Search Console рядом с реестром: клики, показы и CTR по доменам":"Search Console next to the registry: clicks, impressions and CTR per domain",
-  "И ещё:":"Also:",
-  "горячие клавиши · закрепление строк · архив вместо удаления · цветные маркеры и метки · журнал отправки алертов · утренняя сводка одним сообщением · экспорт в CSV и Excel · история по каждому полю":"keyboard shortcuts · pinned rows · archive instead of delete · colour markers and labels · an alert delivery log · a single morning digest · CSV and Excel export · history for every field",
-  "Ниша":"Your niche",
-  "Зеркала и редиректоры – так, как это устроено у вас":"Mirrors and redirectors – the way you actually run them",
-  "Обычная панель управления доменами такого не знает: для неё домен – строка со сроком продления.":"A general-purpose domain manager knows nothing about this: to it a domain is a row with a renewal date.",
-  "Видно, какие зеркала висят на редиректоре и сколько из них живо":"You see which mirrors sit on a redirector and how many are alive",
-  "Одно зеркало может висеть на нескольких редиректорах – так и бывает":"One mirror can sit on several redirectors – that is how it actually works",
-  "Ближайшее истечение по связке: домен теряют не только от бана, но и от забытого продления":"The nearest expiry across the set: domains are lost to a forgotten renewal as often as to a ban",
-  "Привязка и снятие – пачкой из реестра, а не по одному":"Linking and unlinking in bulk from the registry, not one by one",
-  "Безопасность":"Security",
-  "Ваш сервер, ваши данные, ваши правила доступа":"Your server, your data, your access rules",
-  "Панель держит домены, доступы и историю – ровно то, что не должно утечь.":"The panel holds domains, access and history – exactly the things that must not leak.",
-  "Два раунда security-ревью":"Two rounds of security review",
-  "Закрыты кросс-тенантный обход прав, XSS, инъекции в экспорт, брутфорс логина и SSRF при проверке адресов. Гейты стоят в пайплайне.":"Cross-tenant permission bypass, XSS, export injection, login brute force and SSRF in URL checks are all closed. Gates run in the pipeline.",
-  "Видно, что уходит наружу":"You can see what leaves the perimeter",
-  "Внешние проверки выключаются одним рубильником, отдельный домен можно пометить «не светить нигде», карта исходящего трафика описана в документации.":"External checks switch off with one toggle, any single domain can be marked «never expose», and the outbound traffic map is documented.",
-  "След выгрузки":"Export leaves a trace",
-  "Экспорт и объём вычитанных строк считаются на сервере: «выгрузил весь реестр за один заход» не проходит незаметно.":"Exports and the number of rows read are counted on the server: «dumped the whole registry in one go» does not pass unnoticed.",
-  "Доступ решается на сервере":"Access is decided on the server",
-  "Права и приватность папок проверяются на сервере, а не в браузере – клиенту нельзя «подсмотреть» лишнее.":"Permissions and folder privacy are enforced on the server, not in the browser – the client cannot peek at anything extra.",
-  "Публичные и приватные папки – доступ к чувствительным доменам только у тех, кому открыт":"Public and private folders – sensitive domains are reachable only by the people they were opened to",
-  "Поставка":"Delivery",
-  "Что входит и как получить":"What you get and how to get it",
-  "Готовый продукт под ваш бренд – разворачивается на вашей инфраструктуре.":"A finished product under your brand – deployed on your own infrastructure.",
-  "Разворачивается на вашей инфраструктуре":"Deployed on your infrastructure",
-  "Свой сервер или кластер – помогу поднять и настроить под ваше окружение.":"Your own server or cluster – I will help bring it up and tune it to your environment.",
-  "White-label под ваш бренд":"White-label under your brand",
-  "Название, логотип и цвета – панель выглядит как ваш продукт.":"Name, logo and colours – the panel looks like your product.",
-  "Доработки под задачи":"Custom work for your cases",
-  "Дополнительные поля, интеграции и логика – под ваши процессы.":"Extra fields, integrations and logic – shaped to your processes.",
-  "Перенос данных, запуск и поддержка":"Data migration, launch and support",
-  "Помогу перенести реестр из Excel и Google-таблиц, запустить и сопровождать.":"I will help move the registry out of Excel and Google Sheets, launch it and keep it running.",
-  "Стоимость – под ваш объём и задачи. Обсудим в Telegram.":"Pricing depends on your volume and your cases. Let us discuss it on Telegram.",
-  "Мониторинг":"Monitoring",
-  "Один экран на вопрос «что сломано снаружи»":"One screen for the question «what is broken from the outside»",
-  "Семь плиток — семь способов потерять домен: не открылся, уводит на чужое, истекает срок, попал в блок-лист, пропал маркер со страницы, сертификат, отключён реестром. Клик по плитке оставляет в списке только её строки, а вторая ступень отвечает «почему именно»: не резолвится, таймаут, ошибка сертификата, ответ 4xx.":"Seven tiles — seven ways to lose a domain: it stopped opening, it redirects somewhere else, the renewal date is near, it landed on a block list, the page marker is gone, the certificate, suspended by the registry. Clicking a tile leaves only its rows in the list, and the second level answers «why exactly»: does not resolve, timeout, certificate error, a 4xx response.",
-  "В списке первичен домен: если лёг сайт, легли и все адреса на нём — это одна проблема, а не десять":"The domain comes first in the list: if a site goes down, every URL on it goes down too — that is one problem, not ten",
-  "Связаться":"Get in touch",
-  "Покажу вживую и отвечу на вопросы":"I will show it live and answer your questions",
-  "Напишите в Telegram – договоримся о демо и обсудим, как панель ложится под ваши процессы.":"Message me on Telegram – we will set up a demo and see how the panel fits your processes."
+  "Карточка домена сразу показала, где искать.":"The domain card showed straight away where to look.",
+  "Без панели":"Without the panel",
+  "узнали бы утром — от байера, вопросом «почему вчера был ноль?»":"you would hear it in the morning — from the buyer, asking «why was yesterday a zero?»",
+  "Готовый продукт, который ставится у вас":"A finished product installed on your side",
+  "На вашем сервере":"On your server",
+  "Данные не уходят наружу: ни домены, ни проекты, ни история правок.":"Nothing leaves your perimeter: not the domains, not the projects, not the edit history.",
+  "Под вашим брендом":"Under your brand",
+  "Имя, логотип и цвет акцента меняются настройкой — без правок кода.":"Name, logo and accent colour are a setting — no code changes.",
+  "Переезд из таблиц":"Moving out of spreadsheets",
+  "Excel, CSV и Google-таблица заезжают целиком, кабинеты регистраторов подтягиваются сами.":"Excel, CSV and Google Sheets come in whole, registrar accounts sync themselves.",
+  "Доработки под процессы":"Custom work for your processes",
+  "Свои поля, интеграции и логика — отдельной работой, с оценкой до старта.":"Your own fields, integrations and logic — as separate work, estimated up front.",
+  "Здесь будет ваш логотип и ваше название":"Your logo and your name go here",
+  "Результат":"Results",
+  "Что меняется за первый месяц":"What changes in the first month",
+  "—":"—",
+  "поломок поймано до того, как их заметил кто-то снаружи":"failures caught before anyone outside noticed",
+  "на сверку портфеля вместо дня в таблице":"to reconcile the portfolio instead of a day in a spreadsheet",
+  "доменов не потеряли по срокам продления":"domains not lost to missed renewals",
+  "Head of Media Buying, iGaming-холдинг":"Head of Media Buying, iGaming holding",
+  "Цена и старт":"Price and start",
+  "Одна покупка — и панель ваша":"One purchase — and the panel is yours",
+  "Фиксированная стоимость":"Fixed price",
+  "Назову на демо — под ваш объём доменов и проектов. Без подписки и оплаты за пользователей.":"I will name it on the demo — sized to your domains and projects. No subscription, no per-seat fees.",
+  "Установка на вашем сервере":"Install on your server",
+  "Исходный код — без привязки ко мне":"Source code — no lock-in to me",
+  "Ваш бренд: имя, логотип, цвет":"Your brand: name, logo, colour",
+  "Перенос реестра из таблиц":"Registry migration from spreadsheets",
+  "Настройка проверок, стран и алертов":"Checks, countries and alerts set up",
+  "Сопровождение и доработки — отдельно, по оценке. Панель работает и без них.":"Support and custom work are separate, estimated per task. The panel runs fine without them.",
+  "Как начать":"How to start",
+  "Демо на живых данных":"A demo on live data",
+  "Полчаса: показываю работающую установку и отвечаю на вопросы.":"Half an hour: I show a working install and answer your questions.",
+  "Установка у вас":"Install on your side",
+  "Разворачиваю на вашем сервере и ставлю ваш брендинг.":"I deploy it on your server and apply your branding.",
+  "Перенос и проверки":"Migration and checks",
+  "Заезжают таблицы и кабинеты регистраторов, включаются проверки и алерты.":"Spreadsheets and registrar accounts come in, checks and alerts switch on.",
+  "Что спрашивают до покупки":"What people ask before buying",
+  "Сколько занимает внедрение?":"How long does rollout take?",
+  "Установка — дело одного дня с доступа к серверу. Дольше всего идёт разметка ваших таблиц: шапки у всех разные, её делаем вместе и один раз.":"The install takes a day from server access. The slow part is mapping your spreadsheets: everyone's headers differ, so we do it together, once.",
+  "А если сервер у нас слабый?":"What if our server is weak?",
+  "Нагрузку даёт не интерфейс, а проверки: чем больше доменов и чем чаще их опрашивать, тем больше нужно. Конфигурацию под ваш объём считаем до установки.":"The load comes from the checks, not the interface: more domains and more frequent polling need more. We size the configuration for your volume before the install.",
+  "Кто видит наши данные?":"Who can see our data?",
+  "Только вы. Панель стоит на вашем сервере и наружу ничего не отправляет. Внутри — роли по проектам и отделам, приватные папки закрыты даже от соседних команд.":"Only you. The panel sits on your server and sends nothing outside. Inside there are roles per project and department, and private folders are closed even to neighbouring teams.",
+  "Можно перенести наш Excel?":"Can you move our Excel over?",
+  "Да, вместе с Google-таблицами и выгрузками из кабинетов регистраторов — с предпросмотром того, что заедет, до того как оно заедет.":"Yes, along with Google Sheets and registrar exports — with a preview of what will come in before it does.",
+  "Что если нужна доработка?":"What if we need custom work?",
+  "Делаю — отдельной работой, с оценкой до старта. Исходники у вас, так что доработать может и ваша команда.":"I do it — as separate work, estimated up front. The sources are yours, so your own team can extend it too.",
+  "Покажу на живых данных":"I will show it on live data",
+  "Полчаса созвона: ваш объём, ваши процессы, ответы на вопросы.":"A half-hour call: your volume, your processes, your questions answered.",
+  "Domain Control Panel · self-hosted, white-label":"Domain Control Panel · self-hosted, white-label",
+  "На скриншотах — демонстрационные данные":"Screenshots use demonstration data",
+  "Нажмите на экран, чтобы рассмотреть":"Tap the screen to take a closer look"
   };
+  var A={ "Разделы":"Sections","Язык":"Language","Предыдущий экран":"Previous screen","Следующий экран":"Next screen","Закрыть":"Close","Экраны продукта":"Product screens",
+    "Реестр доменов: все домены портфеля с проектами, типами и статусами":"Domain registry: every domain in the portfolio with projects, types and statuses",
+    "Шапка панели с местом под логотип и название покупателя":"Panel header with room for the buyer's logo and name" };
   var items=[]; var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null); var n;
   while(n=w.nextNode()){
     var raw=n.nodeValue; if(!raw||!raw.trim()) continue;
@@ -624,10 +773,15 @@
     var key=raw.trim().replace(/ /g,' ');
     if(Object.prototype.hasOwnProperty.call(T,key)) items.push({node:n,raw:raw,core:raw.trim(),en:T[key]});
   }
+  var attrs=[]; document.querySelectorAll('[aria-label],img[alt]').forEach(function(el){
+    ['aria-label','alt'].forEach(function(a){ var v=el.getAttribute(a); if(v&&A[v]) attrs.push({el:el,a:a,ru:v,en:A[v]}); });
+  });
   function apply(lang){
     items.forEach(function(o){ o.node.nodeValue = lang==='en' ? o.raw.replace(o.core,o.en) : o.raw; });
+    attrs.forEach(function(o){ o.el.setAttribute(o.a, lang==='en'?o.en:o.ru); });
     document.documentElement.lang=lang;
     document.querySelectorAll('.langtog button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-l')===lang); });
+    if(window.__slider) window.__slider.refresh();
     try{localStorage.setItem('lp_lang',lang);}catch(e){}
   }
   document.querySelectorAll('.langtog button').forEach(function(b){ b.addEventListener('click',function(){ apply(b.getAttribute('data-l')); }); });
