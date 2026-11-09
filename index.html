@@ -132,8 +132,8 @@
   .rub-chip i{width:7px;height:7px;border-radius:50%;background:var(--primary-2);box-shadow:0 0 12px var(--primary-2)}
   .more{padding:46px 0 52px}
   /* Заголовок слайда - всегда одна строка, подпись - всегда две ровные. */
-  .more h2{margin-top:16px;font-size:clamp(26px,2.7vw,34px);max-width:none;white-space:nowrap}
-  .more .say{margin-top:10px;font-size:17px;max-width:66ch;text-wrap:balance;min-height:3.25em}
+  .more h2{margin-top:16px;font-size:clamp(26px,2.7vw,34px);max-width:none;white-space:nowrap;color:var(--fg-2)}
+  .more .say{margin-top:10px;font-size:16px;color:var(--fg);max-width:76ch;text-wrap:balance;min-height:3.2em}
   .chipline{margin-top:18px}
   .chips{display:flex;gap:9px;flex-wrap:nowrap;min-width:0;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;
          -webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent);
@@ -488,6 +488,22 @@
   // Заголовок и подпись живут в данных слайда и меняются вместе с кадром.
   (function () {
     var SLIDES = [
+      { img: 'dashboard', chip: { ru: 'Дашборд', en: 'Dashboard' },
+        title: { ru: 'Что требует решения сегодня', en: 'What needs a decision today' },
+        lead: { ru: 'Первый экран утром: сколько доменов ждут решения, что изменилось за неделю, у чего подходят сроки и что сейчас с лендингами.',
+                en: 'The first screen in the morning: how many domains await a decision, what changed over the week, what is about to expire and how the landings are doing.' } },
+      { img: 'availability', chip: { ru: 'Доступность', en: 'Availability' },
+        title: { ru: 'Что сейчас не открывается', en: 'What is down right now' },
+        lead: { ru: 'Плитки по причинам: не открылись, уводят на чужой домен, не та страница, сертификаты, спам-листы, отключены реестром.',
+                en: 'Tiles by reason: did not open, redirect to a third-party domain, wrong page, certificates, blocklists, suspended by the registry.' } },
+      { img: 'registry-bulk', chip: { ru: 'Реестр', en: 'Registry' },
+        title: { ru: 'Массовые действия на сотни строк', en: 'Bulk actions on hundreds of rows' },
+        lead: { ru: 'Выделяете строки - и одним действием меняете проект, папку, метку, ответственного или отправляете в архив; рядом выгрузка.',
+                en: 'Select the rows and change the project, folder, label or owner in one action, or send them to the archive; export sits next to it.' } },
+      { img: 'history', chip: { ru: 'История', en: 'History' },
+        title: { ru: 'Кто, когда и что поменял', en: 'Who changed what and when' },
+        lead: { ru: 'Журнал по каждому полю: было и стало, с фильтрами по человеку, домену и периоду. Поиск идёт по значениям, а не только по именам.',
+                en: 'A log for every field: what it was and what it became, with filters by person, domain and period. Search runs over values, not just names.' } },
       { img: 'money', chip: { ru: 'Деньги', en: 'Renewals' },
         title: { ru: 'Деньги и сроки', en: 'Renewals and money' },
         lead: { ru: 'Прогноз расходов по месяцам: спишется само, продлить руками, не продлеваем. И плитка «можно не продлевать».',
