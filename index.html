@@ -151,6 +151,12 @@
   .dealside{display:flex;flex-direction:column}
   .dealside .note{margin-top:18px}
 
+  /* ── Что нужно от вас: список-спецификация ─────────────────── */
+  .need{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 56px;margin-top:38px}
+  .need-i{border-top:1px solid var(--b1);padding:22px 0 24px}
+  .need-i h3{margin:0 0 7px;font-size:17.5px;font-weight:600;letter-spacing:-.012em}
+  .need-i p{margin:0;color:var(--dim);font-size:15.5px;line-height:1.6;max-width:44ch}
+
   /* ── Слайдер «что ещё внутри» ──────────────────────────────── */
   .rub-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;
             text-transform:uppercase;color:#bfdbfe;background:rgb(59 147 255 / .16);border:1px solid rgb(59 147 255 / .42);
@@ -246,6 +252,7 @@
     .deal{grid-template-columns:1fr;gap:34px}
 
     .adv{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+    .need{grid-template-columns:1fr;gap:0}
     .loss{grid-template-columns:1fr;grid-template-rows:none;gap:18px}
     .loss-i{grid-template-rows:auto;grid-row:auto}
     .hero{padding:64px 0 60px}
@@ -263,6 +270,8 @@
     .mark svg{width:16px;height:16px}
     header .btn-main span{display:none!important}
     header .btn-main::after{content:"Telegram";font-weight:600}
+    .hero .shot{border:0;background:transparent;box-shadow:none}
+    .hero .shot img{aspect-ratio:auto;max-height:72vh;width:auto;max-width:100%;margin:0 auto;object-fit:contain;border-radius:14px}
     .hero .cta{flex-direction:column;align-items:stretch}
     .hero .cta .btn{width:100%}
     .more h2{white-space:normal}
@@ -337,7 +346,7 @@
     --r-card:12px; --r-btn:9px;
   }
   /* Заголовки - чернильно-синие, в одну линию с кнопкой (решение Denis) */
-  h1,h2,.loss-i h3,.adv-i h3,.pricecard .big{color:var(--head)}
+  h1,h2,.loss-i h3,.adv-i h3,.need-i h3,.pricecard .big{color:var(--head)}
   .more h2{color:#2C3E5E}
   header{background:rgb(244 245 247 / .8)}
   .lang button[aria-pressed="true"]{background:rgb(14 17 22 / .07)}
@@ -352,11 +361,11 @@
   /* Тёмная полоса слайдера: кадры продукта тёмные, на бумаге соседние гасли в серую кашу.
      Токены переопределены на секции - внутри всё само становится тёмным. */
   .more{
-    --card:#121A2B; --fg:#F4F7FC; --fg-2:#D4DCEA; --dim:#A3AFC2; --faint:#8C98AC;
+    --card:#1C2027; --fg:#F4F6F9; --fg-2:#D7DBE2; --dim:#A6ADB8; --faint:#8E96A3;
     --b1:rgb(255 255 255 / .11); --b2:rgb(255 255 255 / .22); --s1:rgb(255 255 255 / .05);
-    background:#0A0F1C;background-image:none;color:var(--fg);padding:72px 0 78px
+    background:#15181D;background-image:none;color:var(--fg);padding:72px 0 78px
   }
-  .more h2{color:#DCE5F2}
+  .more h2{color:#DEE2E9}
   .more .chips button{background:rgb(255 255 255 / .06);color:var(--faint)}
   .more .chips button:hover{background:rgb(255 255 255 / .12);color:var(--fg)}
   .more .chips button[aria-selected="true"]{background:var(--primary);color:#07122A}
@@ -364,11 +373,17 @@
   .more .arr:hover{background:rgb(255 255 255 / .15)}
   .more .detail{box-shadow:none}
   .more .track figure{opacity:.2}
-  .more .shot{box-shadow:0 30px 70px rgb(0 0 0 / .5)}
-  .lb{background:rgb(244 245 247 / .96)}
-  .lb-close,.lb-arr{background:#fff;color:#0E1116}
-  .lb-close:hover,.lb-arr:hover{background:rgb(14 17 22 / .06)}
-  .lb img{border-color:var(--b1)}
+  .more .track figure.on{opacity:1}
+  .more .shot{box-shadow:0 30px 70px rgb(0 0 0 / .55)}
+  /* Почти чёрный кадр на тёмном фоне не отделяется - сажаем активный на светлую подложку. */
+  .more .track figure.on .shot{padding:9px;background:rgb(255 255 255 / .07);border-color:rgb(255 255 255 / .16);border-radius:16px}
+  .more .track figure.on .shot img{border-radius:9px}
+  .lb{background:rgb(7 11 19 / .97)}
+  .lb-close,.lb-arr{background:rgb(255 255 255 / .09);color:#E8EEF7;border-color:rgb(255 255 255 / .22)}
+  .lb-close:hover,.lb-arr:hover{background:rgb(255 255 255 / .18)}
+  .lb img{border-color:rgb(255 255 255 / .13)}
+  .lb-cap{color:#9DA9BD}
+  .lb-cap b{color:#F2F6FC}
 </style>
 </head>
 <body>
@@ -417,7 +432,7 @@
     </p>
     <div class="shotwrap glowbox">
       <div class="shot">
-        <img src="shots/dashboard.jpg" data-en="shots/en/dashboard.jpg" alt="Дашборд: что требует решения сегодня" loading="eager">
+        <img src="shots/dashboard.jpg" data-en="shots/en/dashboard.jpg" data-phone="shots/phone-one.jpg" data-phone-en="shots/en/phone-one.jpg" alt="Дашборд: что требует решения сегодня" loading="eager">
       </div>
     </div>
   </div>
@@ -561,6 +576,32 @@
   </p>
 </section>
 
+<!-- 6. Что нужно от вас ────────────────────────────────────── -->
+<section class="screen" id="start">
+  <div class="wrap">
+    <div class="rub"><span class="ru">Начало работы</span><span class="en">Getting started</span></div>
+    <h2 class="wide"><span class="ru">Что нужно от вас, чтобы начать</span><span class="en">What we need from you to start</span></h2>
+    <div class="need">
+      <div class="need-i">
+        <h3><span class="ru">Сервер</span><span class="en">A server</span></h3>
+        <p><span class="ru">Linux с Docker - на нём живут панель, база и вся история. Ваше железо или ваше облако, нам всё равно</span><span class="en">Linux with Docker - it holds the panel, the database and the whole history. Your hardware or your cloud, either works</span></p>
+      </div>
+      <div class="need-i">
+        <h3><span class="ru">Доступы к кабинетам регистраторов</span><span class="en">Access to the registrar accounts</span></h3>
+        <p><span class="ru">Ключ API от каждого кабинета, чтобы сроки продления и NS-записи подтягивались сами, а не руками</span><span class="en">An API key per account, so renewal dates and NS records sync themselves instead of being typed in</span></p>
+      </div>
+      <div class="need-i">
+        <h3><span class="ru">Текущие таблицы</span><span class="en">Your current spreadsheets</span></h3>
+        <p><span class="ru">Excel, CSV или ссылка на Google-таблицу в любом виде - перенос, разбор шапки и поиск дублей на нас</span><span class="en">Excel, CSV or a Google Sheets link in any shape - the migration, the header matching and the duplicate check are on us</span></p>
+      </div>
+      <div class="need-i">
+        <h3><span class="ru">Один человек с вашей стороны</span><span class="en">One person on your side</span></h3>
+        <p><span class="ru">Кто решает, какие проекты завести, кому какой доступ открыть и куда слать алерты. Дальше панель работает сама</span><span class="en">Who decides which projects to create, who gets which access and where the alerts go. After that the panel runs itself</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Финал ─────────────────────────────────────────────────────── -->
 <section class="final">
   <div class="wrap">
@@ -604,15 +645,23 @@
     document.querySelectorAll('[data-set-lang]').forEach(function (b) {
       b.addEventListener('click', function () { setLang(b.dataset.setLang); });
     });
+    // Повернули телефон или изменили окно - кадр героя пересобирается.
+    window.matchMedia('(max-width:640px)').addEventListener('change', function () {
+      setLang(document.documentElement.getAttribute('data-lang') || 'ru');
+    });
     function setLang(l) {
       document.documentElement.setAttribute('data-lang', l);
       document.documentElement.setAttribute('lang', l);
       document.querySelectorAll('[data-set-lang]').forEach(function (b) {
         b.setAttribute('aria-pressed', String(b.dataset.setLang === l));
       });
+      var narrow = window.matchMedia('(max-width:640px)').matches;
       document.querySelectorAll('img[data-en]').forEach(function (img) {
         if (!img.dataset.ru) img.dataset.ru = img.getAttribute('src');
-        var want = l === 'en' ? img.dataset.en : img.dataset.ru;
+        // На телефоне десктопный кадр нечитаем - у героя свой, снятый с телефона.
+        var want = narrow && img.dataset.phone
+          ? (l === 'en' ? img.dataset.phoneEn : img.dataset.phone)
+          : (l === 'en' ? img.dataset.en : img.dataset.ru);
         if (img.getAttribute('src') !== want) img.setAttribute('src', want);
       });
       if (window.renderSlider) window.renderSlider();
