@@ -136,8 +136,8 @@
              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .chipline{display:flex;align-items:center;gap:20px;margin-top:22px}
   .chips{display:flex;gap:9px;flex-wrap:nowrap;min-width:0;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;
-         -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);
-         mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+         -webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent);
+         mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent)}
   .chips::-webkit-scrollbar{display:none}
   .chips button{flex:0 0 auto}
   .chips button{border:1px solid var(--b1);border-radius:999px;padding:10px 18px;font-size:14.5px;color:var(--faint);
@@ -395,8 +395,8 @@
   </div>
   <div class="stage" id="s-stage"><div class="track" id="s-track"></div></div>
   <p class="rest">
-    <span class="ru">Ещё внутри: API-токены только на чтение, второй фактор и сессии, прокси и источники риска, календарь продлений.</span>
-    <span class="en">Also inside: read-only API tokens, two-factor and sessions, proxies and risk sources, a renewal calendar.</span>
+    <span class="ru">Ещё внутри: источники риска и спам-листы, Яндекс.Вебмастер, календарь продлений, журнал безопасности.</span>
+    <span class="en">Also inside: risk sources and blocklists, Yandex.Webmaster, a renewal calendar, a security log.</span>
   </p>
 </section>
 
@@ -501,7 +501,23 @@
       { img: 'folders', chip: { ru: 'Папки', en: 'Folders' },
         title: { ru: 'Папки и метки', en: 'Folders and labels' },
         lead: { ru: 'Открытые папки для команды, закрытые - по списку людей. Метки проекта и цветной маркер домена.',
-                en: 'Open folders for the team, private ones by name list. Project labels and a colour marker per domain.' } }
+                en: 'Open folders for the team, private ones by name list. Project labels and a colour marker per domain.' } },
+      { img: 'access', chip: { ru: 'API-ключи', en: 'API keys' },
+        title: { ru: 'Машинный доступ только на чтение', en: 'Machine access, read-only' },
+        lead: { ru: 'Ключ выдаётся человеку и живёт в выбранных проектах. Видно, кто выпустил, когда был последний запрос и когда ключ истекает; отзывается одной кнопкой.',
+                en: 'A key is issued to a person and lives in the chosen projects. You see who issued it, when it was last used and when it expires; one button revokes it.' } },
+      { img: 'proxies', chip: { ru: 'Прокси', en: 'Proxies' },
+        title: { ru: 'Каналы в восьми странах', en: 'Channels in eight countries' },
+        lead: { ru: 'Резидентные каналы для проверок из нужных стран: видно адрес выхода, когда канал проверялся последний раз и включён ли он.',
+                en: 'Residential channels for checks from the countries you need: you see the exit address, the last check and whether the channel is on.' } },
+      { img: 'profile', chip: { ru: '2FA', en: '2FA' },
+        title: { ru: 'Второй фактор и сессии', en: 'Two-factor and sessions' },
+        lead: { ru: 'Код из приложения в дополнение к паролю, резервные коды, список активных сессий и «выйти везде». Там же ссылка на календарь продлений.',
+                en: 'A code from the app on top of the password, backup codes, a list of active sessions and “sign out everywhere”. The renewal calendar link lives here too.' } },
+      { img: 'phone', chip: { ru: 'С телефона', en: 'On the phone' },
+        title: { ru: 'Дежурный набор с телефона', en: 'The on-call set on your phone' },
+        lead: { ru: 'Дашборд, реестр и доступность открываются с телефона: ночью посмотреть, что лежит, можно не открывая ноутбук.',
+                en: 'Dashboard, registry and availability open on a phone: at night you can check what is down without opening a laptop.' } }
     ];
     var track = document.getElementById('s-track');
     var stage = document.getElementById('s-stage');
@@ -541,6 +557,7 @@
       Array.prototype.forEach.call(chips.children, function (b, idx) {
         b.textContent = SLIDES[idx].chip[l];
         b.setAttribute('aria-selected', String(idx === i));
+        if (idx === i) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
       });
       Array.prototype.forEach.call(track.children, function (f, idx) {
         f.classList.toggle('on', idx === i);
