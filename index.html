@@ -349,6 +349,22 @@
   .arr:hover{background:rgb(14 17 22 / .06)}
   .loss-i,.pricecard,.detail{box-shadow:0 1px 2px rgb(16 24 40 / .05)}
   .track figure{opacity:.28}
+  /* Тёмная полоса слайдера: кадры продукта тёмные, на бумаге соседние гасли в серую кашу.
+     Токены переопределены на секции - внутри всё само становится тёмным. */
+  .more{
+    --card:#121A2B; --fg:#F4F7FC; --fg-2:#D4DCEA; --dim:#A3AFC2; --faint:#8C98AC;
+    --b1:rgb(255 255 255 / .11); --b2:rgb(255 255 255 / .22); --s1:rgb(255 255 255 / .05);
+    background:#0A0F1C;background-image:none;color:var(--fg);padding:72px 0 78px
+  }
+  .more h2{color:#DCE5F2}
+  .more .chips button{background:rgb(255 255 255 / .06);color:var(--faint)}
+  .more .chips button:hover{background:rgb(255 255 255 / .12);color:var(--fg)}
+  .more .chips button[aria-selected="true"]{background:var(--primary);color:#07122A}
+  .more .arr{background:rgb(255 255 255 / .07);color:#E6ECF5}
+  .more .arr:hover{background:rgb(255 255 255 / .15)}
+  .more .detail{box-shadow:none}
+  .more .track figure{opacity:.2}
+  .more .shot{box-shadow:0 30px 70px rgb(0 0 0 / .5)}
   .lb{background:rgb(244 245 247 / .96)}
   .lb-close,.lb-arr{background:#fff;color:#0E1116}
   .lb-close:hover,.lb-arr:hover{background:rgb(14 17 22 / .06)}
