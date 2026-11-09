@@ -135,7 +135,11 @@
   .more .say{margin-top:10px;font-size:17px;max-width:74ch;
              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .chipline{display:flex;align-items:center;gap:20px;margin-top:22px}
-  .chips{display:flex;gap:9px;flex-wrap:wrap;min-width:0}
+  .chips{display:flex;gap:9px;flex-wrap:nowrap;min-width:0;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;
+         -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);
+         mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+  .chips::-webkit-scrollbar{display:none}
+  .chips button{flex:0 0 auto}
   .chips button{border:1px solid var(--b1);border-radius:999px;padding:10px 18px;font-size:14.5px;color:var(--faint);
                 background:rgb(255 255 255 / .03);transition:color .15s,background .15s,border-color .15s}
   .chips button:hover{color:var(--fg);border-color:var(--b2)}
@@ -391,8 +395,8 @@
   </div>
   <div class="stage" id="s-stage"><div class="track" id="s-track"></div></div>
   <p class="rest">
-    <span class="ru">Ещё внутри: карточка домена со всем контекстом, роли и права, импорт из таблиц, папки и метки.</span>
-    <span class="en">Also inside: the domain card with the full context, roles and permissions, spreadsheet import, folders and labels.</span>
+    <span class="ru">Ещё внутри: API-токены только на чтение, второй фактор и сессии, прокси и источники риска, календарь продлений.</span>
+    <span class="en">Also inside: read-only API tokens, two-factor and sessions, proxies and risk sources, a renewal calendar.</span>
   </p>
 </section>
 
@@ -481,7 +485,23 @@
       { img: 'landings', chip: { ru: 'Лендинги', en: 'Landings' },
         title: { ru: 'Реестр лендингов', en: 'Landing registry' },
         lead: { ru: 'Адреса, гео, языки, заказчик и актуальность. Адрес сам находит свой домен в реестре.',
-                en: 'URLs, geo, languages, requester and relevance. A URL finds its own domain in the registry.' } }
+                en: 'URLs, geo, languages, requester and relevance. A URL finds its own domain in the registry.' } },
+      { img: 'card', chip: { ru: 'Карточка', en: 'Domain card' },
+        title: { ru: 'Карточка со всем контекстом', en: 'A card with the full context' },
+        lead: { ru: 'Маркетинг, IT, аналитика и партнёрка - на вкладках одного домена, рядом с его историей и состоянием снаружи.',
+                en: 'Marketing, IT, analytics and affiliates - on the tabs of one domain, next to its history and its state from the outside.' } },
+      { img: 'users', chip: { ru: 'Права', en: 'Permissions' },
+        title: { ru: 'Люди и права', en: 'People and permissions' },
+        lead: { ru: 'У одного человека в разных проектах разные роли. Доступ к лендингам и настройкам - отдельными осями, второй фактор виден в списке.',
+                en: 'One person holds different roles in different projects. Landing and settings access are separate axes, and 2FA is visible in the list.' } },
+      { img: 'import', chip: { ru: 'Импорт', en: 'Import' },
+        title: { ru: 'Переезд из таблиц', en: 'Migration from spreadsheets' },
+        lead: { ru: 'Excel, CSV и Google-таблица заезжают целиком: колонки размечаются сами, дубли и занятые имена видно до отправки.',
+                en: 'Excel, CSV and Google Sheets import in full: columns map themselves, duplicates and taken names are visible before submitting.' } },
+      { img: 'folders', chip: { ru: 'Папки', en: 'Folders' },
+        title: { ru: 'Папки и метки', en: 'Folders and labels' },
+        lead: { ru: 'Открытые папки для команды, закрытые - по списку людей. Метки проекта и цветной маркер домена.',
+                en: 'Open folders for the team, private ones by name list. Project labels and a colour marker per domain.' } }
     ];
     var track = document.getElementById('s-track');
     var stage = document.getElementById('s-stage');
