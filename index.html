@@ -131,9 +131,9 @@
             border-radius:999px;padding:8px 15px;box-shadow:0 0 28px rgb(59 147 255 / .22)}
   .rub-chip i{width:7px;height:7px;border-radius:50%;background:var(--primary-2);box-shadow:0 0 12px var(--primary-2)}
   .more{padding:46px 0 52px}
-  .more h2{margin-top:16px;font-size:clamp(26px,3vw,36px);max-width:20ch}
-  .more .say{margin-top:10px;font-size:17px;max-width:74ch;
-             display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  /* Заголовок слайда - всегда одна строка, подпись - всегда две ровные. */
+  .more h2{margin-top:16px;font-size:clamp(26px,2.7vw,34px);max-width:none;white-space:nowrap}
+  .more .say{margin-top:10px;font-size:17px;max-width:66ch;text-wrap:balance;min-height:3.25em}
   .chipline{margin-top:18px}
   .chips{display:flex;gap:9px;flex-wrap:nowrap;min-width:0;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;
          -webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent);
@@ -220,6 +220,8 @@
     header .btn-main::after{content:"Telegram";font-weight:600}
     .hero .cta{flex-direction:column;align-items:stretch}
     .hero .cta .btn{width:100%}
+    .more h2{white-space:normal}
+    .more .say{min-height:0}
     .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
     .chips::-webkit-scrollbar{display:none}
     .chips button{flex:0 0 auto}
@@ -488,64 +490,64 @@
     var SLIDES = [
       { img: 'money', chip: { ru: 'Деньги', en: 'Renewals' },
         title: { ru: 'Деньги и сроки', en: 'Renewals and money' },
-        lead: { ru: 'Прогноз расходов по месяцам: спишется само, продлить руками, не продлеваем. И плитка «можно не продлевать» - годовая цена доменов, которые никому не нужны.',
-                en: 'A month-by-month forecast: renews automatically, renew manually, not renewing. Plus a “safe to drop” tile - the yearly cost of domains nobody needs.' } },
+        lead: { ru: 'Прогноз расходов по месяцам: спишется само, продлить руками, не продлеваем. И плитка «можно не продлевать».',
+                en: 'A month-by-month forecast: renews automatically, renew manually, not renewing. Plus a “safe to drop” tile.' } },
       { img: 'alerts', chip: { ru: 'Алерты', en: 'Alerts' },
         title: { ru: 'Алерты в Slack и Telegram', en: 'Alerts in Slack and Telegram' },
         lead: { ru: 'Сообщение уходит на смену состояния, а не каждый час. Каждый вид включается в своём канале, пороги - свои.',
                 en: 'A message fires on a state change, not every hour. Each type is switched on per channel, with its own thresholds.' } },
       { img: 'geo', chip: { ru: 'Страны', en: 'Countries' },
         title: { ru: 'Замеры по странам', en: 'Country measurements' },
-        lead: { ru: 'Резидентные каналы в восьми странах раз в шесть часов: где адрес открывается, а где нет.',
-                en: 'Residential channels in eight countries every six hours: where the URL opens and where it does not.' } },
+        lead: { ru: 'Резидентные каналы в восьми странах раз в шесть часов: видно, где адрес открывается, а где нет и почему.',
+                en: 'Residential channels in eight countries every six hours: you see where the URL opens, where it does not and why.' } },
       { img: 'seo', chip: { ru: 'SEO', en: 'SEO' },
         title: { ru: 'SEO по всему портфелю', en: 'SEO across the portfolio' },
-        lead: { ru: 'Search Console и Вебмастер рядом с доменом: клики, показы, позиции и страны.',
-                en: 'Search Console and Yandex.Webmaster next to the domain: clicks, impressions, positions and countries.' } },
+        lead: { ru: 'Search Console и Яндекс.Вебмастер рядом с доменом: клики, показы, позиции и страны, с динамикой по дням.',
+                en: 'Search Console and Yandex.Webmaster next to the domain: clicks, impressions, positions and countries, day by day.' } },
       { img: 'requests', chip: { ru: 'Заявки', en: 'Requests' },
         title: { ru: 'Заявки на домены', en: 'Domain requests' },
         lead: { ru: 'Запрос от команды, согласование админом проекта, выдача из резерва и запуск - вместо сообщения в чате.',
-                en: 'A request from the team, approval by the project admin, assignment from the reserve and launch - instead of a chat message.' } },
+                en: 'A request from the team, approval by the project admin, assignment from the reserve and launch - not a chat message.' } },
       { img: 'landings', chip: { ru: 'Лендинги', en: 'Landings' },
         title: { ru: 'Реестр лендингов', en: 'Landing registry' },
-        lead: { ru: 'Адреса, гео, языки, заказчик и актуальность. Адрес сам находит свой домен в реестре.',
-                en: 'URLs, geo, languages, requester and relevance. A URL finds its own domain in the registry.' } },
+        lead: { ru: 'Адреса, гео, языки, заказчик и актуальность. Адрес сам находит свой домен в реестре и делит с ним поля.',
+                en: 'URLs, geo, languages, requester and relevance. A URL finds its own domain and shares its fields with it.' } },
       { img: 'card', chip: { ru: 'Карточка', en: 'Domain card' },
-        title: { ru: 'Карточка со всем контекстом', en: 'A card with the full context' },
-        lead: { ru: 'Маркетинг, IT, аналитика и партнёрка - на вкладках одного домена, рядом с его историей и состоянием снаружи.',
-                en: 'Marketing, IT, analytics and affiliates - on the tabs of one domain, next to its history and its state from the outside.' } },
+        title: { ru: 'Карточка с контекстом', en: 'A card with context' },
+        lead: { ru: 'Маркетинг, IT, аналитика и партнёрка - на вкладках одного домена, рядом с историей и состоянием снаружи.',
+                en: 'Marketing, IT, analytics and affiliates - on the tabs of one domain, next to its history and outside state.' } },
       { img: 'users', chip: { ru: 'Права', en: 'Permissions' },
         title: { ru: 'Люди и права', en: 'People and permissions' },
-        lead: { ru: 'У одного человека в разных проектах разные роли. Доступ к лендингам и настройкам - отдельными осями, второй фактор виден в списке.',
-                en: 'One person holds different roles in different projects. Landing and settings access are separate axes, and 2FA is visible in the list.' } },
+        lead: { ru: 'У одного человека в разных проектах разные роли. Доступ к лендингам и настройкам - отдельными осями.',
+                en: 'One person holds different roles in different projects. Landing and settings access are separate axes.' } },
       { img: 'import', chip: { ru: 'Импорт', en: 'Import' },
-        title: { ru: 'Переезд из таблиц', en: 'Migration from spreadsheets' },
-        lead: { ru: 'Excel, CSV и Google-таблица заезжают целиком: колонки размечаются сами, дубли и занятые имена видно до отправки.',
-                en: 'Excel, CSV and Google Sheets import in full: columns map themselves, duplicates and taken names are visible before submitting.' } },
+        title: { ru: 'Переезд из таблиц', en: 'Migration from sheets' },
+        lead: { ru: 'Excel, CSV и Google-таблица заезжают целиком: колонки размечаются сами, дубли видно до отправки.',
+                en: 'Excel, CSV and Google Sheets import in full: columns map themselves, duplicates show up before submitting.' } },
       { img: 'folders', chip: { ru: 'Папки', en: 'Folders' },
         title: { ru: 'Папки и метки', en: 'Folders and labels' },
         lead: { ru: 'Открытые папки для команды, закрытые - по списку людей. Метки проекта и цветной маркер домена.',
                 en: 'Open folders for the team, private ones by name list. Project labels and a colour marker per domain.' } },
       { img: 'access', chip: { ru: 'API-ключи', en: 'API keys' },
-        title: { ru: 'Машинный доступ только на чтение', en: 'Machine access, read-only' },
-        lead: { ru: 'Ключ выдаётся человеку и живёт в выбранных проектах. Видно, кто выпустил, когда был последний запрос и когда ключ истекает; отзывается одной кнопкой.',
-                en: 'A key is issued to a person and lives in the chosen projects. You see who issued it, when it was last used and when it expires; one button revokes it.' } },
+        title: { ru: 'Ключи API на чтение', en: 'Read-only API keys' },
+        lead: { ru: 'Ключ выдаётся человеку и живёт в своих проектах: видно последний запрос и срок, отзывается одной кнопкой.',
+                en: 'A key belongs to a person and lives in its projects: last use and expiry are visible, one button revokes it.' } },
       { img: 'proxies', chip: { ru: 'Прокси', en: 'Proxies' },
         title: { ru: 'Каналы в восьми странах', en: 'Channels in eight countries' },
-        lead: { ru: 'Резидентные каналы для проверок из нужных стран: видно адрес выхода, когда канал проверялся последний раз и включён ли он.',
-                en: 'Residential channels for checks from the countries you need: you see the exit address, the last check and whether the channel is on.' } },
+        lead: { ru: 'Резидентные каналы для проверок из нужных стран: видно адрес выхода и когда канал проверялся последний раз.',
+                en: 'Residential channels for checks from the countries you need: the exit address and the last check are visible.' } },
       { img: 'profile', chip: { ru: '2FA', en: '2FA' },
         title: { ru: 'Второй фактор и сессии', en: 'Two-factor and sessions' },
-        lead: { ru: 'Код из приложения в дополнение к паролю, резервные коды, список активных сессий и «выйти везде». Там же ссылка на календарь продлений.',
-                en: 'A code from the app on top of the password, backup codes, a list of active sessions and “sign out everywhere”. The renewal calendar link lives here too.' } },
+        lead: { ru: 'Код из приложения в дополнение к паролю, резервные коды, список активных сессий и «выйти везде».',
+                en: 'A code from the app on top of the password, backup codes, active sessions and “sign out everywhere”.' } },
       { img: 'registrars', chip: { ru: 'Регистраторы', en: 'Registrars' },
-        title: { ru: 'Кабинеты регистраторов сами наполняют реестр', en: 'Registrar accounts fill the registry themselves' },
-        lead: { ru: 'Namecheap, GoDaddy, NETIM, Cloudflare, Dynadot, Beget, SmartApe и Яндекс: домены, даты продления и NS приезжают сами, новое складывается в отдельный бакет. Видно, когда была синхронизация и сколько домены из кабинета занимают в реестре.',
-                en: 'Namecheap, GoDaddy, NETIM, Cloudflare, Dynadot, Beget, SmartApe and Yandex: domains, expiry dates and NS records arrive on their own, and anything new lands in a separate bucket. You see when the sync ran and how many domains from the account are in the registry.' } },
+        title: { ru: 'Кабинеты наполняют реестр', en: 'Registrars fill the registry' },
+        lead: { ru: 'Namecheap, GoDaddy, NETIM, Cloudflare, Dynadot, Beget, SmartApe и Яндекс: домены, сроки и NS приезжают сами.',
+                en: 'Namecheap, GoDaddy, NETIM, Cloudflare, Dynadot, Beget, SmartApe and Yandex: domains, dates and NS arrive on their own.' } },
       { img: 'phone', chip: { ru: 'С телефона', en: 'On the phone' },
-        title: { ru: 'Дежурный набор с телефона', en: 'The on-call set on your phone' },
-        lead: { ru: 'Дашборд, реестр и доступность открываются с телефона: ночью посмотреть, что лежит, можно не открывая ноутбук.',
-                en: 'Dashboard, registry and availability open on a phone: at night you can check what is down without opening a laptop.' } }
+        title: { ru: 'Панель в телефоне', en: 'The panel on your phone' },
+        lead: { ru: 'Дашборд, реестр и доступность открываются с телефона: ночью видно, что лежит, и без ноутбука.',
+                en: 'Dashboard, registry and availability open on a phone: at night you see what is down without a laptop.' } }
     ];
     var track = document.getElementById('s-track');
     var stage = document.getElementById('s-stage');
