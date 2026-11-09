@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Domain panel - учёт доменного портфеля для iGaming-команд</title>
-<meta name="description" content="Что сейчас не открывается, кто что менял, что продлевать. Self-hosted, под вашим брендом, исходный код передаётся">
+<title>Domain panel - панель управления доменами холдинга</title>
+<meta name="description" content="Портфель доменов всего холдинга в одной точке управления и учёта: сроки, доступы, проверки доступности и алерты. Self-hosted, под вашим брендом, исходный код передаётся">
 <meta name="robots" content="noindex,nofollow">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Domain panel - учёт доменного портфеля для iGaming-команд">
-<meta property="og:description" content="О том, что домен лёг, вы узнаёте раньше байера. Self-hosted, white-label, исходный код передаётся">
+<meta property="og:title" content="Domain panel - панель управления доменами холдинга">
+<meta property="og:description" content="Портфель доменов всего холдинга в одной точке управления и учёта. Self-hosted, white-label, исходный код передаётся">
 <meta property="og:image" content="og.jpg">
 <link rel="icon" href="favicon.svg">
 <style>
@@ -122,6 +122,22 @@
   .adv-i h3{font-size:18px;font-weight:600;letter-spacing:-.015em;margin-bottom:8px}
   .adv-i p{margin:0;color:var(--dim);font-size:15.5px;max-width:34ch}
 
+  /* ── Цена ошибки: потеря и ответ продукта ──────────────────── */
+  h2.wide{max-width:26ch;text-wrap:balance}
+  /* Подзаголовок, потеря и ответ продукта стоят на одной линии у соседних карточек: subgrid. */
+  .loss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,auto auto auto);
+        gap:22px;margin-top:44px}
+  .loss-i{position:relative;border:1px solid var(--b1);border-radius:18px;padding:26px 28px 24px;
+          background:linear-gradient(180deg,rgb(255 255 255 / .045),rgb(255 255 255 / .012));
+          display:grid;grid-template-rows:subgrid;grid-row:span 3}
+  .loss-i .num{position:absolute;top:24px;right:26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:rgb(148 163 184 / .5)}
+  .loss-i h3{margin:0 56px 14px 0;font-size:19.5px;font-weight:650;letter-spacing:-.02em;line-height:1.26}
+  .loss-i .lose{position:relative;margin:0;padding-left:16px;color:var(--fg-2);font-size:15.5px;line-height:1.6}
+  .loss-i .lose::before{content:"";position:absolute;left:0;top:5px;bottom:5px;width:3px;border-radius:3px;background:#f0607a}
+  .loss-i .fix{margin:18px 0 0;padding-top:17px;border-top:1px solid var(--b1);color:var(--dim);font-size:15px;line-height:1.6}
+  .loss-i .fix .lab{display:block;margin-bottom:7px;font-family:var(--mono);font-size:11px;letter-spacing:.15em;
+                    text-transform:uppercase;color:#6ee7b7}
+
   /* ── Поставка и цена ───────────────────────────────────────── */
   .deal{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:56px;align-items:start}
   .deal ul{margin:24px 0 0;padding:0}
@@ -131,7 +147,9 @@
   .pricecard .big{font-size:26px;font-weight:700;letter-spacing:-.025em;line-height:1.18}
   .pricecard p{margin:14px 0 0;color:var(--dim);font-size:15.5px}
   .pricecard .btn{margin-top:24px;width:100%}
-  .note{margin-top:20px;font-size:14.5px;color:var(--faint);max-width:62ch}
+  .note{margin-top:18px;font-size:14.5px;color:var(--faint);max-width:62ch}
+  .dealside{display:flex;flex-direction:column}
+  .dealside .note{margin-top:18px}
 
   /* ── Слайдер «что ещё внутри» ──────────────────────────────── */
   .rub-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;
@@ -144,8 +162,8 @@
   .more .say{margin-top:10px;font-size:16px;color:var(--fg);max-width:76ch;text-wrap:balance;min-height:3.2em}
   .chipline{margin-top:18px}
   .chips{display:flex;gap:9px;flex-wrap:nowrap;min-width:0;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;
-         -webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent);
-         mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent)}
+         -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent);
+         mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 28px),transparent)}
   .chips::-webkit-scrollbar{display:none}
   .chips button{flex:0 0 auto}
   .chips button{border:1px solid var(--b1);border-radius:999px;padding:10px 18px;font-size:14.5px;color:var(--faint);
@@ -187,7 +205,7 @@
 
   /* ── Финал и подвал ────────────────────────────────────────── */
   .final{padding:96px 0 104px;text-align:center}
-  .final h2{margin:0 auto;max-width:17ch}
+  .final h2{margin:0 auto;max-width:23ch;text-wrap:balance}
   .final .say{margin:20px auto 0;text-align:center}
   .final .cta{display:flex;justify-content:center;margin-top:32px}
   .final .ps{margin-top:16px;font-size:14px;color:var(--faint)}
@@ -214,12 +232,22 @@
   .lb svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .zoomhint{margin-top:16px;text-align:center;color:var(--faint);font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:8px}
   .zoomhint svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  @media (max-width:640px){.lb-arr{width:46px;height:46px}.lb-prev{left:4px}.lb-next{right:4px}}
+  @media (max-width:640px){
+    .lb-arr{width:46px;height:46px}.lb-prev{left:4px}.lb-next{right:4px}
+    /* Кадр продукта снят с десктопа: на телефоне даём его крупно и с прокруткой вбок. */
+    .lb{padding:14px 0 18px}
+    .lb-fig{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;align-items:flex-start}
+    .lb img{max-width:none;width:290vw;max-height:none;border-radius:8px}
+    .lb-cap{position:sticky;left:0;align-self:center;padding:0 14px;text-align:center}
+  }
 
   @media (max-width:1000px){
     .screen{padding:84px 0}
     .deal{grid-template-columns:1fr;gap:34px}
+
     .adv{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px}
+    .loss{grid-template-columns:1fr;grid-template-rows:none;gap:18px}
+    .loss-i{grid-template-rows:auto;grid-row:auto}
     .hero{padding:64px 0 60px}
     .hero .shotwrap{margin-top:44px}
     .track{padding-left:calc(50% - min(900px,78vw) / 2);padding-right:calc(50% - min(900px,78vw) / 2)}
@@ -250,10 +278,81 @@
     .arr{width:54px;height:54px}
     .slider-nav{gap:18px}
     .adv{grid-template-columns:1fr;gap:26px}
+    .loss-i{padding:22px 20px 20px}
+    .loss-i h3{font-size:18px;margin-right:48px}
+    .zoomhint{display:block}
+    .zoomhint svg{display:inline;vertical-align:-2px;margin-right:6px}
     .final{padding:84px 0 92px}
     footer .sp{margin-left:0}
   }
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+
+  /* ── Светлая тема и типографика (решение Denis 09.11.2026) ──
+     Плоско: ни размытых пятен, ни градиентов, ни свечения. ───── */
+  .bgfx{display:none}
+  .glowbox::before{display:none}
+  .mark{background:var(--primary);box-shadow:none;border-radius:var(--r-btn)}
+  .mark::after{display:none}
+  .mark svg{stroke:var(--on-primary)}
+  .btn{border-radius:var(--r-btn)}
+  .btn-main{background:var(--primary);color:var(--on-primary);box-shadow:none}
+  .btn-main:hover{background:var(--primary-2);transform:none;box-shadow:none}
+  .shot{background:var(--card);border-radius:var(--r-card);box-shadow:var(--shadow)}
+  .screen + .screen{background-image:linear-gradient(90deg,transparent,var(--b1),transparent)}
+  h1{font-weight:700;letter-spacing:-.022em;max-width:20ch;text-wrap:balance}
+  h2{font-weight:700;letter-spacing:-.018em}
+  .loss-i h3,.adv-i h3{font-weight:600;letter-spacing:-.01em}
+  .rub{display:flex;align-items:center;gap:10px;color:var(--faint)}
+  .rub::before{content:"";width:24px;height:1px;background:var(--b2);flex:none}
+  .rub-chip{background:transparent;box-shadow:none;color:var(--primary);border-color:var(--b2)}
+  .rub-chip i{background:var(--primary);box-shadow:none}
+  .chips button[aria-selected="true"]{background:var(--primary);color:var(--on-primary);border-color:transparent}
+  .pricecard,.loss-i,.detail{background:var(--card);border-radius:var(--r-card)}
+  .adv-i .ic{background:transparent;border-color:var(--b2);color:var(--primary);border-radius:var(--r-btn)}
+  .loss-i .lose::before{background:var(--sig-dn)}
+  .loss-i .fix .lab{color:var(--sig-up)}
+  .deal li svg{stroke:var(--sig-up)}
+  .detail::before{background:var(--primary)}
+
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:400;src:url(fonts/golos-text-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:400;src:url(fonts/golos-text-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/golos-text-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/golos-text-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:600;src:url(fonts/golos-text-cyrillic-600-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:600;src:url(fonts/golos-text-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:700;src:url(fonts/golos-text-cyrillic-700-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"Golos Text";font-style:normal;font-display:swap;font-weight:700;src:url(fonts/golos-text-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"IBM Plex Mono";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/ibm-plex-mono-cyrillic-500-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"IBM Plex Mono";font-style:normal;font-display:swap;font-weight:500;src:url(fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2190-2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  :root{
+    --bg:#F4F5F7; --card:#FFFFFF; --sec:#FFFFFF;
+    --fg:#0E1116; --fg-2:#1B212B; --dim:#55606E; --faint:#667082;
+    --primary:#3B82F6; --primary-2:#2F74EC; --on-primary:#fff;
+    --sig-dn:#C8384A; --sig-up:#0E7C5A;
+    --b1:rgb(14 17 22 / .11); --b2:rgb(14 17 22 / .2); --s1:rgb(14 17 22 / .03);
+    --shadow:0 18px 44px rgb(16 24 40 / .14);
+    --head:#0C2143;
+    --sans:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --r-card:12px; --r-btn:9px;
+  }
+  /* Заголовки - чернильно-синие, в одну линию с кнопкой (решение Denis) */
+  h1,h2,.loss-i h3,.adv-i h3,.pricecard .big{color:var(--head)}
+  .more h2{color:#2C3E5E}
+  header{background:rgb(244 245 247 / .8)}
+  .lang button[aria-pressed="true"]{background:rgb(14 17 22 / .07)}
+  .btn-ghost{background:#fff}
+  .btn-ghost:hover{background:rgb(14 17 22 / .04)}
+  .chips button{background:#fff}
+  .chips button:hover{background:rgb(14 17 22 / .04)}
+  .arr{background:#fff;color:var(--fg-2)}
+  .arr:hover{background:rgb(14 17 22 / .06)}
+  .loss-i,.pricecard,.detail{box-shadow:0 1px 2px rgb(16 24 40 / .05)}
+  .track figure{opacity:.28}
+  .lb{background:rgb(244 245 247 / .96)}
+  .lb-close,.lb-arr{background:#fff;color:#0E1116}
+  .lb-close:hover,.lb-arr:hover{background:rgb(14 17 22 / .06)}
+  .lb img{border-color:var(--b1)}
 </style>
 </head>
 <body>
@@ -282,19 +381,19 @@
   <div class="bgfx"><i></i><i></i></div>
   <div class="wrap">
     <h1>
-      <span class="ru">О том, что домен лёг, вы узнаёте раньше байера</span>
-      <span class="en">You find out a domain is down before your media buyer does</span>
+      <span class="ru">Панель управления доменами</span>
+      <span class="en">A control panel for your domains</span>
     </h1>
     <p class="say">
-      <span class="ru">Учёт доменного портфеля для iGaming-команд: что сейчас не открывается, кто что менял и что пора продлевать. <b>Ставится на ваш сервер, работает под вашим именем</b></span>
-      <span class="en">Domain portfolio management for iGaming teams: what is down right now, who changed what and what to renew. <b>Installed on your server, running under your own name</b></span>
+      <span class="ru">Портфель доменов всего холдинга в одной точке управления и учёта: домены и лендинги, сроки продления, доступы по проектам, проверки доступности и алерты. <b>Ставится на ваш сервер, работает под вашим именем</b></span>
+      <span class="en">The whole holding's domain portfolio in one place to run and account for: domains and landings, renewal dates, per-project access, availability checks and alerts. <b>Installed on your server, running under your own name</b></span>
     </p>
     <div class="cta">
       <a class="btn btn-main" href="https://t.me/denis_pdm" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
         <span class="ru">Написать в Telegram</span><span class="en">Message on Telegram</span>
       </a>
-      <a class="btn btn-ghost" href="#more"><span class="ru">Что ещё внутри</span><span class="en">What else is inside</span></a>
+      <a class="btn btn-ghost" href="#loss"><span class="ru">Где теряются деньги</span><span class="en">Where the money leaks</span></a>
     </div>
     <p class="fact">
       <span class="ru">Работает в холдинге: <b>сотни доменов, десятки лендингов, десятки пользователей</b></span>
@@ -308,7 +407,46 @@
   </div>
 </section>
 
-<!-- 2. Что снимает ─────────────────────────────────────────── -->
+<!-- 2. Цена ошибки ──────────────────────────────────────────── -->
+<section class="screen" id="loss">
+  <div class="wrap">
+    <div class="rub"><span class="ru">Цена ошибки</span><span class="en">What it costs</span></div>
+    <h2 class="wide"><span class="ru">Четыре способа потерять деньги на доменах</span><span class="en">Four ways to lose money on domains</span></h2>
+    <div class="loss">
+
+      <article class="loss-i">
+        <h3><span class="ru">Льёте в закрытую дверь</span><span class="en">You buy traffic into a closed door</span></h3>
+        <p class="lose"><span class="ru">Из дата-центра домен открывается, а у игрока в стране - нет. Клики куплены, регистраций не будет, и никто не знает, в чём дело: блокирует провайдер или лежит сервер</span><span class="en">From a data centre the domain opens; for the player in-country it does not. The clicks are paid for, the signups never come, and nobody knows which it is: the ISP blocking or the server down</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Мерит домены из нужных стран и сама заводит подозрение на блокировку: ответ 451, «не открывается только в этой стране», увод на чужой сайт при живом сайте у нас. Видно, чей это глаз - наш замер или автотест. Решение остаётся за человеком: панель ничего не отмечает сама</span><span class="en">Measures domains from the countries you care about and raises a blocking suspicion itself: a 451 response, “down only in this country”, a redirect to someone else's site while ours is alive. You see whose eye it was - our probe or an autotest. The call stays with a human: the panel never marks it for you</span></p>
+      </article>
+
+      <article class="loss-i">
+        <h3><span class="ru">Домен перестал быть вашим</span><span class="en">The domain stopped being yours</span></h3>
+        <p class="lose"><span class="ru">Пропущенное продление уносит имя вместе с трафиком, ссылками и доверием поисковика. Выкупить обратно дороже, чем продлить, а иногда уже невозможно</span><span class="en">A missed renewal takes the name away along with the traffic, the backlinks and the trust you built. Buying it back costs more than renewing - and sometimes it is simply gone</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Тянет сроки из кабинетов регистраторов, кладёт домен в «Требуют внимания» заранее и напоминает за 30 и 7 дней, а с автопродлением - за 7 и 1. Календарь продлений выгружается в ICS, так что срок виден в обычном календаре команды</span><span class="en">Pulls expiry dates from the registrar accounts, puts the domain into “Needs attention” ahead of time and reminds you 30 and 7 days out - or 7 and 1 when auto-renew is on. The renewal calendar exports to ICS, so the date sits in the team's normal calendar</span></p>
+      </article>
+
+      <article class="loss-i">
+        <h3><span class="ru">Игроков уводят на чужой сайт</span><span class="en">Your players get handed to someone else</span></h3>
+        <p class="lose"><span class="ru">Подменённый редирект или клоакинг отдаёт ваш трафик другому проекту. Проверка «с сервера» показывает белую заглушку и говорит, что всё хорошо</span><span class="en">A swapped redirect or cloaking hands your traffic to another project. A check “from the server” sees a white stub page and reports that all is well</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Судит увод по замеру из страны, а не из дата-центра: в списке «Уводят» виден настоящий адрес назначения, по нему же группируются случаи и уходит алерт. Если в странах всё открывается - тревоги нет, а если свежих замеров нет - верим прямой проверке, молчать про настоящий угон нельзя</span><span class="en">Judges a hijack by the in-country probe, not from a data centre: the “Redirecting away” list shows the real destination, cases group by it and the alert carries it. If the countries open fine, there is no alarm; if no fresh probe exists, the direct check decides - staying silent about a real hijack is not an option</span></p>
+      </article>
+
+      <article class="loss-i">
+        <h3><span class="ru">Домен тихо выпал из поиска</span><span class="en">The domain quietly dropped out of search</span></h3>
+        <p class="lose"><span class="ru">Склейка, выпадение из индекса, фильтр - органика исчезает без единого сообщения. В отчёте это видно через месяц, когда возвращать позиции уже дорого</span><span class="en">A merge, a drop from the index, a filter - organic traffic disappears without a single message. The report shows it a month later, when getting the positions back is already expensive</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Подключает к домену Яндекс.Вебмастер и Google Search Console: выпадение из поиска, склейка и прочие виды приходят событием в карточку домена и в алерты, с запросами и кликами рядом. Одно событие - одно сообщение, повтором не будит</span><span class="en">Connects Yandex.Webmaster and Google Search Console to the domain: a drop from search, a merge and the rest arrive as events on the domain card and in the alerts, with queries and clicks next to them. One event, one message - it does not wake you twice</span></p>
+      </article>
+
+    </div>
+    <p class="note">
+      <span class="ru">Ни одной выдуманной цифры: панель показывает то, что померила, называет время замера и честно говорит «нет данных», когда проверка не дошла</span>
+      <span class="en">Not a single invented number: the panel shows what it measured, names the time of the probe and honestly says “no data” when a check did not get through</span>
+    </p>
+  </div>
+</section>
+
+<!-- 3. Что снимает ─────────────────────────────────────────── -->
 <section class="screen" id="pains">
   <div class="wrap">
     <div class="rub"><span class="ru">Что меняется</span><span class="en">What changes</span></div>
@@ -348,7 +486,7 @@
   </div>
 </section>
 
-<!-- 3. Поставка и цена ────────────────────────────────────────── -->
+<!-- 4. Поставка и цена ────────────────────────────────────────── -->
 <section class="screen" id="delivery">
   <div class="wrap deal">
     <div>
@@ -360,23 +498,25 @@
         <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Имя, логотип и акцент - ваши, задаются переменными сборки. Для команды это ваш продукт</span><span class="en">Name, logo and accent colour are yours, set through build variables. To your team it is your own product</span></li>
         <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Переносим таблицы и кабинеты регистраторов, настраиваем проверки, страны и алерты</span><span class="en">We migrate your spreadsheets and registrar accounts, set up the checks, countries and alerts</span></li>
       </ul>
-      <p class="note">
-        <span class="ru">Наружу уходят только имена доменов и адреса лендингов - и только тем, без кого проверка не работает. Карту исходящего трафика пришлю до покупки</span>
-        <span class="en">Only domain names and landing URLs leave the perimeter - and only to those without whom a check cannot run. I send the outbound traffic map before the purchase</span>
-      </p>
     </div>
-    <div class="pricecard">
+    <div class="dealside">
+      <div class="pricecard">
       <div class="big"><span class="ru">Фиксированная стоимость, один раз</span><span class="en">A fixed price, paid once</span></div>
       <p><span class="ru">Без подписки, без платы за пользователей и за домены. Цифру называю на демо - под ваш объём доменов и проектов</span><span class="en">No subscription, no per-user or per-domain fees. I name the figure at the demo - based on your volume of domains and projects</span></p>
       <a class="btn btn-main" href="https://t.me/denis_pdm" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
         <span class="ru">Спросить цену в Telegram</span><span class="en">Ask the price on Telegram</span>
-      </a>
+        </a>
+      </div>
+      <p class="note">
+      <span class="ru">Наружу уходят только имена доменов и адреса лендингов - и только тем, без кого проверка не работает. Карту исходящего трафика пришлю до покупки</span>
+        <span class="en">Only domain names and landing URLs leave the perimeter - and only to those without whom a check cannot run. I send the outbound traffic map before the purchase</span>
+      </p>
     </div>
   </div>
 </section>
 
-<!-- 4. Что ещё внутри: слайдер ─────────────────────────────── -->
+<!-- 5. Что ещё внутри: слайдер ─────────────────────────────── -->
 <section class="screen more" id="more">
   <div class="wrap">
     <span class="rub-chip"><i></i><span class="ru">Что ещё внутри</span><span class="en">What else is inside</span></span>
@@ -478,115 +618,115 @@
       { img: 'dashboard', chip: { ru: 'Дашборд', en: 'Dashboard' },
         title: { ru: 'Что требует решения сегодня', en: 'What needs a decision today' },
         lead: { ru: 'Первый экран утром: сколько доменов ждут решения, что изменилось за неделю, у чего подходят сроки и что сейчас с лендингами',
-                en: 'The first screen in the morning: how many domains await a decision, what changed over the week, what is about to expire and how the landings are doing.' },
+                en: 'The first screen in the morning: how many domains await a decision, what changed over the week, what is about to expire and how the landings are doing' },
         detail: { ru: 'Утренний экран: сколько доменов ждут решения, что менялось за неделю, какие сроки подходят и что сейчас с лендингами. Отсюда одним кликом проваливаетесь в нужный список',
                   en: 'The morning screen: how many domains await a decision, what changed over the week, which deadlines are close and how the landings are doing. From here one click takes you into the right list' } },
       { img: 'availability', chip: { ru: 'Доступность', en: 'Availability' },
         title: { ru: 'Что сейчас не открывается', en: 'What is down right now' },
         lead: { ru: 'Плитки по причинам: не открылись, уводят на чужой домен, не та страница, сертификаты, спам-листы, отключены реестром',
-                en: 'Tiles by reason: did not open, redirect to a third-party domain, wrong page, certificates, blocklists, suspended by the registry.' },
+                en: 'Tiles by reason: did not open, redirect to a third-party domain, wrong page, certificates, blocklists, suspended by the registry' },
         detail: { ru: 'Проверка проходит цепочку редиректов до четырёх переходов и отличает норму - склейку www и переход на https - от увода на чужой домен. Рядом сертификаты, спам-листы и статус у реестра по RDAP',
                   en: 'The check follows the redirect chain up to four hops and tells normal behaviour - a www merge or an https upgrade - from a redirect to a third-party domain. Certificates, blocklists and the registry status over RDAP sit next to it' } },
       { img: 'registry-bulk', chip: { ru: 'Реестр', en: 'Registry' },
         title: { ru: 'Массовые действия на сотни строк', en: 'Bulk actions on hundreds of rows' },
         lead: { ru: 'Выделяете строки - и одним действием меняете проект, папку, метку, ответственного или отправляете в архив; рядом выгрузка',
-                en: 'Select the rows and change the project, folder, label or owner in one action, or send them to the archive; export sits next to it.' },
+                en: 'Select the rows and change the project, folder, label or owner in one action, or send them to the archive; export sits next to it' },
         detail: { ru: 'Выделение сотен строк и одно действие: проект, папка, метка, ответственный, архив или выгрузка. Правка идёт прямо в таблице, значение протягивается вниз мышью, как в Excel',
                   en: 'Select hundreds of rows and act once: project, folder, label, owner, archive or export. Editing happens right in the table, and a value is dragged down with the mouse, like in Excel' } },
       { img: 'history', chip: { ru: 'История', en: 'History' },
         title: { ru: 'Кто, когда и что поменял', en: 'Who changed what and when' },
         lead: { ru: 'Журнал по каждому полю: было и стало, с фильтрами по человеку, домену и периоду. Поиск идёт по значениям, а не только по именам',
-                en: 'A log for every field: what it was and what it became, with filters by person, domain and period. Search runs over values, not just names.' },
+                en: 'A log for every field: what it was and what it became, with filters by person, domain and period. Search runs over values, not just names' },
         detail: { ru: 'Запись в журнал идёт в той же транзакции, что и само изменение, поэтому история не расходится с данными. Поиск работает по значениям и находит, где ставили ns1.cloudflare.com',
                   en: 'The log is written in the same transaction as the change itself, so the history never drifts from the data. Search runs over values and finds where ns1.cloudflare.com was set' } },
       { img: 'money', chip: { ru: 'Деньги', en: 'Renewals' },
         title: { ru: 'Деньги и сроки', en: 'Renewals and money' },
         lead: { ru: 'Прогноз расходов по месяцам: спишется само, продлить руками, не продлеваем. И плитка «можно не продлевать»',
-                en: 'A month-by-month forecast: renews automatically, renew manually, not renewing. Plus a “safe to drop” tile.' },
+                en: 'A month-by-month forecast: renews automatically, renew manually, not renewing. Plus a “safe to drop” tile' },
         detail: { ru: 'Сроки приходят из кабинетов регистраторов, а решение по сроку живёт в домене и действует один цикл: продлили - через год продукт спросит снова. Цену продления отдаёт Namecheap, остальным её задают по зонам',
                   en: 'Expiry dates come from the registrar accounts, and the decision lives on the domain for one cycle: renew it and a year later the product asks again. Namecheap reports the renewal price, for the rest you set it per zone' } },
       { img: 'alerts', chip: { ru: 'Алерты', en: 'Alerts' },
         title: { ru: 'Алерты в Slack и Telegram', en: 'Alerts in Slack and Telegram' },
         lead: { ru: 'Сообщение уходит на смену состояния, а не каждый час. Каждый вид включается в своём канале, пороги - свои',
-                en: 'A message fires on a state change, not every hour. Each type is switched on per channel, with its own thresholds.' },
+                en: 'A message fires on a state change, not every hour. Each type is switched on per channel, with its own thresholds' },
         detail: { ru: 'Алерт уходит на смену состояния, а когда адрес снова открывается, приходит отбой. Каждый вид включается отдельно в своём канале, пороги сроков - за 60, 30, 14, 7 и 1 день',
                   en: 'An alert fires on a state change, and when the URL is back up an all-clear arrives. Each type is enabled per channel, with expiry thresholds at 60, 30, 14, 7 and 1 day' } },
       { img: 'geo', chip: { ru: 'Страны', en: 'Countries' },
         title: { ru: 'Замеры по странам', en: 'Country measurements' },
         lead: { ru: 'Резидентные каналы в восьми странах раз в шесть часов: видно, где адрес открывается, а где нет и почему',
-                en: 'Residential channels in eight countries every six hours: you see where the URL opens, where it does not and why.' },
+                en: 'Residential channels in eight countries every six hours: you see where the URL opens, where it does not and why' },
         detail: { ru: 'Замер из страны считает код ответа и то, куда увело; цепочку редиректов целиком проходит обычная проверка - каждый запрос через резидентный канал стоит денег. Канал, который не дошёл, отделён от самого адреса',
                   en: 'A measurement from a country records the response code and where it led; the full redirect chain is walked by the regular check, since every request through a residential channel costs money. A channel that failed is kept separate from the URL itself' } },
       { img: 'seo', chip: { ru: 'SEO', en: 'SEO' },
         title: { ru: 'SEO по всему портфелю', en: 'SEO across the portfolio' },
         lead: { ru: 'Search Console и Яндекс.Вебмастер рядом с доменом: клики, показы, позиции и страны, с динамикой по дням',
-                en: 'Search Console and Yandex.Webmaster next to the domain: clicks, impressions, positions and countries, day by day.' },
+                en: 'Search Console and Yandex.Webmaster next to the domain: clicks, impressions, positions and countries, day by day' },
         detail: { ru: 'Search Console собирается раз в сутки, у Google лаг в два-три дня - он подписан прямо на экране. Яндекс.Вебмастер показывает страницы в поиске, ИКС, главное зеркало и критичные проблемы',
                   en: 'Search Console is collected once a day, and Google\'s two to three day lag is spelled out on the screen. Yandex.Webmaster shows pages in search, the site quality index, the main mirror and critical issues' } },
       { img: 'requests', chip: { ru: 'Заявки', en: 'Requests' },
         title: { ru: 'Заявки на домены', en: 'Domain requests' },
         lead: { ru: 'Запрос от команды, согласование админом проекта, выдача из резерва и запуск - вместо сообщения в чате',
-                en: 'A request from the team, approval by the project admin, assignment from the reserve and launch - not a chat message.' },
+                en: 'A request from the team, approval by the project admin, assignment from the reserve and launch - not a chat message' },
         detail: { ru: 'Заявка идёт по пути «на согласовании - ждёт домен - запуск - запущена». Админ проекта видит очередь и выдаёт домен из резерва, автор получает уведомление в колокольчик',
                   en: 'A request moves through “pending - waiting for a domain - launching - launched”. The project admin sees the queue and hands out a domain from the reserve, and the author gets a notification' } },
       { img: 'landings', chip: { ru: 'Лендинги', en: 'Landings' },
         title: { ru: 'Реестр лендингов', en: 'Landing registry' },
         lead: { ru: 'Адреса, гео, языки, заказчик и актуальность. Адрес сам находит свой домен в реестре и делит с ним поля',
-                en: 'URLs, geo, languages, requester and relevance. A URL finds its own domain and shares its fields with it.' },
+                en: 'URLs, geo, languages, requester and relevance. A URL finds its own domain and shares its fields with it' },
         detail: { ru: 'Адрес сам находит свой домен в реестре, и общие поля правятся с любой стороны - значение остаётся одно. Адреса лендингов «в работе» проверяются раз в час, остальные догоняются пачками',
                   en: 'A URL finds its own domain in the registry, and shared fields are edited from either side - the value stays single. URLs of landings in work are checked hourly, the rest catch up in batches' } },
       { img: 'card', chip: { ru: 'Карточка', en: 'Domain card' },
         title: { ru: 'Карточка с контекстом', en: 'A card with context' },
         lead: { ru: 'Маркетинг, IT, аналитика и партнёрка - на вкладках одного домена, рядом с историей и состоянием снаружи',
-                en: 'Marketing, IT, analytics and affiliates - on the tabs of one domain, next to its history and outside state.' },
+                en: 'Marketing, IT, analytics and affiliates - on the tabs of one domain, next to its history and outside state' },
         detail: { ru: 'Поля разложены по отделам: маркетинг, IT, аналитика и партнёрка. Вкладка состояния показывает, что видно снаружи, а история правок идёт по каждому полю отдельно',
                   en: 'Fields are grouped by team: marketing, IT, analytics and affiliates. The state tab shows what is visible from the outside, and the edit history is kept per field' } },
       { img: 'users', chip: { ru: 'Права', en: 'Permissions' },
         title: { ru: 'Люди и права', en: 'People and permissions' },
         lead: { ru: 'У одного человека в разных проектах разные роли. Доступ к лендингам и настройкам - отдельными осями',
-                en: 'One person holds different roles in different projects. Landing and settings access are separate axes.' },
+                en: 'One person holds different roles in different projects. Landing and settings access are separate axes' },
         detail: { ru: 'Роль выдаётся на проект, и к ней идут две отдельные оси: доступ к лендингам и к настройкам. В списке видно последний вход и включён ли второй фактор',
                   en: 'A role is granted per project, with two separate axes next to it: access to landings and to settings. The list shows the last sign-in and whether two-factor is on' } },
       { img: 'import', chip: { ru: 'Импорт', en: 'Import' },
         title: { ru: 'Переезд из таблиц', en: 'Migration from sheets' },
         lead: { ru: 'Excel, CSV и Google-таблица заезжают целиком: колонки размечаются сами, дубли видно до отправки',
-                en: 'Excel, CSV and Google Sheets import in full: columns map themselves, duplicates show up before submitting.' },
+                en: 'Excel, CSV and Google Sheets import in full: columns map themselves, duplicates show up before submitting' },
         detail: { ru: 'Три входа в одну редактируемую таблицу: вставка из Excel, файл CSV или XLSX и ссылка на Google-таблицу вместе с примечаниями ячеек. Пустая ячейка не стирает значение - очищает только дефис',
                   en: 'Three ways into one editable table: paste from Excel, a CSV or XLSX file, and a Google Sheets link together with cell notes. An empty cell never wipes a value - only a dash clears it' } },
       { img: 'folders', chip: { ru: 'Папки', en: 'Folders' },
         title: { ru: 'Папки и метки', en: 'Folders and labels' },
         lead: { ru: 'Открытые папки для команды, закрытые - по списку людей. Метки проекта и цветной маркер домена',
-                en: 'Open folders for the team, private ones by name list. Project labels and a colour marker per domain.' },
+                en: 'Open folders for the team, private ones by name list. Project labels and a colour marker per domain' },
         detail: { ru: 'Открытые папки видит весь проект, закрытые - только названные люди, и поиском их не найти. Меток у домена до десяти, в строке реестра показывается одна и «+N»',
                   en: 'Open folders are visible to the whole project, private ones only to the people you name, and search will not surface them. A domain carries up to ten labels, and the registry row shows one plus “+N”' } },
       { img: 'access', chip: { ru: 'API-ключи', en: 'API keys' },
         title: { ru: 'Ключи API на чтение', en: 'Read-only API keys' },
         lead: { ru: 'Ключ выдаётся человеку и живёт в своих проектах: видно последний запрос и срок, отзывается одной кнопкой',
-                en: 'A key belongs to a person and lives in its projects: last use and expiry are visible, one button revokes it.' },
+                en: 'A key belongs to a person and lives in its projects: last use and expiry are visible, one button revokes it' },
         detail: { ru: 'Ключ показывается получателю один раз и живёт только в доступных ему проектах. Отдаёт список доменов и расписание автотестов, а забирать изменения можно инкрементально',
                   en: 'A key is shown to its holder once and lives only in the projects available to them. It serves the domain list and the autotest schedule, and changes can be pulled incrementally' } },
       { img: 'proxies', chip: { ru: 'Прокси', en: 'Proxies' },
         title: { ru: 'Каналы в восьми странах', en: 'Channels in eight countries' },
         lead: { ru: 'Резидентные каналы для проверок из нужных стран: видно адрес выхода и когда канал проверялся последний раз',
-                en: 'Residential channels for checks from the countries you need: the exit address and the last check are visible.' },
+                en: 'Residential channels for checks from the countries you need: the exit address and the last check are visible' },
         detail: { ru: 'Каналы заводятся по странам, у каждого видно адрес выхода и время последней проверки. Если канал не ответил, замер помечается отдельно и не выдаётся за падение адреса',
                   en: 'Channels are set up per country, each showing its exit address and the time of the last check. If a channel fails, the measurement is flagged separately and never passes for a downed URL' } },
       { img: 'profile', chip: { ru: '2FA', en: '2FA' },
         title: { ru: 'Второй фактор и сессии', en: 'Two-factor and sessions' },
         lead: { ru: 'Код из приложения в дополнение к паролю, резервные коды, список активных сессий и «выйти везде»',
-                en: 'A code from the app on top of the password, backup codes, active sessions and “sign out everywhere”.' },
+                en: 'A code from the app on top of the password, backup codes, active sessions and “sign out everywhere”' },
         detail: { ru: 'Второй фактор - код из приложения и одноразовые резервные коды; смена пароля обнуляет все токены. Там же список активных сессий, «выйти везде» и ссылка на календарь продлений',
                   en: 'Two-factor means a code from the app plus one-time backup codes; changing the password invalidates every token. The same screen holds active sessions, “sign out everywhere” and the renewal calendar link' } },
       { img: 'registrars', chip: { ru: 'Регистраторы', en: 'Registrars' },
         title: { ru: 'Кабинеты наполняют реестр', en: 'Registrars fill the registry' },
         lead: { ru: 'Namecheap, GoDaddy, NETIM, Cloudflare, Dynadot, Beget, SmartApe и Яндекс: домены, сроки и NS приезжают сами',
-                en: 'Namecheap, GoDaddy, NETIM, Cloudflare, Dynadot, Beget, SmartApe and Yandex: domains, dates and NS arrive on their own.' },
+                en: 'Namecheap, GoDaddy, NETIM, Cloudflare, Dynadot, Beget, SmartApe and Yandex: domains, dates and NS arrive on their own' },
         detail: { ru: 'Синхронизация тянет домены, даты продления и NS, а новое складывает в бакет «Проект не определён». Если домен пропал из кабинета, панель скажет об этом, а не удалит его молча',
                   en: 'The sync pulls domains, expiry dates and NS records, and puts anything new into the “project unassigned” bucket. If a domain disappears from the account, the panel says so instead of deleting it silently' } },
       { img: 'phone', chip: { ru: 'С телефона', en: 'On the phone' },
         title: { ru: 'Панель в телефоне', en: 'The panel on your phone' },
         lead: { ru: 'Дашборд, реестр и доступность открываются с телефона: ночью видно, что лежит, и без ноутбука',
-                en: 'Dashboard, registry and availability open on a phone: at night you see what is down without a laptop.' },
+                en: 'Dashboard, registry and availability open on a phone: at night you see what is down without a laptop' },
         detail: { ru: 'Дежурный набор открывается с телефона: дашборд, реестр и доступность. Ночью этого хватает, чтобы понять, что лежит, и отдать команду, не открывая ноутбук',
                   en: 'The on-call set opens on a phone: dashboard, registry and availability. At night that is enough to see what is down and give the order without opening a laptop' } }
     ];
@@ -638,7 +778,9 @@
       Array.prototype.forEach.call(chips.children, function (b, idx) {
         b.textContent = SLIDES[idx].chip[l];
         b.setAttribute('aria-selected', String(idx === i));
-        if (idx === i) b.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+        // Двигаем только ленту чипов: scrollIntoView утаскивал за собой весь документ,
+        // и страница открывалась не с героя, а с середины слайдера.
+        if (idx === i) chips.scrollLeft = b.offsetLeft - (chips.clientWidth - b.offsetWidth) / 2;
       });
       Array.prototype.forEach.call(track.children, function (f, idx) {
         f.classList.toggle('on', idx === i);
