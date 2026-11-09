@@ -130,11 +130,11 @@
             text-transform:uppercase;color:#bfdbfe;background:rgb(59 147 255 / .16);border:1px solid rgb(59 147 255 / .42);
             border-radius:999px;padding:8px 15px;box-shadow:0 0 28px rgb(59 147 255 / .22)}
   .rub-chip i{width:7px;height:7px;border-radius:50%;background:var(--primary-2);box-shadow:0 0 12px var(--primary-2)}
-  .more{padding:56px 0 60px}
+  .more{padding:46px 0 52px}
   .more h2{margin-top:16px;font-size:clamp(26px,3vw,36px);max-width:20ch}
   .more .say{margin-top:10px;font-size:17px;max-width:74ch;
              display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .chipline{display:flex;align-items:center;gap:22px;margin-top:22px}
+  .chipline{margin-top:18px}
   .chips{display:flex;gap:9px;flex-wrap:nowrap;min-width:0;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;
          -webkit-mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent);
          mask-image:linear-gradient(90deg,transparent,#000 22px,#000 calc(100% - 28px),transparent)}
@@ -148,9 +148,9 @@
   .stage{margin-top:22px;position:relative}
   /* Высота слайда задана, ширина считается из неё (кадр 8:5): место известно до загрузки,
      а центровку держит нативная прокрутка с привязкой - не надо считать пиксели. */
-  .track{--sl-h:min(50vh,500px);display:flex;align-items:center;gap:26px;overflow-x:auto;overscroll-behavior-x:contain;
+  .track{--sl-h:min(46vh,470px);display:flex;align-items:center;gap:26px;overflow-x:auto;overscroll-behavior-x:contain;
          scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;
-         padding:6px calc(50% - (min(50vh,500px) * 1.6) / 2) 12px}
+         padding:6px calc(50% - (min(46vh,470px) * 1.6) / 2) 12px}
   .track::-webkit-scrollbar{display:none}
   .stage{-webkit-mask-image:linear-gradient(90deg,transparent,#000 90px,#000 calc(100% - 90px),transparent);
          mask-image:linear-gradient(90deg,transparent,#000 90px,#000 calc(100% - 90px),transparent)}
@@ -159,14 +159,14 @@
   .track figure .shot{height:100%}
   .track figure img{height:100%;width:100%;aspect-ratio:auto;object-fit:cover}
   .track figure.on{opacity:1;transform:none;filter:none}
-  .slider-nav{display:flex;align-items:center;gap:14px;order:-1;flex:none}
+  .slider-nav{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:22px}
   .arr{width:52px;height:52px;border-radius:50%;border:1px solid var(--b2);display:grid;place-items:center;color:#e2e8f0;
        background:rgb(255 255 255 / .05);transition:background .15s,transform .15s}
   .arr:hover{background:rgb(255 255 255 / .12);transform:scale(1.04)}
   .arr:active{transform:scale(.97)}
   .arr svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .count{font-family:var(--mono);font-size:14px;color:var(--faint);letter-spacing:.06em;min-width:76px;text-align:center}
-  .rest{margin-top:14px;text-align:center;color:var(--faint);font-size:13.5px}
+  .rest{margin-top:16px;text-align:center;color:var(--faint);font-size:13.5px}
 
   /* ── Финал и подвал ────────────────────────────────────────── */
   .final{padding:96px 0 104px;text-align:center}
@@ -211,8 +211,7 @@
     .track{padding-left:7vw;padding-right:7vw;gap:14px}
     .track figure{flex:0 0 86vw;height:auto}
     .track figure img{height:auto;width:100%;object-fit:fill}
-    .chipline{flex-direction:column;align-items:stretch;gap:14px}
-    .slider-nav{order:1;justify-content:center}
+    .slider-nav{margin-top:20px}
     .arr{width:54px;height:54px}
     .slider-nav{gap:18px}
     .final{padding:84px 0 92px}
@@ -386,14 +385,14 @@
     <p class="say" id="s-lead"></p>
     <div class="chipline">
       <div class="chips" id="s-chips" role="tablist" aria-label="Разделы продукта"></div>
-      <div class="slider-nav">
-        <button class="arr" id="s-prev" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-        <span class="count" id="s-count"></span>
-        <button class="arr" id="s-next" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
-      </div>
     </div>
   </div>
   <div class="stage" id="s-stage"><div class="track" id="s-track"></div></div>
+  <div class="wrap slider-nav">
+    <button class="arr" id="s-prev" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+    <span class="count" id="s-count"></span>
+    <button class="arr" id="s-next" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+  </div>
   <p class="rest">
     <span class="ru">Ещё внутри: источники риска и спам-листы, Яндекс.Вебмастер, календарь продлений, журнал безопасности.</span>
     <span class="en">Also inside: risk sources and blocklists, Yandex.Webmaster, a renewal calendar, a security log.</span>
