@@ -179,9 +179,25 @@
   footer a{color:var(--dim)}
   footer .sp{margin-left:auto}
 
-  .lb{position:fixed;inset:0;z-index:90;background:rgb(2 5 12 / .94);display:none;align-items:center;justify-content:center;padding:24px;cursor:zoom-out}
+  /* Просмотр кадра на весь экран: закрыть, листать, счётчик. */
+  .lb{position:fixed;inset:0;z-index:90;background:rgb(2 5 12 / .95);display:none;align-items:center;justify-content:center;
+      padding:clamp(16px,4vw,54px);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
   .lb.on{display:flex}
-  .lb img{max-width:97vw;max-height:94vh;border-radius:12px;border:1px solid var(--b1)}
+  .lb-fig{margin:0;display:flex;flex-direction:column;align-items:center;gap:16px;max-width:min(1500px,94vw)}
+  .lb img{max-width:100%;max-height:82vh;border-radius:14px;border:1px solid var(--b1);box-shadow:var(--shadow)}
+  .lb-cap{display:flex;align-items:center;gap:16px;color:var(--faint);font-size:14.5px;font-family:var(--mono)}
+  .lb-cap b{color:var(--fg);font-weight:600;font-family:var(--sans);font-size:16px;letter-spacing:-.01em}
+  .lb-close,.lb-arr{border:1px solid var(--b2);background:rgb(255 255 255 / .06);display:grid;place-items:center;color:#e2e8f0;
+                    border-radius:50%;transition:background .15s,transform .15s}
+  .lb-close:hover,.lb-arr:hover{background:rgb(255 255 255 / .14);transform:scale(1.05)}
+  .lb-close{position:absolute;top:clamp(12px,2.4vw,26px);right:clamp(12px,2.4vw,26px);width:48px;height:48px}
+  .lb-arr{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px}
+  .lb-arr:hover{transform:translateY(-50%) scale(1.05)}
+  .lb-prev{left:clamp(8px,2vw,26px)} .lb-next{right:clamp(8px,2vw,26px)}
+  .lb svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .zoomhint{margin-top:16px;text-align:center;color:var(--faint);font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:8px}
+  .zoomhint svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  @media (max-width:640px){.lb-arr{width:46px;height:46px}.lb-prev{left:4px}.lb-next{right:4px}}
 
   @media (max-width:1000px){
     .screen{padding:84px 0}
@@ -393,9 +409,10 @@
     <span class="count" id="s-count"></span>
     <button class="arr" id="s-next" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
   </div>
-  <p class="rest">
-    <span class="ru">Ещё внутри: источники риска и спам-листы, Яндекс.Вебмастер, календарь продлений, журнал безопасности.</span>
-    <span class="en">Also inside: risk sources and blocklists, Yandex.Webmaster, a renewal calendar, a security log.</span>
+  <p class="zoomhint">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>
+    <span class="ru">Нажмите на экран - откроется крупно, там же можно листать</span>
+    <span class="en">Click a screen to open it large - you can flip through it there too</span>
   </p>
 </section>
 
@@ -422,7 +439,15 @@
   </div>
 </footer>
 
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Снимок экрана"><img alt=""></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Снимок экрана">
+  <button class="lb-close" id="lb-close" aria-label="Закрыть"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <button class="lb-arr lb-prev" id="lb-prev" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+  <figure class="lb-fig">
+    <img id="lb-img" alt="">
+    <figcaption class="lb-cap"><b id="lb-title"></b><span id="lb-count"></span></figcaption>
+  </figure>
+  <button class="lb-arr lb-next" id="lb-next" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
+</div>
 
 <script>
   // Язык: выбор запоминается, разметка несёт обе версии, кадры продукта - тоже.
@@ -536,7 +561,13 @@
       img.dataset.en = 'shots/en/' + sl.img + '.jpg';
       img.alt = sl.title.ru;
       img.loading = idx < 2 ? 'eager' : 'lazy';
-      img.addEventListener('click', function () { if (window.openShot) window.openShot(img); });
+      img.addEventListener('click', function () {
+        if (!window.openShot) return;
+        var l = lang();
+        window.openShot(SLIDES.map(function (sl) {
+          return { src: l === 'en' ? 'shots/en/' + sl.img + '.jpg' : 'shots/' + sl.img + '.jpg', title: sl.title[l] };
+        }), idx, function (n) { go(n); });
+      });
       img.addEventListener('load', function () { if (idx === i) place(false); });
       box.appendChild(img); fig.appendChild(box); track.appendChild(fig);
 
@@ -607,22 +638,63 @@
     render();
   })();
 
-  // Снимок по клику - крупнее.
+  // Просмотр кадра на весь экран: закрыть крестиком, Esc или фоном; листать стрелками,
+  // клавишами и свайпом. Список кадров приходит от того, кто открыл просмотр.
   (function () {
-    var lb = document.getElementById('lb'), img = lb.querySelector('img');
+    var lb = document.getElementById('lb');
+    var img = document.getElementById('lb-img');
+    var title = document.getElementById('lb-title');
+    var count = document.getElementById('lb-count');
+    var prev = document.getElementById('lb-prev');
+    var next = document.getElementById('lb-next');
+    var list = [], idx = 0, onChange = null;
+
+    window.openShot = function (items, start, change) {
+      list = items || []; idx = start || 0; onChange = change || null;
+      if (!list.length) return;
+      paint(); lb.classList.add('on'); document.body.style.overflow = 'hidden';
+    };
+
+    function paint() {
+      var it = list[idx];
+      img.src = it.src; img.alt = it.title || '';
+      title.textContent = it.title || '';
+      var many = list.length > 1;
+      count.textContent = many ? ('0' + (idx + 1)).slice(-2) + ' / ' + ('0' + list.length).slice(-2) : '';
+      prev.style.display = many ? 'grid' : 'none';
+      next.style.display = many ? 'grid' : 'none';
+    }
+    function go(n) {
+      idx = (n + list.length) % list.length; paint();
+      if (onChange) onChange(idx);
+    }
+    function close() { lb.classList.remove('on'); img.removeAttribute('src'); document.body.style.overflow = ''; }
+
+    prev.addEventListener('click', function (e) { e.stopPropagation(); go(idx - 1); });
+    next.addEventListener('click', function (e) { e.stopPropagation(); go(idx + 1); });
+    document.getElementById('lb-close').addEventListener('click', close);
+    lb.addEventListener('click', function (e) { if (e.target === lb || e.target.closest('.lb-fig') === null) close(); });
+    img.addEventListener('click', function (e) { e.stopPropagation(); });
+    addEventListener('keydown', function (e) {
+      if (!lb.classList.contains('on')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') go(idx - 1);
+      if (e.key === 'ArrowRight') go(idx + 1);
+    });
+    var x0 = null;
+    lb.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+    lb.addEventListener('pointerup', function (e) {
+      if (x0 === null) return; var dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 56 && list.length > 1) go(idx + (dx < 0 ? 1 : -1));
+    });
+
+    // Кадры вне слайдера открываются поодиночке.
     document.querySelectorAll('.shot img').forEach(function (el) {
+      if (el.closest('#s-track')) return;
       el.addEventListener('click', function () {
-        img.src = el.currentSrc || el.src; img.alt = el.alt; lb.classList.add('on');
-        document.body.style.overflow = 'hidden';
+        window.openShot([{ src: el.currentSrc || el.src, title: el.alt || '' }], 0);
       });
     });
-    window.openShot = function (el) {
-      img.src = el.currentSrc || el.src; img.alt = el.alt; lb.classList.add('on');
-      document.body.style.overflow = 'hidden';
-    };
-    function close() { lb.classList.remove('on'); img.src = ''; document.body.style.overflow = ''; }
-    lb.addEventListener('click', close);
-    addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   })();
 </script>
 </body>
