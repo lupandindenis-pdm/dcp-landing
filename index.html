@@ -87,9 +87,6 @@
   /* ── Кадр продукта ─────────────────────────────────────────── */
   .shot{position:relative;border:1px solid var(--b1);border-radius:18px;overflow:hidden;
         background:linear-gradient(135deg,var(--card),var(--sec));box-shadow:var(--shadow)}
-  .shot .bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid var(--b1);background:rgb(255 255 255 / .02)}
-  .shot .bar i{width:9px;height:9px;border-radius:50%;background:rgb(255 255 255 / .14)}
-  .shot .bar span{margin-left:12px;font-family:var(--mono);font-size:12px;color:var(--faint)}
   .shot img{width:100%;aspect-ratio:8 / 5;background:var(--card);cursor:zoom-in}
   .glowbox{position:relative}
   .glowbox::before{content:"";position:absolute;inset:-14% -6% -22%;pointer-events:none;filter:blur(50px);
@@ -126,20 +123,32 @@
   .pricecard .btn{margin-top:24px;width:100%}
   .note{margin-top:20px;font-size:14.5px;color:var(--faint);max-width:62ch}
 
-  /* ── Слайдер «что ещё» ─────────────────────────────────────── */
-  .more-head{display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap}
-  .more-head .arrows{margin-left:auto;display:flex;gap:8px}
-  .arrows button{width:42px;height:42px;border:1px solid var(--b2);border-radius:11px;display:grid;place-items:center;color:var(--dim)}
-  .arrows button:hover{background:var(--s1);color:var(--fg)}
-  .arrows svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
-        margin-top:38px;padding:4px 24px 30px;scrollbar-width:none;
-        -webkit-mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent);
-        mask-image:linear-gradient(90deg,transparent,#000 26px,#000 calc(100% - 26px),transparent)}
-  .rail::-webkit-scrollbar{display:none}
-  .rail > figure{flex:0 0 min(560px,84vw);scroll-snap-align:center;margin:0}
-  .rail h3{margin:16px 0 6px;font-size:17.5px;font-weight:600;letter-spacing:-.01em}
-  .rail p{margin:0;color:var(--faint);font-size:14.5px;max-width:50ch}
+  /* ── Слайдер «что ещё внутри» ──────────────────────────────── */
+  .rub-chip{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;
+            text-transform:uppercase;color:#bfdbfe;background:rgb(59 147 255 / .16);border:1px solid rgb(59 147 255 / .42);
+            border-radius:999px;padding:8px 15px;box-shadow:0 0 28px rgb(59 147 255 / .22)}
+  .rub-chip i{width:7px;height:7px;border-radius:50%;background:var(--primary-2);box-shadow:0 0 12px var(--primary-2)}
+  .more h2{margin-top:20px}
+  .more .say{min-height:3.1em}
+  .chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:28px}
+  .chips button{border:1px solid var(--b1);border-radius:999px;padding:10px 18px;font-size:14.5px;color:var(--faint);
+                background:rgb(255 255 255 / .03);transition:color .15s,background .15s,border-color .15s}
+  .chips button:hover{color:var(--fg);border-color:var(--b2)}
+  .chips button[aria-selected="true"]{color:#0b1220;background:linear-gradient(135deg,#7cc0ff,#3b93ff);
+                                      border-color:transparent;font-weight:600}
+  .stage{margin-top:42px;overflow:hidden;position:relative;touch-action:pan-y}
+  .track{display:flex;align-items:center;gap:26px;transition:transform .45s cubic-bezier(.22,.61,.36,1);will-change:transform}
+  .track figure{flex:0 0 min(900px,70vw);margin:0;opacity:.24;transform:scale(.97);filter:saturate(.7);
+                transition:opacity .35s,transform .35s,filter .35s}
+  .track figure.on{opacity:1;transform:none;filter:none}
+  .slider-nav{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:34px}
+  .arr{width:58px;height:58px;border-radius:50%;border:1px solid var(--b2);display:grid;place-items:center;color:#e2e8f0;
+       background:rgb(255 255 255 / .05);transition:background .15s,transform .15s}
+  .arr:hover{background:rgb(255 255 255 / .12);transform:scale(1.04)}
+  .arr:active{transform:scale(.97)}
+  .arr svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .count{font-family:var(--mono);font-size:14px;color:var(--faint);letter-spacing:.06em;min-width:76px;text-align:center}
+  .rest{margin-top:30px;text-align:center;color:var(--faint);font-size:14.5px}
 
   /* ── Финал и подвал ────────────────────────────────────────── */
   .final{padding:120px 0 130px;text-align:center}
@@ -162,6 +171,7 @@
     .duo.rev .say-col{order:0}
     .hero{padding:64px 0 60px}
     .hero .shotwrap{margin-top:44px}
+    .track figure{flex:0 0 min(900px,78vw)}
   }
   @media (max-width:640px){
     .wrap{padding:0 18px}
@@ -174,7 +184,13 @@
     header .btn-main::after{content:"Telegram";font-weight:600}
     .hero .cta{flex-direction:column;align-items:stretch}
     .hero .cta .btn{width:100%}
-    .rail{padding-left:18px;padding-right:18px;gap:16px}
+    .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+    .chips::-webkit-scrollbar{display:none}
+    .chips button{flex:0 0 auto}
+    .track{gap:14px}
+    .track figure{flex:0 0 86vw}
+    .arr{width:54px;height:54px}
+    .slider-nav{gap:18px}
     .final{padding:84px 0 92px}
     footer .sp{margin-left:0}
   }
@@ -227,7 +243,6 @@
     </p>
     <div class="shotwrap glowbox">
       <div class="shot">
-        <div class="bar"><i></i><i></i><i></i><span>panel.your-brand.com</span></div>
         <img src="shots/dashboard.jpg" data-en="shots/en/dashboard.jpg" alt="Дашборд: что требует решения сегодня" loading="eager">
       </div>
     </div>
@@ -255,7 +270,6 @@
     </div>
     <div class="glowbox">
       <div class="shot">
-        <div class="bar"><i></i><i></i><i></i><span>panel.your-brand.com/availability</span></div>
         <img src="shots/availability.jpg" data-en="shots/en/availability.jpg" alt="Доступность: причина по каждому домену" loading="lazy">
       </div>
     </div>
@@ -281,7 +295,6 @@
     </div>
     <div class="glowbox">
       <div class="shot">
-        <div class="bar"><i></i><i></i><i></i><span>panel.your-brand.com/domains</span></div>
         <img src="shots/registry-bulk.jpg" data-en="shots/en/registry-bulk.jpg" alt="Реестр доменов: массовое выделение" loading="lazy">
       </div>
     </div>
@@ -307,7 +320,6 @@
     </div>
     <div class="glowbox">
       <div class="shot">
-        <div class="bar"><i></i><i></i><i></i><span>panel.your-brand.com/history</span></div>
         <img src="shots/history.jpg" data-en="shots/en/history.jpg" alt="История изменений: было и стало" loading="lazy">
       </div>
     </div>
@@ -342,83 +354,24 @@
   </div>
 </section>
 
-<!-- 6. Что ещё внутри: слайдер ────────────────────────────────── -->
-<section class="screen" id="more">
+<!-- 6. Что ещё внутри: слайдер ─────────────────────────────── -->
+<section class="screen more" id="more">
   <div class="wrap">
-    <div class="more-head">
-      <div>
-        <div class="rub"><span class="ru">Что ещё внутри</span><span class="en">What else is inside</span></div>
-        <h2 style="max-width:23ch"><span class="ru">Деньги, SEO, заявки, лендинги и ещё шесть экранов</span><span class="en">Renewals, SEO, requests, landings and six more screens</span></h2>
-        <p class="say"><span class="ru">Это уже работает, включать ничего не нужно. Листайте вбок - каждый экран снят с живой установки на демонстрационных данных.</span><span class="en">All of it already works, nothing to switch on. Scroll sideways - every screen is captured from a live installation with demo data.</span></p>
-      </div>
-      <div class="arrows">
-        <button type="button" data-rail="-1" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button type="button" data-rail="1" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
-      </div>
-    </div>
+    <span class="rub-chip"><i></i><span class="ru">Что ещё внутри</span><span class="en">What else is inside</span></span>
+    <h2 id="s-title"></h2>
+    <p class="say" id="s-lead"></p>
+    <div class="chips" id="s-chips" role="tablist" aria-label="Разделы продукта"></div>
   </div>
-  <div class="rail" id="rail">
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/money</span></div>
-        <img src="shots/money.jpg" data-en="shots/en/money.jpg" alt="Деньги портфеля" loading="lazy"></div>
-      <h3><span class="ru">Деньги и сроки</span><span class="en">Renewals and money</span></h3>
-      <p><span class="ru">Прогноз расходов по месяцам: спишется само, продлить руками, не продлеваем. И плитка «можно не продлевать».</span><span class="en">A month-by-month forecast: renews automatically, renew manually, not renewing. Plus a “safe to drop” tile.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/availability</span></div>
-        <img src="shots/geo.jpg" data-en="shots/en/geo.jpg" alt="Замеры по странам" loading="lazy"></div>
-      <h3><span class="ru">Замеры по странам</span><span class="en">Country measurements</span></h3>
-      <p><span class="ru">Резидентные каналы в восьми странах раз в шесть часов: где адрес открывается, а где нет.</span><span class="en">Residential channels in eight countries every six hours: where the URL opens and where it does not.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/settings</span></div>
-        <img src="shots/alerts.jpg" data-en="shots/en/alerts.jpg" alt="Каналы и пороги алертов" loading="lazy"></div>
-      <h3><span class="ru">Алерты в Slack и Telegram</span><span class="en">Alerts in Slack and Telegram</span></h3>
-      <p><span class="ru">Сообщение уходит на смену состояния, а не каждый час. Каждый вид включается в своём канале, пороги - свои.</span><span class="en">A message fires on a state change, not every hour. Each type is switched on per channel, with its own thresholds.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/landings</span></div>
-        <img src="shots/landings.jpg" data-en="shots/en/landings.jpg" alt="Реестр лендингов" loading="lazy"></div>
-      <h3><span class="ru">Реестр лендингов</span><span class="en">Landing registry</span></h3>
-      <p><span class="ru">Адреса, гео, языки, заказчик и актуальность. Адрес сам находит свой домен в реестре.</span><span class="en">URLs, geo, languages, requester and relevance. A URL finds its own domain in the registry.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/seo</span></div>
-        <img src="shots/seo.jpg" data-en="shots/en/seo.jpg" alt="SEO: Search Console" loading="lazy"></div>
-      <h3><span class="ru">SEO по портфелю</span><span class="en">SEO across the portfolio</span></h3>
-      <p><span class="ru">Search Console и Вебмастер рядом с доменом: клики, показы, позиции, страны.</span><span class="en">Search Console and Yandex.Webmaster next to the domain: clicks, impressions, positions, countries.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/requests</span></div>
-        <img src="shots/requests.jpg" data-en="shots/en/requests.jpg" alt="Заявки на домены" loading="lazy"></div>
-      <h3><span class="ru">Заявки на домены</span><span class="en">Domain requests</span></h3>
-      <p><span class="ru">Запрос от команды, согласование админом проекта, выдача из резерва и запуск - вместо сообщения в чате.</span><span class="en">A request from the team, approval by the project admin, assignment from the reserve and launch - instead of a chat message.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/domains/…</span></div>
-        <img src="shots/card.jpg" data-en="shots/en/card.jpg" alt="Карточка домена" loading="lazy"></div>
-      <h3><span class="ru">Карточка со всем контекстом</span><span class="en">A card with the full context</span></h3>
-      <p><span class="ru">Маркетинг, IT, аналитика и партнёрка - на вкладках одного домена, рядом с его историей.</span><span class="en">Marketing, IT, analytics and affiliates - on the tabs of one domain, next to its history.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/users</span></div>
-        <img src="shots/users.jpg" data-en="shots/en/users.jpg" alt="Пользователи и права" loading="lazy"></div>
-      <h3><span class="ru">Люди и права</span><span class="en">People and permissions</span></h3>
-      <p><span class="ru">У одного человека в разных проектах разные роли. Доступ к лендингам и настройкам - отдельными осями.</span><span class="en">One person holds different roles in different projects. Landing and settings access are separate axes.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/import</span></div>
-        <img src="shots/import.jpg" data-en="shots/en/import.jpg" alt="Импорт из таблиц" loading="lazy"></div>
-      <h3><span class="ru">Переезд из таблиц</span><span class="en">Migration from spreadsheets</span></h3>
-      <p><span class="ru">Excel, CSV и Google-таблица заезжают целиком: колонки размечаются сами, дубли видно до отправки.</span><span class="en">Excel, CSV and Google Sheets import in full: columns map themselves, duplicates are visible before submitting.</span></p>
-    </figure>
-    <figure>
-      <div class="shot"><div class="bar"><i></i><i></i><i></i><span>/folders</span></div>
-        <img src="shots/folders.jpg" data-en="shots/en/folders.jpg" alt="Папки: открытые и закрытые" loading="lazy"></div>
-      <h3><span class="ru">Папки и метки</span><span class="en">Folders and labels</span></h3>
-      <p><span class="ru">Открытые папки для команды, закрытые - по списку людей. Метки проекта и цветной маркер домена.</span><span class="en">Open folders for the team, private ones by name list. Project labels and a colour marker per domain.</span></p>
-    </figure>
+  <div class="stage" id="s-stage"><div class="track" id="s-track"></div></div>
+  <div class="wrap slider-nav">
+    <button class="arr" id="s-prev" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
+    <span class="count" id="s-count"></span>
+    <button class="arr" id="s-next" aria-label="Вперёд"><svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg></button>
   </div>
+  <p class="rest">
+    <span class="ru">Ещё внутри: карточка домена со всем контекстом, роли и права, импорт из таблиц, папки и метки.</span>
+    <span class="en">Also inside: the domain card with the full context, roles and permissions, spreadsheet import, folders and labels.</span>
+  </p>
 </section>
 
 <!-- Финал ─────────────────────────────────────────────────────── -->
@@ -467,6 +420,7 @@
         var want = l === 'en' ? img.dataset.en : img.dataset.ru;
         if (img.getAttribute('src') !== want) img.setAttribute('src', want);
       });
+      if (window.renderSlider) window.renderSlider();
       try { localStorage.setItem('dp-lang', l); } catch (e) {}
     }
   })();
@@ -478,17 +432,111 @@
     on(); addEventListener('scroll', on, { passive: true });
   })();
 
-  // Слайдер: кнопки листают на карточку, палец и трекпад работают сами.
+  // Слайдер «что ещё внутри»: чипы, крупные стрелки, свайп, клавиши.
+  // Заголовок и подпись живут в данных слайда и меняются вместе с кадром.
   (function () {
-    var rail = document.getElementById('rail');
-    if (!rail) return;
-    document.querySelectorAll('[data-rail]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        var card = rail.querySelector('figure');
-        var step = card ? card.getBoundingClientRect().width + 22 : rail.clientWidth * 0.8;
-        rail.scrollBy({ left: step * Number(b.dataset.rail), behavior: 'smooth' });
-      });
+    var SLIDES = [
+      { img: 'money', chip: { ru: 'Деньги', en: 'Renewals' },
+        title: { ru: 'Деньги и сроки', en: 'Renewals and money' },
+        lead: { ru: 'Прогноз расходов по месяцам: спишется само, продлить руками, не продлеваем. И плитка «можно не продлевать» - годовая цена доменов, которые никому не нужны.',
+                en: 'A month-by-month forecast: renews automatically, renew manually, not renewing. Plus a “safe to drop” tile - the yearly cost of domains nobody needs.' } },
+      { img: 'alerts', chip: { ru: 'Алерты', en: 'Alerts' },
+        title: { ru: 'Алерты в Slack и Telegram', en: 'Alerts in Slack and Telegram' },
+        lead: { ru: 'Сообщение уходит на смену состояния, а не каждый час. Каждый вид включается в своём канале, пороги - свои.',
+                en: 'A message fires on a state change, not every hour. Each type is switched on per channel, with its own thresholds.' } },
+      { img: 'geo', chip: { ru: 'Страны', en: 'Countries' },
+        title: { ru: 'Замеры по странам', en: 'Country measurements' },
+        lead: { ru: 'Резидентные каналы в восьми странах раз в шесть часов: где адрес открывается, а где нет.',
+                en: 'Residential channels in eight countries every six hours: where the URL opens and where it does not.' } },
+      { img: 'seo', chip: { ru: 'SEO', en: 'SEO' },
+        title: { ru: 'SEO по всему портфелю', en: 'SEO across the portfolio' },
+        lead: { ru: 'Search Console и Вебмастер рядом с доменом: клики, показы, позиции и страны.',
+                en: 'Search Console and Yandex.Webmaster next to the domain: clicks, impressions, positions and countries.' } },
+      { img: 'requests', chip: { ru: 'Заявки', en: 'Requests' },
+        title: { ru: 'Заявки на домены', en: 'Domain requests' },
+        lead: { ru: 'Запрос от команды, согласование админом проекта, выдача из резерва и запуск - вместо сообщения в чате.',
+                en: 'A request from the team, approval by the project admin, assignment from the reserve and launch - instead of a chat message.' } },
+      { img: 'landings', chip: { ru: 'Лендинги', en: 'Landings' },
+        title: { ru: 'Реестр лендингов', en: 'Landing registry' },
+        lead: { ru: 'Адреса, гео, языки, заказчик и актуальность. Адрес сам находит свой домен в реестре.',
+                en: 'URLs, geo, languages, requester and relevance. A URL finds its own domain in the registry.' } }
+    ];
+    var track = document.getElementById('s-track');
+    var stage = document.getElementById('s-stage');
+    var chips = document.getElementById('s-chips');
+    var title = document.getElementById('s-title');
+    var lead = document.getElementById('s-lead');
+    var count = document.getElementById('s-count');
+    if (!track) return;
+    var i = 0;
+
+    SLIDES.forEach(function (sl, idx) {
+      var fig = document.createElement('figure');
+      var box = document.createElement('div');
+      box.className = 'shot';
+      var img = document.createElement('img');
+      img.src = 'shots/' + sl.img + '.jpg';
+      img.dataset.en = 'shots/en/' + sl.img + '.jpg';
+      img.alt = sl.title.ru;
+      img.loading = idx < 2 ? 'eager' : 'lazy';
+      img.addEventListener('click', function () { if (window.openShot) window.openShot(img); });
+      box.appendChild(img); fig.appendChild(box); track.appendChild(fig);
+
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('role', 'tab');
+      b.addEventListener('click', function () { go(idx); });
+      chips.appendChild(b);
     });
+
+    function lang() { return document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'ru'; }
+
+    function render() {
+      var l = lang();
+      title.textContent = SLIDES[i].title[l];
+      lead.textContent = SLIDES[i].lead[l];
+      count.textContent = ('0' + (i + 1)).slice(-2) + ' / ' + ('0' + SLIDES.length).slice(-2);
+      Array.prototype.forEach.call(chips.children, function (b, idx) {
+        b.textContent = SLIDES[idx].chip[l];
+        b.setAttribute('aria-selected', String(idx === i));
+      });
+      Array.prototype.forEach.call(track.children, function (f, idx) {
+        f.classList.toggle('on', idx === i);
+        var img = f.querySelector('img');
+        var want = l === 'en' ? img.dataset.en : 'shots/' + SLIDES[idx].img + '.jpg';
+        if (img.getAttribute('src') !== want) img.setAttribute('src', want);
+      });
+      place();
+    }
+
+    function place() {
+      var act = track.children[i];
+      if (!act) return;
+      var shift = act.offsetLeft + act.offsetWidth / 2 - stage.clientWidth / 2;
+      track.style.transform = 'translateX(' + (-shift) + 'px)';
+    }
+
+    function go(n) { i = (n + SLIDES.length) % SLIDES.length; render(); }
+    document.getElementById('s-prev').addEventListener('click', function () { go(i - 1); });
+    document.getElementById('s-next').addEventListener('click', function () { go(i + 1); });
+
+    // Свайп пальцем и трекпадом.
+    var x0 = null;
+    stage.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+    stage.addEventListener('pointerup', function (e) {
+      if (x0 === null) return;
+      var dx = e.clientX - x0; x0 = null;
+      if (Math.abs(dx) > 48) go(i + (dx < 0 ? 1 : -1));
+    });
+    // Клавиши, когда слайдер на экране.
+    addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      var r = stage.getBoundingClientRect();
+      if (r.top > innerHeight * 0.8 || r.bottom < innerHeight * 0.2) return;
+      go(i + (e.key === 'ArrowRight' ? 1 : -1));
+    });
+    addEventListener('resize', place);
+    window.renderSlider = render;
+    render();
   })();
 
   // Снимок по клику - крупнее.
@@ -500,6 +548,10 @@
         document.body.style.overflow = 'hidden';
       });
     });
+    window.openShot = function (el) {
+      img.src = el.currentSrc || el.src; img.alt = el.alt; lb.classList.add('on');
+      document.body.style.overflow = 'hidden';
+    };
     function close() { lb.classList.remove('on'); img.src = ''; document.body.style.overflow = ''; }
     lb.addEventListener('click', close);
     addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
