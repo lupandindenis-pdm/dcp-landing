@@ -314,8 +314,8 @@
   .chips button[aria-selected="true"]{background:var(--primary);color:var(--on-primary);border-color:transparent}
   .pricecard,.loss-i,.detail{background:var(--card);border-radius:var(--r-card)}
   .adv-i .ic{background:transparent;border-color:var(--b2);color:var(--primary);border-radius:var(--r-btn)}
-  .loss-i .lose::before{background:var(--sig-dn)}
-  .loss-i .fix .lab{color:var(--sig-up)}
+  .loss-i .lose::before{background:var(--primary)}
+  .loss-i .fix .lab{color:var(--sig-up);font-weight:700}
   .deal li svg{stroke:var(--sig-up)}
   .detail::before{background:var(--primary)}
 
@@ -429,8 +429,8 @@
   .loss{grid-template-rows:repeat(2,auto auto auto auto)}
   .loss-i{grid-row:span 4;row-gap:4px}
   .loss-ic{display:grid;place-items:center;width:46px;height:46px;margin-bottom:6px;border-radius:50%;
-           background:var(--card);border:1px solid var(--b1);color:var(--sig-dn);
-           box-shadow:0 8px 20px rgb(200 56 74 / .16),0 1px 2px rgb(16 24 40 / .06)}
+           background:var(--card);border:1px solid var(--b1);color:var(--primary);
+           box-shadow:0 8px 20px rgb(29 78 216 / .16),0 1px 2px rgb(16 24 40 / .06)}
   .loss-ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   @media (max-width:1000px){.loss{grid-template-rows:none}.loss-i{grid-row:auto}}
 </style>
@@ -517,10 +517,6 @@
       </article>
 
     </div>
-    <p class="note">
-      <span class="ru">Ни одной выдуманной цифры: панель показывает то, что померила, называет время замера и честно говорит «нет данных», когда проверка не дошла</span>
-      <span class="en">Not a single invented number: the panel shows what it measured, names the time of the probe and honestly says “no data” when a check did not get through</span>
-    </p>
   </div>
 </section>
 
