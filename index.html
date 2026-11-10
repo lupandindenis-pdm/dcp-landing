@@ -386,6 +386,40 @@
   .lb img{border-color:rgb(255 255 255 / .13)}
   .lb-cap{color:#9DA9BD}
   .lb-cap b{color:#F2F6FC}
+  /* ── Герой: условия поставки сразу у заголовка ──────────── */
+  .hterms{display:none}
+  .onlynarrow{display:none}
+  @media (max-width:639px){.onlynarrow{display:inline}}
+  @media (min-width:1001px){
+    .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:0 60px;align-items:start}
+    .hero .shotwrap{grid-column:1 / -1}
+    .hterms{display:block;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:20px 22px}
+  }
+  @media (min-width:640px) and (max-width:1000px){
+    .hterms{display:block;margin-top:30px;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:20px 22px}
+    .hterms ul{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
+    .hterms li:nth-child(2){border-top:0;padding-top:0}
+  }
+  .hterms-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+  .hterms ul{margin:0;padding:0;list-style:none}
+  .hterms li{padding:13px 0;border-top:1px solid var(--b1)}
+  .hterms li:first-child{border-top:0;padding-top:0}
+  .hterms li b{display:block;font-size:15px;font-weight:600;color:var(--fg);letter-spacing:-.01em}
+  .hterms li > span{display:block;margin-top:4px;font-size:13.5px;line-height:1.5;color:var(--dim)}
+
+  /* ── Поставка: первый вопрос покупателя - что уходит наружу ─ */
+  .outcard{margin-top:16px;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:20px 22px}
+  .outcard-h{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--fg);letter-spacing:-.01em}
+  .outcard-h svg{width:18px;height:18px;flex:none;fill:none;stroke:var(--sig-up);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .outcard ul{margin:12px 0 0;padding:0;list-style:none}
+  .outcard li{position:relative;padding:7px 0 7px 16px;font-size:14px;line-height:1.55;color:var(--dim)}
+  .outcard li::before{content:"";position:absolute;left:2px;top:15px;width:4px;height:4px;border-radius:50%;background:var(--b2)}
+
+  /* ── Начало работы: срок запуска ────────────────────────── */
+  .when{margin-top:34px;padding-top:20px;border-top:1px solid var(--b1);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 56px;font-size:15px;color:var(--dim)}
+  .when b{color:var(--fg);font-weight:600}
+  .when-l{grid-column:1 / -1;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  @media (max-width:1000px){.when{grid-template-columns:1fr;gap:16px}}
 </style>
 </head>
 <body>
@@ -413,13 +447,14 @@
 <section class="hero">
   <div class="bgfx"><i></i><i></i></div>
   <div class="wrap">
+    <div class="hmain">
     <h1>
       <span class="ru">Панель управления доменами</span>
       <span class="en">A control panel for your domains</span>
     </h1>
     <p class="say">
-      <span class="ru">Портфель доменов всего холдинга в одной точке управления и учёта: домены и лендинги, сроки продления, доступы по проектам, проверки доступности и алерты. <b>Ставится на ваш сервер, работает под вашим именем</b></span>
-      <span class="en">The whole holding's domain portfolio in one place to run and account for: domains and landings, renewal dates, per-project access, availability checks and alerts. <b>Installed on your server, running under your own name</b></span>
+      <span class="ru">Портфель доменов всего холдинга в одной точке управления и учёта: домены и лендинги, сроки продления, доступы по проектам, проверки доступности и алерты. <b class="onlynarrow">Ставится на ваш сервер, работает под вашим именем</b></span>
+      <span class="en">The whole holding's domain portfolio in one place to run and account for: domains and landings, renewal dates, per-project access, availability checks and alerts. <b class="onlynarrow">Installed on your server, running under your own name</b></span>
     </p>
     <div class="cta">
       <a class="btn btn-main" href="https://t.me/denis_pdm" target="_blank" rel="noopener">
@@ -432,6 +467,16 @@
       <span class="ru">Работает в холдинге: <b>сотни доменов, десятки лендингов, десятки пользователей</b></span>
       <span class="en">Running in a holding company: <b>hundreds of domains, dozens of landings, dozens of users</b></span>
     </p>
+    </div>
+    <aside class="hterms">
+      <div class="hterms-h"><span class="ru">На каких условиях</span><span class="en">On what terms</span></div>
+      <ul>
+        <li><b><span class="ru">На вашем сервере</span><span class="en">On your server</span></b><span><span class="ru">Docker, база и вся история у вас. Наружу уходят только имена доменов и адреса лендингов - и только для проверок</span><span class="en">Docker, the database and the whole history stay with you. Only domain names and landing URLs leave the perimeter, and only for the checks</span></span></li>
+        <li><b><span class="ru">Под вашим именем</span><span class="en">Under your own name</span></b><span><span class="ru">Логотип, название и акцент - ваши. Для команды это ваш продукт</span><span class="en">Logo, name and accent colour are yours. To your team it is your own product</span></span></li>
+        <li><b><span class="ru">Исходный код передаётся</span><span class="en">The source code is handed over</span></b><span><span class="ru">Панель работает, даже если мы больше не общаемся</span><span class="en">The panel keeps working even if we never speak again</span></span></li>
+        <li><b><span class="ru">Один раз, без подписки</span><span class="en">Paid once, no subscription</span></b><span><span class="ru">Без платы за пользователей и за домены</span><span class="en">No per-user or per-domain fees</span></span></li>
+      </ul>
+    </aside>
     <div class="shotwrap glowbox">
       <div class="shot">
         <img src="shots/dashboard.jpg" data-en="shots/en/dashboard.jpg" data-phone="shots/phone-one.jpg" data-phone-en="shots/en/phone-one.jpg" alt="Дашборд: что требует решения сегодня" loading="eager">
@@ -526,10 +571,9 @@
       <div class="rub"><span class="ru">Поставка</span><span class="en">Delivery</span></div>
       <h2><span class="ru">Ставится у вас, работает под вашим именем</span><span class="en">Installed at your place, running under your name</span></h2>
       <ul>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Docker на вашем сервере. Реестр, доступы и история - на вашей инфраструктуре</span><span class="en">Docker on your server. The registry, access and history stay on your infrastructure</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Исходный код передаётся. Панель работает, даже если мы больше не общаемся</span><span class="en">The source code is handed over. The panel keeps working even if we never speak again</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Имя, логотип и акцент - ваши, задаются переменными сборки. Для команды это ваш продукт</span><span class="en">Name, logo and accent colour are yours, set through build variables. To your team it is your own product</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Ставим и запускаем на вашем сервере: сборка, база, вход для команды</span><span class="en">We install and start it on your server: the build, the database, logins for the team</span></li>
         <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Переносим таблицы и кабинеты регистраторов, настраиваем проверки, страны и алерты</span><span class="en">We migrate your spreadsheets and registrar accounts, set up the checks, countries and alerts</span></li>
+        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Собираем под ваш бренд и передаём исходный код - с инструкцией, как обновлять своими силами</span><span class="en">We build it under your brand and hand over the source code - with instructions on updating it yourselves</span></li>
       </ul>
     </div>
     <div class="dealside">
@@ -541,10 +585,17 @@
         <span class="ru">Спросить цену в Telegram</span><span class="en">Ask the price on Telegram</span>
         </a>
       </div>
-      <p class="note">
-      <span class="ru">Наружу уходят только имена доменов и адреса лендингов - и только тем, без кого проверка не работает. Карту исходящего трафика пришлю до покупки</span>
-        <span class="en">Only domain names and landing URLs leave the perimeter - and only to those without whom a check cannot run. I send the outbound traffic map before the purchase</span>
-      </p>
+      <div class="outcard">
+        <div class="outcard-h">
+          <svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span class="ru">Что уходит наружу</span><span class="en">What leaves the perimeter</span>
+        </div>
+        <ul>
+          <li><span class="ru">Только имена доменов и адреса лендингов - и только тем, без кого проверка не работает</span><span class="en">Only domain names and landing URLs - and only to the services a check cannot run without</span></li>
+          <li><span class="ru">Карту исходящего трафика пришлю до покупки</span><span class="en">I send the outbound traffic map before the purchase</span></li>
+          <li><span class="ru">Ни игроков, ни ставок, ни выплат панель не видит и не хранит</span><span class="en">The panel never sees or stores players, bets or payouts</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -600,6 +651,11 @@
         <h3><span class="ru">Один человек с вашей стороны</span><span class="en">One person on your side</span></h3>
         <p><span class="ru">Кто решает, какие проекты завести, кому какой доступ открыть и куда слать алерты. Дальше панель работает сама</span><span class="en">Who decides which projects to create, who gets which access and where the alerts go. After that the panel runs itself</span></p>
       </div>
+    </div>
+    <div class="when">
+      <span class="when-l"><span class="ru">Сколько это займёт</span><span class="en">How long it takes</span></span>
+      <span><b><span class="ru">День установки</span><span class="en">Install day</span></b> <span class="ru">- панель открывается, ваши таблицы уже внутри</span><span class="en">- the panel opens with your spreadsheets already inside</span></span>
+      <span><b><span class="ru">Первая неделя</span><span class="en">First week</span></b> <span class="ru">- остальное настроено, панель работает сама</span><span class="en">- everything else is set up and the panel runs itself</span></span>
     </div>
   </div>
 </section>
