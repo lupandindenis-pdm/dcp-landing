@@ -457,6 +457,14 @@
   @supports not ((-webkit-background-clip:text) or (background-clip:text)){
     .hero h1{background:none;color:var(--head);-webkit-text-fill-color:currentColor}
   }
+  /* Подпись слайда: без плашки, по левому краю секции, без названия экрана */
+  .more .detail{border:0;background:none;box-shadow:none;border-radius:0;padding:0;max-width:72ch;margin:0}
+  .more .detail::before{display:none}
+  .more .detail-chip{display:none}
+  .more .detail-top{margin-bottom:8px}
+  .more .detailwrap{margin-top:28px}
+  /* Лид героя: мельче, но контрастнее */
+  .hero .say{font-size:16.5px;line-height:1.62;color:var(--fg-2)}
 </style>
 </head>
 <body>
@@ -486,8 +494,8 @@
       <span class="en">A control panel for your domain portfolio</span>
     </h1>
     <p class="say">
-      <span class="ru">Домены всего холдинга в одной точке учёта и управления: доступы по ролям и проектам, проверки доступности, алерты и вся история по каждому домену в его карточке. <b class="onlynarrow">Ставится на ваш сервер, работает под вашим именем</b></span>
-      <span class="en">Every domain in the holding in one place to run and account for: access by role and project, availability checks, alerts and the whole history of each domain on its own card. <b class="onlynarrow">Installed on your server, running under your own name</b></span>
+      <span class="ru">Домены всего холдинга в одной точке учёта и управления: доступы по ролям и проектам, проверки доступности, алерты и вся история по каждому домену в его карточке <b class="onlynarrow">Ставится на ваш сервер, работает под вашим именем</b></span>
+      <span class="en">Every domain in the holding in one place to run and account for: access by role and project, availability checks, alerts and the whole history of each domain on its own card <b class="onlynarrow">Installed on your server, running under your own name</b></span>
     </p>
     <div class="cta">
       <a class="btn btn-main" href="https://t.me/denis_pdm" target="_blank" rel="noopener">
