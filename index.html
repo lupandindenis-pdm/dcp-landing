@@ -88,7 +88,6 @@
   .shot{position:relative;border:1px solid var(--b1);border-radius:18px;overflow:hidden;
         background:linear-gradient(135deg,var(--card),var(--sec));box-shadow:var(--shadow)}
   .shot img{width:100%;aspect-ratio:8 / 5;background:var(--card);cursor:zoom-in}
-  .hero .shot img{aspect-ratio:auto;max-height:min(56vh,540px);object-fit:cover;object-position:top center}
   .duo .shot img{aspect-ratio:auto;max-height:min(48vh,470px);object-fit:cover;object-position:top center}
   .glowbox{position:relative}
   .glowbox::before{content:"";position:absolute;inset:-14% -6% -22%;pointer-events:none;filter:blur(50px);
@@ -96,7 +95,7 @@
   .glowbox > *{position:relative}
 
   /* ── Герой ─────────────────────────────────────────────────── */
-  .hero{padding:74px 0 70px;overflow:hidden}
+  .hero{padding:74px 0 34px;overflow:hidden}
   .bgfx{position:absolute;inset:0 0 auto;height:900px;overflow:hidden;pointer-events:none}
   .bgfx i{position:absolute;border-radius:50%;filter:blur(110px)}
   .bgfx i:nth-child(1){width:700px;height:700px;left:50%;top:-340px;transform:translateX(-85%);background:#7c3aed;opacity:.16}
@@ -105,7 +104,6 @@
   .hero .cta{display:flex;gap:13px;margin-top:34px;flex-wrap:wrap}
   .hero .fact{margin-top:26px;font-size:14.5px;color:var(--faint)}
   .hero .fact b{color:var(--dim);font-weight:500}
-  .hero .shotwrap{margin-top:46px}
 
   /* Экран-доказательство: слово слева, кадр справа и крупнее. */
   .duo{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:56px;align-items:center}
@@ -257,7 +255,6 @@
     .loss{grid-template-columns:1fr;grid-template-rows:none;gap:18px}
     .loss-i{grid-template-rows:auto;grid-row:auto}
     .hero{padding:64px 0 60px}
-    .hero .shotwrap{margin-top:44px}
     .track{padding-left:calc(50% - min(900px,78vw) / 2);padding-right:calc(50% - min(900px,78vw) / 2)}
     .track figure{flex:0 0 min(900px,78vw);height:auto}
     .track figure img{height:auto;width:100%;object-fit:fill}
@@ -271,8 +268,6 @@
     .mark svg{width:16px;height:16px}
     header .btn-main span{display:none!important}
     header .btn-main::after{content:"Telegram";font-weight:600}
-    .hero .shot{border:0;background:transparent;box-shadow:none}
-    .hero .shot img{aspect-ratio:auto;max-height:72vh;width:auto;max-width:100%;margin:0 auto;object-fit:contain;border-radius:14px}
     .hero .cta{flex-direction:column;align-items:stretch}
     .hero .cta .btn{width:100%}
     .more h2{white-space:normal}
@@ -393,10 +388,9 @@
   @media (max-width:639px){.onlynarrow{display:inline}}
   @media (min-width:1001px){
     .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:0 60px;align-items:stretch}
-    .hmain{display:flex;flex-direction:column;justify-content:center}
+    .hmain{display:flex;flex-direction:column;justify-content:center;margin-top:-10px}
     .hterms{display:flex;flex-direction:column;justify-content:center}
     .hterms ul{display:flex;flex-direction:column}
-    .hero .shotwrap{grid-column:1 / -1}
     .hterms{display:block;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:18px 20px}
   }
   @media (min-width:640px) and (max-width:1000px){
@@ -405,9 +399,9 @@
     .hterms li:nth-child(2){border-top:0;padding-top:0}
   }
   /* Карточка условий - тёмная, как полоса со скринами: видно кромку и выравнивание с заголовком */
-  .hterms{--card:#1C2027; --fg:#F4F6F9; --fg-2:#D7DBE2; --dim:#A6ADB8; --faint:#8E96A3;
-          --b1:rgb(255 255 255 / .11); --b2:rgb(255 255 255 / .22);
-          background:#15181D!important;color:var(--fg);border-color:rgb(255 255 255 / .10)!important}
+  .hterms{--card:#E8EBF0; --fg:#0E1116; --fg-2:#1B212B; --dim:#4C5663; --faint:#5E6877;
+          --b1:rgb(14 17 22 / .12); --b2:rgb(14 17 22 / .22);
+          background:#E8EBF0!important;color:var(--fg);border-color:rgb(14 17 22 / .10)!important}
   .hterms-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
   .hterms ul{margin:0;padding:0;list-style:none}
   .hterms li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--b1)}
@@ -488,11 +482,6 @@
         <li><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M20.6 13.4 12 22l-9-9V4a1 1 0 0 1 1-1h8l8.6 8.6a1 1 0 0 1 0 1.8Z"/><circle cx="8" cy="8" r="1.2"/></svg></span><b><span class="ru">Один раз, без подписки</span><span class="en">Paid once, no subscription</span></b><span><span class="ru">Без платы за пользователей и за домены</span><span class="en">No per-user or per-domain fees</span></span></li>
       </ul>
     </aside>
-    <div class="shotwrap glowbox">
-      <div class="shot">
-        <img src="shots/dashboard.jpg" data-en="shots/en/dashboard.jpg" data-phone="shots/phone-one.jpg" data-phone-en="shots/en/phone-one.jpg" alt="Дашборд: что требует решения сегодня" loading="eager">
-      </div>
-    </div>
   </div>
 </section>
 
