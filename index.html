@@ -451,6 +451,12 @@
   #pains .adv-i p{color:var(--dim)}
   #pains .adv-i .ic{background:rgb(255 255 255 / .06);border-color:rgb(255 255 255 / .16);color:#8FB6FF}
   #pains .rub::before{background:rgb(255 255 255 / .22)}
+  /* Заголовок героя: лёгкий перелив от чернильного к синему, без неона */
+  .hero h1{background:linear-gradient(104deg,#0C2143 0%,#14306E 52%,#1D4ED8 100%);
+           -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+  @supports not ((-webkit-background-clip:text) or (background-clip:text)){
+    .hero h1{background:none;color:var(--head);-webkit-text-fill-color:currentColor}
+  }
 </style>
 </head>
 <body>
