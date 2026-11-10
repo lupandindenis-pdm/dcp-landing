@@ -337,7 +337,7 @@
   :root{
     --bg:#F4F5F7; --card:#FFFFFF; --sec:#FFFFFF;
     --fg:#0E1116; --fg-2:#1B212B; --dim:#55606E; --faint:#667082;
-    --primary:#3B82F6; --primary-2:#2F74EC; --on-primary:#fff;
+    --primary:#1D4ED8; --primary-2:#1A44BE; --on-primary:#fff;
     --sig-dn:#C8384A; --sig-up:#0E7C5A;
     --b1:rgb(14 17 22 / .11); --b2:rgb(14 17 22 / .2); --s1:rgb(14 17 22 / .03);
     --shadow:0 18px 44px rgb(16 24 40 / .14);
@@ -392,21 +392,32 @@
   .onlynarrow{display:none}
   @media (max-width:639px){.onlynarrow{display:inline}}
   @media (min-width:1001px){
-    .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:0 60px;align-items:start}
+    .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:0 60px;align-items:stretch}
+    .hmain{display:flex;flex-direction:column}
+    .hmain .say{margin-bottom:auto}
+    .hterms{display:flex;flex-direction:column;justify-content:center;margin-top:11px;padding-top:15px;padding-bottom:13px}
+    .hterms ul{display:flex;flex-direction:column}
     .hero .shotwrap{grid-column:1 / -1}
-    .hterms{display:block;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:20px 22px}
+    .hterms{display:block;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:18px 20px}
   }
   @media (min-width:640px) and (max-width:1000px){
     .hterms{display:block;margin-top:30px;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:20px 22px}
     .hterms ul{display:grid;grid-template-columns:1fr 1fr;gap:0 30px}
     .hterms li:nth-child(2){border-top:0;padding-top:0}
   }
+  /* Карточка условий - тёмная, как полоса со скринами: видно кромку и выравнивание с заголовком */
+  .hterms{--card:#1C2027; --fg:#F4F6F9; --fg-2:#D7DBE2; --dim:#A6ADB8; --faint:#8E96A3;
+          --b1:rgb(255 255 255 / .11); --b2:rgb(255 255 255 / .22);
+          background:#15181D!important;color:var(--fg);border-color:rgb(255 255 255 / .10)!important}
   .hterms-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
   .hterms ul{margin:0;padding:0;list-style:none}
-  .hterms li{padding:13px 0;border-top:1px solid var(--b1)}
+  .hterms li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--b1)}
   .hterms li:first-child{border-top:0;padding-top:0}
-  .hterms li b{display:block;font-size:15px;font-weight:600;color:var(--fg);letter-spacing:-.01em}
-  .hterms li > span{display:block;margin-top:4px;font-size:13.5px;line-height:1.5;color:var(--dim)}
+  .hterms li b{grid-column:2;font-size:15px;font-weight:600;color:var(--fg);letter-spacing:-.01em;line-height:1.3}
+  .hterms li > span:not(.t-ic){grid-column:2;display:block;margin-top:4px;font-size:13px;line-height:1.46;color:var(--dim)}
+  .t-ic{grid-row:span 2;align-self:start;display:grid;place-items:center;width:30px;height:30px;margin-top:-3px;
+        border-radius:9px;background:#1D4ED8;color:#fff}
+  .t-ic svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
   /* ── Поставка: первый вопрос покупателя - что уходит наружу ─ */
   .outcard{margin-top:16px;border:1px solid var(--b1);border-radius:var(--r-card);background:var(--card);padding:20px 22px}
@@ -421,6 +432,14 @@
   .when b{color:var(--fg);font-weight:600}
   .when-l{grid-column:1 / -1;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
   @media (max-width:1000px){.when{grid-template-columns:1fr;gap:16px}}
+  /* ── Цена ошибки: значок проблемы ───────────────────────── */
+  .loss{grid-template-rows:repeat(2,auto auto auto auto)}
+  .loss-i{grid-row:span 4;row-gap:4px}
+  .loss-ic{display:grid;place-items:center;width:46px;height:46px;margin-bottom:6px;border-radius:50%;
+           background:var(--card);border:1px solid var(--b1);color:var(--sig-dn);
+           box-shadow:0 8px 20px rgb(200 56 74 / .16),0 1px 2px rgb(16 24 40 / .06)}
+  .loss-ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  @media (max-width:1000px){.loss{grid-template-rows:none}.loss-i{grid-row:auto}}
 </style>
 </head>
 <body>
@@ -436,10 +455,6 @@
         <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
         <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
       </div>
-      <a class="btn btn-main btn-sm" href="https://t.me/denis_pdm" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-        <span class="ru">Написать в Telegram</span><span class="en">Message on Telegram</span>
-      </a>
     </div>
   </div>
 </header>
@@ -450,12 +465,12 @@
   <div class="wrap">
     <div class="hmain">
     <h1>
-      <span class="ru">Панель управления доменами</span>
-      <span class="en">A control panel for your domains</span>
+      <span class="ru">Панель управления доменным портфелем</span>
+      <span class="en">A control panel for your domain portfolio</span>
     </h1>
     <p class="say">
-      <span class="ru">Портфель доменов всего холдинга в одной точке управления и учёта: домены и лендинги, сроки продления, доступы по проектам, проверки доступности и алерты. <b class="onlynarrow">Ставится на ваш сервер, работает под вашим именем</b></span>
-      <span class="en">The whole holding's domain portfolio in one place to run and account for: domains and landings, renewal dates, per-project access, availability checks and alerts. <b class="onlynarrow">Installed on your server, running under your own name</b></span>
+      <span class="ru">Домены всего холдинга в одной точке учёта и управления: доступы по ролям и проектам, проверки доступности, алерты и вся история по каждому домену в его карточке. <b class="onlynarrow">Ставится на ваш сервер, работает под вашим именем</b></span>
+      <span class="en">Every domain in the holding in one place to run and account for: access by role and project, availability checks, alerts and the whole history of each domain on its own card. <b class="onlynarrow">Installed on your server, running under your own name</b></span>
     </p>
     <div class="cta">
       <a class="btn btn-main" href="https://t.me/denis_pdm" target="_blank" rel="noopener">
@@ -464,18 +479,14 @@
       </a>
       <a class="btn btn-ghost" href="#loss"><span class="ru">Где теряются деньги</span><span class="en">Where the money leaks</span></a>
     </div>
-    <p class="fact">
-      <span class="ru">Работает в холдинге: <b>сотни доменов, десятки лендингов, десятки пользователей</b></span>
-      <span class="en">Running in a holding company: <b>hundreds of domains, dozens of landings, dozens of users</b></span>
-    </p>
     </div>
     <aside class="hterms">
-      <div class="hterms-h"><span class="ru">На каких условиях</span><span class="en">On what terms</span></div>
+      <div class="hterms-h"><span class="ru">Ставится из коробки</span><span class="en">Out of the box</span></div>
       <ul>
-        <li><b><span class="ru">На вашем сервере</span><span class="en">On your server</span></b><span><span class="ru">Docker, база и вся история у вас. Наружу уходят только имена доменов и адреса лендингов - и только для проверок</span><span class="en">Docker, the database and the whole history stay with you. Only domain names and landing URLs leave the perimeter, and only for the checks</span></span></li>
-        <li><b><span class="ru">Под вашим именем</span><span class="en">Under your own name</span></b><span><span class="ru">Логотип, название и акцент - ваши. Для команды это ваш продукт</span><span class="en">Logo, name and accent colour are yours. To your team it is your own product</span></span></li>
-        <li><b><span class="ru">Исходный код передаётся</span><span class="en">The source code is handed over</span></b><span><span class="ru">Панель работает, даже если мы больше не общаемся</span><span class="en">The panel keeps working even if we never speak again</span></span></li>
-        <li><b><span class="ru">Один раз, без подписки</span><span class="en">Paid once, no subscription</span></b><span><span class="ru">Без платы за пользователей и за домены</span><span class="en">No per-user or per-domain fees</span></span></li>
+        <li><span class="t-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span><b><span class="ru">На вашем сервере</span><span class="en">On your server</span></b><span><span class="ru">Docker, база и вся история у вас. Наружу уходят только имена доменов и адреса лендингов - и только для проверок</span><span class="en">Docker, the database and the whole history stay with you. Only domain names and landing URLs leave the perimeter, and only for the checks</span></span></li>
+        <li><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.1 0-.9.8-1.6 1.7-1.6H16a5 5 0 0 0 5-5c0-4-4-7.4-9-7.4Z"/><circle cx="8" cy="11" r="1"/><circle cx="12" cy="8" r="1"/><circle cx="16" cy="11" r="1"/></svg></span><b><span class="ru">Под вашим именем</span><span class="en">Under your own name</span></b><span><span class="ru">Логотип, название и акцент - ваши. Для команды это ваш продукт</span><span class="en">Logo, name and accent colour are yours. To your team it is your own product</span></span></li>
+        <li><span class="t-ic"><svg viewBox="0 0 24 24"><path d="m9 17-5-5 5-5"/><path d="m15 7 5 5-5 5"/></svg></span><b><span class="ru">Исходный код передаётся</span><span class="en">The source code is handed over</span></b><span><span class="ru">Панель работает, даже если мы больше не общаемся</span><span class="en">The panel keeps working even if we never speak again</span></span></li>
+        <li><span class="t-ic"><svg viewBox="0 0 24 24"><path d="M20.6 13.4 12 22l-9-9V4a1 1 0 0 1 1-1h8l8.6 8.6a1 1 0 0 1 0 1.8Z"/><circle cx="8" cy="8" r="1.2"/></svg></span><b><span class="ru">Один раз, без подписки</span><span class="en">Paid once, no subscription</span></b><span><span class="ru">Без платы за пользователей и за домены</span><span class="en">No per-user or per-domain fees</span></span></li>
       </ul>
     </aside>
     <div class="shotwrap glowbox">
@@ -494,27 +505,27 @@
     <div class="loss">
 
       <article class="loss-i">
-        <h3><span class="ru">Льёте в закрытую дверь</span><span class="en">You buy traffic into a closed door</span></h3>
-        <p class="lose"><span class="ru">Из дата-центра домен открывается, а у игрока в стране - нет. Клики куплены, регистраций не будет, и никто не знает, в чём дело: блокирует провайдер или лежит сервер</span><span class="en">From a data centre the domain opens; for the player in-country it does not. The clicks are paid for, the signups never come, and nobody knows which it is: the ISP blocking or the server down</span></p>
-        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Мерит домены из нужных стран и сама заводит подозрение на блокировку: ответ 451, «не открывается только в этой стране», увод на чужой сайт при живом сайте у нас. Видно, чей это глаз - наш замер или автотест. Решение остаётся за человеком: панель ничего не отмечает сама</span><span class="en">Measures domains from the countries you care about and raises a blocking suspicion itself: a 451 response, “down only in this country”, a redirect to someone else's site while ours is alive. You see whose eye it was - our probe or an autotest. The call stays with a human: the panel never marks it for you</span></p>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.3 3.3 8.5s-1.1 6.1-3.3 8.5c-2.2-2.4-3.3-5.3-3.3-8.5S9.8 5.9 12 3.5Z"/><path d="M5 19 19 5"/></svg></span><h3><span class="ru">Льёте в закрытую дверь</span><span class="en">You buy traffic into a closed door</span></h3>
+        <p class="lose"><span class="ru">Из дата-центра домен открывается, а у игрока в стране - нет. Клики куплены, регистраций не будет</span><span class="en">From a data centre the domain opens; for the player in-country it does not. The clicks are paid for, the signups never come</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Мерит из нужных стран и сама поднимает подозрение на блокировку. Решение остаётся за человеком</span><span class="en">Probes from the countries you care about and raises a blocking suspicion itself. The call stays with a human</span></p>
       </article>
 
       <article class="loss-i">
-        <h3><span class="ru">Домен перестал быть вашим</span><span class="en">The domain stopped being yours</span></h3>
-        <p class="lose"><span class="ru">Пропущенное продление уносит имя вместе с трафиком, ссылками и доверием поисковика. Выкупить обратно дороже, чем продлить, а иногда уже невозможно</span><span class="en">A missed renewal takes the name away along with the traffic, the backlinks and the trust you built. Buying it back costs more than renewing - and sometimes it is simply gone</span></p>
-        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Тянет сроки из кабинетов регистраторов, кладёт домен в «Требуют внимания» заранее и напоминает за 30 и 7 дней, а с автопродлением - за 7 и 1. Календарь продлений выгружается в ICS, так что срок виден в обычном календаре команды</span><span class="en">Pulls expiry dates from the registrar accounts, puts the domain into “Needs attention” ahead of time and reminds you 30 and 7 days out - or 7 and 1 when auto-renew is on. The renewal calendar exports to ICS, so the date sits in the team's normal calendar</span></p>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 14v3"/><circle cx="12" cy="19" r=".6" fill="currentColor" stroke="none"/></svg></span><h3><span class="ru">Домен перестал быть вашим</span><span class="en">The domain stopped being yours</span></h3>
+        <p class="lose"><span class="ru">Пропущенное продление уносит имя вместе с трафиком и ссылками. Выкупить обратно дороже, чем продлить</span><span class="en">A missed renewal takes the name away with the traffic and the backlinks. Buying it back costs more than renewing</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Тянет сроки из кабинетов регистраторов и напоминает за 30 и 7 дней. Календарь продлений - в календаре команды</span><span class="en">Pulls expiry dates from the registrar accounts and reminds you 30 and 7 days out. The renewal calendar lands in the team calendar</span></p>
       </article>
 
       <article class="loss-i">
-        <h3><span class="ru">Игроков уводят на чужой сайт</span><span class="en">Your players get handed to someone else</span></h3>
-        <p class="lose"><span class="ru">Подменённый редирект или клоакинг отдаёт ваш трафик другому проекту. Проверка «с сервера» показывает белую заглушку и говорит, что всё хорошо</span><span class="en">A swapped redirect or cloaking hands your traffic to another project. A check “from the server” sees a white stub page and reports that all is well</span></p>
-        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Судит увод по замеру из страны, а не из дата-центра: в списке «Уводят» виден настоящий адрес назначения, по нему же группируются случаи и уходит алерт. Если в странах всё открывается - тревоги нет, а если свежих замеров нет - верим прямой проверке, молчать про настоящий угон нельзя</span><span class="en">Judges a hijack by the in-country probe, not from a data centre: the “Redirecting away” list shows the real destination, cases group by it and the alert carries it. If the countries open fine, there is no alarm; if no fresh probe exists, the direct check decides - staying silent about a real hijack is not an option</span></p>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><path d="M3 12h9"/><path d="m9 8 4 4-4 4"/><path d="M15 5h6v6"/><path d="m21 5-7 7"/></svg></span><h3><span class="ru">Игроков уводят на чужой сайт</span><span class="en">Your players get handed to someone else</span></h3>
+        <p class="lose"><span class="ru">Подменённый редирект отдаёт ваш трафик другому проекту. Проверка с сервера показывает заглушку и говорит, что всё хорошо</span><span class="en">A swapped redirect hands your traffic to another project. A check from the server sees a stub page and reports all is well</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Судит увод по замеру из страны, а не из дата-центра, и показывает настоящий адрес назначения</span><span class="en">Judges a hijack by the in-country probe, not from a data centre, and shows the real destination</span></p>
       </article>
 
       <article class="loss-i">
-        <h3><span class="ru">Домен тихо выпал из поиска</span><span class="en">The domain quietly dropped out of search</span></h3>
-        <p class="lose"><span class="ru">Склейка, выпадение из индекса, фильтр - органика исчезает без единого сообщения. В отчёте это видно через месяц, когда возвращать позиции уже дорого</span><span class="en">A merge, a drop from the index, a filter - organic traffic disappears without a single message. The report shows it a month later, when getting the positions back is already expensive</span></p>
-        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Подключает к домену Яндекс.Вебмастер и Google Search Console: выпадение из поиска, склейка и прочие виды приходят событием в карточку домена и в алерты, с запросами и кликами рядом. Одно событие - одно сообщение, повтором не будит</span><span class="en">Connects Yandex.Webmaster and Google Search Console to the domain: a drop from search, a merge and the rest arrive as events on the domain card and in the alerts, with queries and clicks next to them. One event, one message - it does not wake you twice</span></p>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m19.5 19.5-4-4"/><path d="M8 8.5v4.5M8 13l2.5-2.5M8 13l-2.5-2.5"/><path d="M13 8.5v2"/></svg></span><h3><span class="ru">Домен тихо выпал из поиска</span><span class="en">The domain quietly dropped out of search</span></h3>
+        <p class="lose"><span class="ru">Склейка, выпадение из индекса, фильтр - органика исчезает молча. В отчёте это видно через месяц</span><span class="en">A merge, a drop from the index, a filter - organic traffic disappears silently. The report shows it a month later</span></p>
+        <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Яндекс.Вебмастер и Search Console приходят событием в карточку домена и в алерты. Одно событие - одно сообщение</span><span class="en">Yandex.Webmaster and Search Console arrive as events on the domain card and in the alerts. One event, one message</span></p>
       </article>
 
     </div>
@@ -537,9 +548,9 @@
         <p><span class="ru">Система сама обходит домены и адреса лендингов и показывает, что не открывается - до того, как об этом напишут в чате</span><span class="en">The system walks the domains and landing URLs itself and shows what is down - before anyone posts about it in chat</span></p>
       </div>
       <div class="adv-i">
-        <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 20V9"/></svg></span>
-        <h3><span class="ru">Ничего не теряется</span><span class="en">Nothing gets lost</span></h3>
-        <p><span class="ru">Домен, срок продления, кто завёл и что менял - в одном месте, а не в чьём-то файле и переписке</span><span class="en">The domain, its expiry, who added it and what they changed - in one place, not in someone's file and a chat thread</span></p>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v4h4"/><path d="M12 8v4.5l3 1.8"/></svg></span>
+        <h3><span class="ru">Вся история - в карточке домена</span><span class="en">The whole history sits on the domain card</span></h3>
+        <p><span class="ru">Кто завёл, кто менял NS и адрес, когда продлевали - видно в самом домене, с датой и автором. Человек ушёл из команды - контекст остался</span><span class="en">Who created it, who changed the NS and the URL, when it was renewed - all on the domain itself, with date and author. People leave the team, the context stays</span></p>
       </div>
       <div class="adv-i">
         <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
@@ -612,6 +623,11 @@
     </div>
   </div>
   <div class="stage" id="s-stage"><div class="track" id="s-track"></div></div>
+  <p class="zoomhint">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>
+    <span class="ru">Нажмите на экран - откроется крупно, там же можно листать</span>
+    <span class="en">Click a screen to open it large - you can flip through it there too</span>
+  </p>
   <div class="wrap slider-nav">
     <button class="arr" id="s-prev" aria-label="Назад"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></button>
     <span class="count" id="s-count"></span>
@@ -623,11 +639,6 @@
       <p id="s-detail"></p>
     </article>
   </div>
-  <p class="zoomhint">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>
-    <span class="ru">Нажмите на экран - откроется крупно, там же можно листать</span>
-    <span class="en">Click a screen to open it large - you can flip through it there too</span>
-  </p>
 </section>
 
 <!-- 6. Что нужно от вас ────────────────────────────────────── -->
