@@ -433,6 +433,15 @@
            box-shadow:0 8px 20px rgb(29 78 216 / .16),0 1px 2px rgb(16 24 40 / .06)}
   .loss-ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   @media (max-width:1000px){.loss{grid-template-rows:none}.loss-i{grid-row:auto}}
+  /* Финал: цена и периметр одной строкой каждая */
+  .finfacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 48px;max-width:860px;margin:34px auto 0;text-align:left}
+  .finfacts p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.55}
+  .finfacts b{display:block;margin-bottom:5px;color:var(--fg);font-size:15.5px;font-weight:600;letter-spacing:-.01em}
+  @media (max-width:760px){.finfacts{grid-template-columns:1fr;gap:18px;margin-top:28px}}
+  /* На тёмной полосе акцент светлее: тёмно-синий на графите не читался (2,6:1) */
+  .more .rub-chip{color:#7FB0FF;border-color:rgb(127 176 255 / .32)}
+  .more .rub-chip i{background:#7FB0FF}
+  .more .detail-label{color:#7FB0FF}
 </style>
 </head>
 <body>
@@ -533,7 +542,7 @@
       </div>
       <div class="adv-i">
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v4h4"/><path d="M12 8v4.5l3 1.8"/></svg></span>
-        <h3><span class="ru">Вся история - в карточке домена</span><span class="en">The whole history sits on the domain card</span></h3>
+        <h3><span class="ru">Вся история - в карточке домена</span><span class="en">History lives on the domain card</span></h3>
         <p><span class="ru">Кто завёл, кто менял NS и адрес, когда продлевали - видно в самом домене, с датой и автором. Человек ушёл из команды - контекст остался</span><span class="en">Who created it, who changed the NS and the URL, when it was renewed - all on the domain itself, with date and author. People leave the team, the context stays</span></p>
       </div>
       <div class="adv-i">
@@ -555,42 +564,6 @@
         <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h8"/><circle cx="19" cy="17" r="2"/></svg></span>
         <h3><span class="ru">Лендинги и домены - одна система</span><span class="en">Landings and domains - one system</span></h3>
         <p><span class="ru">А не две таблицы: адрес сам находит свой домен, общие поля правятся с любой стороны и значение остаётся одно</span><span class="en">Not two spreadsheets: a URL finds its own domain, shared fields are edited from either side and stay a single value</span></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. Поставка и цена ────────────────────────────────────────── -->
-<section class="screen" id="delivery">
-  <div class="wrap deal">
-    <div>
-      <div class="rub"><span class="ru">Поставка</span><span class="en">Delivery</span></div>
-      <h2><span class="ru">Ставится у вас, работает под вашим именем</span><span class="en">Installed at your place, running under your name</span></h2>
-      <ul>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Ставим и запускаем на вашем сервере: сборка, база, вход для команды</span><span class="en">We install and start it on your server: the build, the database, logins for the team</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Переносим таблицы и кабинеты регистраторов, настраиваем проверки, страны и алерты</span><span class="en">We migrate your spreadsheets and registrar accounts, set up the checks, countries and alerts</span></li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg><span class="ru">Собираем под ваш бренд и передаём исходный код - с инструкцией, как обновлять своими силами</span><span class="en">We build it under your brand and hand over the source code - with instructions on updating it yourselves</span></li>
-      </ul>
-    </div>
-    <div class="dealside">
-      <div class="pricecard">
-      <div class="big"><span class="ru">Фиксированная стоимость, один раз</span><span class="en">A fixed price, paid once</span></div>
-      <p><span class="ru">Без подписки, без платы за пользователей и за домены. Цифру называю на демо - под ваш объём доменов и проектов</span><span class="en">No subscription, no per-user or per-domain fees. I name the figure at the demo - based on your volume of domains and projects</span></p>
-      <a class="btn btn-main" href="https://t.me/denis_pdm" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-        <span class="ru">Спросить цену в Telegram</span><span class="en">Ask the price on Telegram</span>
-        </a>
-      </div>
-      <div class="outcard">
-        <div class="outcard-h">
-          <svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
-          <span class="ru">Что уходит наружу</span><span class="en">What leaves the perimeter</span>
-        </div>
-        <ul>
-          <li><span class="ru">Только имена доменов и адреса лендингов - и только тем, без кого проверка не работает</span><span class="en">Only domain names and landing URLs - and only to the services a check cannot run without</span></li>
-          <li><span class="ru">Карту исходящего трафика пришлю до покупки</span><span class="en">I send the outbound traffic map before the purchase</span></li>
-          <li><span class="ru">Ни игроков, ни ставок, ни выплат панель не видит и не хранит</span><span class="en">The panel never sees or stores players, bets or payouts</span></li>
-        </ul>
       </div>
     </div>
   </div>
@@ -625,37 +598,6 @@
   </div>
 </section>
 
-<!-- 6. Что нужно от вас ────────────────────────────────────── -->
-<section class="screen" id="start">
-  <div class="wrap">
-    <div class="rub"><span class="ru">Начало работы</span><span class="en">Getting started</span></div>
-    <h2 class="wide"><span class="ru">Что нужно от вас, чтобы начать</span><span class="en">What we need from you to start</span></h2>
-    <div class="need">
-      <div class="need-i">
-        <h3><span class="ru">Сервер</span><span class="en">A server</span></h3>
-        <p><span class="ru">Linux с Docker - на нём живут панель, база и вся история. Ваше железо или ваше облако, нам всё равно</span><span class="en">Linux with Docker - it holds the panel, the database and the whole history. Your hardware or your cloud, either works</span></p>
-      </div>
-      <div class="need-i">
-        <h3><span class="ru">Доступы к кабинетам регистраторов</span><span class="en">Access to the registrar accounts</span></h3>
-        <p><span class="ru">Ключ API от каждого кабинета, чтобы сроки продления и NS-записи подтягивались сами, а не руками</span><span class="en">An API key per account, so renewal dates and NS records sync themselves instead of being typed in</span></p>
-      </div>
-      <div class="need-i">
-        <h3><span class="ru">Текущие таблицы</span><span class="en">Your current spreadsheets</span></h3>
-        <p><span class="ru">Excel, CSV или ссылка на Google-таблицу в любом виде - перенос, разбор шапки и поиск дублей на нас</span><span class="en">Excel, CSV or a Google Sheets link in any shape - the migration, the header matching and the duplicate check are on us</span></p>
-      </div>
-      <div class="need-i">
-        <h3><span class="ru">Один человек с вашей стороны</span><span class="en">One person on your side</span></h3>
-        <p><span class="ru">Кто решает, какие проекты завести, кому какой доступ открыть и куда слать алерты. Дальше панель работает сама</span><span class="en">Who decides which projects to create, who gets which access and where the alerts go. After that the panel runs itself</span></p>
-      </div>
-    </div>
-    <div class="when">
-      <span class="when-l"><span class="ru">Сколько это займёт</span><span class="en">How long it takes</span></span>
-      <span><b><span class="ru">День установки</span><span class="en">Install day</span></b> <span class="ru">- панель открывается, ваши таблицы уже внутри</span><span class="en">- the panel opens with your spreadsheets already inside</span></span>
-      <span><b><span class="ru">Первая неделя</span><span class="en">First week</span></b> <span class="ru">- остальное настроено и запущено</span><span class="en">- everything else is set up and running</span></span>
-    </div>
-  </div>
-</section>
-
 <!-- Финал ─────────────────────────────────────────────────────── -->
 <section class="final">
   <div class="wrap">
@@ -666,6 +608,10 @@
         <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
         <span class="ru">Написать в Telegram</span><span class="en">Message on Telegram</span>
       </a>
+    </div>
+    <div class="finfacts">
+      <p><b><span class="ru">Фиксированная стоимость, один раз</span><span class="en">A fixed price, paid once</span></b><span class="ru">Без подписки, без платы за пользователей и за домены. Цифру называю на демо - под ваш объём доменов и проектов</span><span class="en">No subscription, no per-user or per-domain fees. I name the figure at the demo - based on your volume of domains and projects</span></p>
+      <p><b><span class="ru">Наружу уходят только имена доменов</span><span class="en">Only domain names leave the perimeter</span></b><span class="ru">И адреса лендингов - только тем, без кого проверка не работает. Карту исходящего трафика пришлю до покупки</span><span class="en">And landing URLs - only to the services a check cannot run without. I send the outbound traffic map before the purchase</span></p>
     </div>
     <p class="ps"><span class="ru">Пишите сразу с объёмом портфеля - будет предметнее</span><span class="en">Write with your portfolio size up front - the conversation will be more concrete</span></p>
   </div>
