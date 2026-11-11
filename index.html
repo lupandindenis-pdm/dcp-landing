@@ -427,11 +427,13 @@
   .when-l{grid-column:1 / -1;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
   @media (max-width:1000px){.when{grid-template-columns:1fr;gap:16px}}
   /* ── Цена ошибки: значок проблемы ───────────────────────── */
-  .loss-i h3{display:flex;align-items:center;gap:13px;margin-bottom:14px}
-  .loss-ic{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;
+  .loss{grid-template-rows:repeat(2,auto auto auto auto)}
+  .loss-i{grid-row:span 4;row-gap:4px}
+  .loss-ic{display:grid;place-items:center;width:46px;height:46px;margin-bottom:6px;border-radius:50%;
            background:var(--card);border:1px solid var(--b1);color:var(--primary);
-           box-shadow:0 6px 16px rgb(29 78 216 / .14),0 1px 2px rgb(16 24 40 / .06)}
-  .loss-ic svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+           box-shadow:0 8px 20px rgb(29 78 216 / .16),0 1px 2px rgb(16 24 40 / .06)}
+  .loss-ic svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  @media (max-width:1000px){.loss{grid-template-rows:none}.loss-i{grid-row:auto}}
   /* Финал: цена и периметр одной строкой каждая */
   .finfacts{max-width:540px;margin:34px auto 0;text-align:center}
   .finfacts p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.55}
@@ -466,21 +468,17 @@
   /* Лид героя: мельче, но контрастнее */
   .hero .say{font-size:16.5px;line-height:1.62;color:var(--fg-2)}
   /* Вторая кнопка героя - текстовая ссылка с подчёркиванием */
-  .hero .cta .btn-ghost{border:0;background:none;padding:13px 2px;color:var(--fg-2);font-weight:600;
-    text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px;
-    text-decoration-color:rgb(14 17 22 / .28);transition:color .15s,text-decoration-color .15s}
-  .hero .cta .btn-ghost:hover{background:none;color:#0E1116;text-decoration-color:#0E1116}
+  .hero .cta .btn-ghost{border:0;background:none;padding:13px 2px;margin-left:16px;color:var(--fg-2);
+    font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;
+    text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:1.5px;
+    text-decoration-color:rgb(14 17 22 / .28);transition:color .25s ease,text-decoration-color .25s ease}
+  .hero .cta .btn-ghost:hover{background:none;color:var(--primary);text-decoration-color:var(--primary)}
   .hero .cta{gap:22px;align-items:center}
   /* Ховер синих кнопок - чёрный фон, белый текст */
   .btn-main:hover{background:#0E1116;color:#fff}
   .btn-main:hover svg{stroke:#fff}
-  /* «Шесть вещей»: значок в строке заголовка, ярче синий */
-  .adv-i h3{display:flex;align-items:flex-start;gap:12px;line-height:1.35}
-  .adv-i .ic{margin-top:-2px}
-  .adv-i .ic{width:36px;height:36px;flex:none;margin-bottom:0;border-radius:10px}
-  .adv-i .ic svg{width:18px;height:18px}
+  /* Значки «Шести вещей» - ярче синий */
   #pains .adv-i .ic{color:#4C9BFF}
-  .adv{gap:30px 40px}
 </style>
 </head>
 <body>
@@ -510,7 +508,7 @@
       <span class="en">A control panel for your domain portfolio</span>
     </h1>
     <p class="say">
-      <span class="ru">Домены всего холдинга в одной точке учёта и управления: доступы по ролям и проектам, проверки доступности, алерты и вся история по каждому домену в его карточке <b class="onlynarrow">Ставится на ваш сервер, работает под вашим именем</b></span>
+      <span class="ru">Домены всего холдинга в одной точке учёта и управления: доступы по&nbsp;ролям и проектам, проверки доступности, алерты и вся история по&nbsp;каждому домену в его карточке <b class="onlynarrow">Ставится на ваш сервер, работает под вашим именем</b></span>
       <span class="en">Every domain in the holding in one place to run and account for: access by role and project, availability checks, alerts and the whole history of each domain on its own card <b class="onlynarrow">Installed on your server, running under your own name</b></span>
     </p>
     <div class="cta">
@@ -570,25 +568,25 @@
     <div class="loss">
 
       <article class="loss-i">
-        <h3><span class="loss-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.3 3.3 8.5s-1.1 6.1-3.3 8.5c-2.2-2.4-3.3-5.3-3.3-8.5S9.8 5.9 12 3.5Z"/><path d="M5 19 19 5"/></svg></span><span class="ru">Льёте в закрытую дверь</span><span class="en">You buy traffic into a closed door</span></h3>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.2 2.4 3.3 5.3 3.3 8.5s-1.1 6.1-3.3 8.5c-2.2-2.4-3.3-5.3-3.3-8.5S9.8 5.9 12 3.5Z"/><path d="M5 19 19 5"/></svg></span><h3><span class="ru">Льёте в закрытую дверь</span><span class="en">You buy traffic into a closed door</span></h3>
         <p class="lose"><span class="ru">Из дата-центра домен открывается, а у игрока в стране - нет. Клики куплены, регистраций не будет</span><span class="en">From a data centre the domain opens; for the player in-country it does not. The clicks are paid for, the signups never come</span></p>
         <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Мерит из нужных стран и сама поднимает подозрение на блокировку. Решение остаётся за человеком</span><span class="en">Probes from the countries you care about and raises a blocking suspicion itself. The call stays with a human</span></p>
       </article>
 
       <article class="loss-i">
-        <h3><span class="loss-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 14v3"/><circle cx="12" cy="19" r=".6" fill="currentColor" stroke="none"/></svg></span><span class="ru">Домен перестал быть вашим</span><span class="en">The domain stopped being yours</span></h3>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M12 14v3"/><circle cx="12" cy="19" r=".6" fill="currentColor" stroke="none"/></svg></span><h3><span class="ru">Домен перестал быть вашим</span><span class="en">The domain stopped being yours</span></h3>
         <p class="lose"><span class="ru">Пропущенное продление уносит имя вместе с трафиком и ссылками. Выкупить обратно дороже, чем продлить</span><span class="en">A missed renewal takes the name away with the traffic and the backlinks. Buying it back costs more than renewing</span></p>
         <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Тянет сроки из кабинетов регистраторов и напоминает за 30 и 7 дней. Календарь продлений - в календаре команды</span><span class="en">Pulls expiry dates from the registrar accounts and reminds you 30 and 7 days out. The renewal calendar lands in the team calendar</span></p>
       </article>
 
       <article class="loss-i">
-        <h3><span class="loss-ic"><svg viewBox="0 0 24 24"><path d="M3 12h9"/><path d="m9 8 4 4-4 4"/><path d="M15 5h6v6"/><path d="m21 5-7 7"/></svg></span><span class="ru">Игроков уводят на чужой сайт</span><span class="en">Your players get handed to someone else</span></h3>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><path d="M3 12h9"/><path d="m9 8 4 4-4 4"/><path d="M15 5h6v6"/><path d="m21 5-7 7"/></svg></span><h3><span class="ru">Игроков уводят на чужой сайт</span><span class="en">Your players get handed to someone else</span></h3>
         <p class="lose"><span class="ru">Подменённый редирект отдаёт ваш трафик другому проекту. Проверка с сервера показывает заглушку и говорит, что всё хорошо</span><span class="en">A swapped redirect hands your traffic to another project. A check from the server sees a stub page and reports all is well</span></p>
         <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Судит увод по замеру из страны, а не из дата-центра, и показывает настоящий адрес назначения</span><span class="en">Judges a hijack by the in-country probe, not from a data centre, and shows the real destination</span></p>
       </article>
 
       <article class="loss-i">
-        <h3><span class="loss-ic"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m19.5 19.5-4-4"/><path d="M8 8.5v4.5M8 13l2.5-2.5M8 13l-2.5-2.5"/><path d="M13 8.5v2"/></svg></span><span class="ru">Домен тихо выпал из поиска</span><span class="en">The domain quietly dropped out of search</span></h3>
+        <span class="loss-ic"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m19.5 19.5-4-4"/><path d="M8 8.5v4.5M8 13l2.5-2.5M8 13l-2.5-2.5"/><path d="M13 8.5v2"/></svg></span><h3><span class="ru">Домен тихо выпал из поиска</span><span class="en">The domain quietly dropped out of search</span></h3>
         <p class="lose"><span class="ru">Склейка, выпадение из индекса, фильтр - органика исчезает молча. В отчёте это видно через месяц</span><span class="en">A merge, a drop from the index, a filter - organic traffic disappears silently. The report shows it a month later</span></p>
         <p class="fix"><span class="lab"><span class="ru">Панель</span><span class="en">The panel</span></span><span class="ru">Яндекс.Вебмастер и Search Console приходят событием в карточку домена и в алерты. Одно событие - одно сообщение</span><span class="en">Yandex.Webmaster and Search Console arrive as events on the domain card and in the alerts. One event, one message</span></p>
       </article>
@@ -604,27 +602,33 @@
     <h2 class="wide"><span class="ru">Шесть вещей, которые перестают болеть</span><span class="en">Six things that stop hurting</span></h2>
     <div class="adv">
       <div class="adv-i">
-        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></span><span class="ru">Видно, что сломалось</span><span class="en">You see what broke</span></h3>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></span>
+        <h3><span class="ru">Видно, что сломалось</span><span class="en">You see what broke</span></h3>
         <p><span class="ru">Система сама обходит домены и адреса лендингов и показывает, что не открывается - до того, как об этом напишут в чате</span><span class="en">The system walks the domains and landing URLs itself and shows what is down - before anyone posts about it in chat</span></p>
       </div>
       <div class="adv-i">
-        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v4h4"/><path d="M12 8v4.5l3 1.8"/></svg></span><span class="ru">Вся история - в карточке домена</span><span class="en">History lives on the domain card</span></h3>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v4h4"/><path d="M12 8v4.5l3 1.8"/></svg></span>
+        <h3><span class="ru">Вся история - в карточке домена</span><span class="en">History lives on the domain card</span></h3>
         <p><span class="ru">Кто завёл, кто менял NS и адрес, когда продлевали - видно в самом домене, с датой и автором. Человек ушёл из команды - контекст остался</span><span class="en">Who created it, who changed the NS and the URL, when it was renewed - all on the domain itself, with date and author. People leave the team, the context stays</span></p>
       </div>
       <div class="adv-i">
-        <h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="ru">Каждый видит своё</span><span class="en">Everyone sees their own</span></h3>
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+        <h3><span class="ru">Каждый видит своё</span><span class="en">Everyone sees their own</span></h3>
         <p><span class="ru">Доступ выдаётся на проект, чувствительные домены лежат в закрытых папках - их видят только те, кому открыли</span><span class="en">Access is granted per project, sensitive domains sit in private folders - visible only to the people you name</span></p>
       </div>
       <div class="adv-i">
-        <h3><span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m8 12 3 3 5-6"/></svg></span><span class="ru">Код 200 ещё не значит «наш сайт»</span><span class="en">A 200 does not mean “our site”</span></h3>
+        <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m8 12 3 3 5-6"/></svg></span>
+        <h3><span class="ru">Код 200 ещё не значит «наш сайт»</span><span class="en">A 200 does not mean “our site”</span></h3>
         <p><span class="ru">Парковка регистратора, страница «домен продаётся», заглушка хостинга и пустая страница распознаются отдельно</span><span class="en">A registrar parking page, a “domain for sale” page, a hosting stub and an empty page are each detected separately</span></p>
       </div>
       <div class="adv-i">
-        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span><span class="ru">Без ежечасного спама</span><span class="en">No hourly spam</span></h3>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span>
+        <h3><span class="ru">Без ежечасного спама</span><span class="en">No hourly spam</span></h3>
         <p><span class="ru">Сообщение приходит на смену состояния - «лёг» и «снова открывается», а не каждый час, пока беда жива</span><span class="en">A message arrives on a state change - “down” and “up again”, not every hour while the problem is alive</span></p>
       </div>
       <div class="adv-i">
-        <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h8"/><circle cx="19" cy="17" r="2"/></svg></span><span class="ru">Лендинги и домены - одна система</span><span class="en">Landings and domains - one system</span></h3>
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h8"/><circle cx="19" cy="17" r="2"/></svg></span>
+        <h3><span class="ru">Лендинги и домены - одна система</span><span class="en">Landings and domains - one system</span></h3>
         <p><span class="ru">А не две таблицы: адрес сам находит свой домен, общие поля правятся с любой стороны и значение остаётся одно</span><span class="en">Not two spreadsheets: a URL finds its own domain, shared fields are edited from either side and stay a single value</span></p>
       </div>
     </div>
