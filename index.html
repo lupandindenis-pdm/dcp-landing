@@ -401,7 +401,8 @@
   /* Карточка условий - тёмная, как полоса со скринами: видно кромку и выравнивание с заголовком */
   .hterms{--card:#E8EBF0; --fg:#0E1116; --fg-2:#1B212B; --dim:#4C5663; --faint:#5E6877;
           --b1:rgb(14 17 22 / .12); --b2:rgb(14 17 22 / .22);
-          background:#E8EBF0!important;color:var(--fg);border-color:rgb(14 17 22 / .10)!important}
+          background:#E8EBF0!important;color:var(--fg);
+          border-style:dashed!important;border-color:rgb(14 17 22 / .22)!important}
   .hterms-h{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
   .hterms ul{margin:0;padding:0;list-style:none}
   .hterms li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:0 12px;padding:12px 0;border-top:1px solid var(--b1)}
@@ -466,6 +467,15 @@
   .more .detailwrap{margin-top:28px}
   /* Лид героя: мельче, но контрастнее */
   .hero .say{font-size:16.5px;line-height:1.62;color:var(--fg-2)}
+  /* Вторая кнопка героя - текстовая ссылка с подчёркиванием */
+  .hero .cta .btn-ghost{border:0;background:none;padding:13px 2px;color:var(--fg-2);font-weight:600;
+    text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:1.5px;
+    text-decoration-color:rgb(14 17 22 / .28);transition:color .15s,text-decoration-color .15s}
+  .hero .cta .btn-ghost:hover{background:none;color:#0E1116;text-decoration-color:#0E1116}
+  .hero .cta{gap:22px;align-items:center}
+  /* Ховер синих кнопок - чёрный фон, белый текст */
+  .btn-main:hover{background:#0E1116;color:#fff}
+  .btn-main:hover svg{stroke:#fff}
 </style>
 </head>
 <body>
