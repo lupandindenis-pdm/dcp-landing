@@ -10,7 +10,7 @@
 <meta property="og:title" content="Domain panel - панель управления доменами холдинга">
 <meta property="og:description" content="Портфель доменов всего холдинга в одной точке управления и учёта. Self-hosted, white-label, исходный код передаётся">
 <meta property="og:url" content="https://domainoffer-chi.vercel.app/">
-<meta property="og:image" content="https://domainoffer-chi.vercel.app/og.jpg?v=2">
+<meta property="og:image" content="https://domainoffer-chi.vercel.app/og.jpg?v=3">
 <meta property="og:image:width" content="2400">
 <meta property="og:image:height" content="1260">
 <meta name="twitter:card" content="summary_large_image">
@@ -726,6 +726,30 @@
   /* Тихая линия между двумя тёмными блоками: «Шесть вещей» и слайдер. */
   #more::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(calc(var(--wrap) - 48px),calc(100% - 48px));height:1px;
     background:linear-gradient(90deg,transparent,rgb(255 255 255 / .2) 12%,rgb(255 255 255 / .2) 88%,transparent)}
+  /* Первый экран: кадр продукта справа уходит за край, условия «из коробки» - плашками под кнопкой. */
+  .hchecks{display:none}
+  .hshot{margin:30px 0 0;border:0;border-radius:12px;background:none;overflow:hidden;box-shadow:0 0 0 1px rgb(12 33 67 / .16),0 24px 60px -24px rgb(12 33 67 / .5)}
+  .hshot img{display:block;width:100%;height:auto;aspect-ratio:8 / 5}
+  @media (min-width:1001px){
+    .hero .wrap{grid-template-columns:minmax(0,700px) minmax(0,1fr)}
+    .hterms.chk{display:none}
+    .hshot{position:relative;align-self:stretch;margin:0;overflow:visible;border-radius:0;box-shadow:none}
+    .hshot img{position:absolute;top:6px;left:8px;width:840px;max-width:none;border-radius:16px;
+      box-shadow:0 0 0 1px rgb(12 33 67 / .16),0 40px 90px -30px rgb(12 33 67 / .6),0 0 80px -20px rgb(29 78 216 / .35)}
+    .hchecks{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:9px;max-width:600px}
+    .hchecks li{display:inline-flex;align-items:center;gap:8px;padding:8px 15px 8px 11px;border:1px solid var(--b2);border-radius:999px;background:#fff;font-size:14px;font-weight:500;color:var(--fg-2)}
+    .hchecks svg{width:15px;height:15px;flex:none;fill:none;stroke:var(--primary);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  }
+  @media (min-width:1001px) and (max-width:1179px){
+    .hero .wrap{grid-template-columns:minmax(0,560px) minmax(0,1fr)}
+    .hero h1{font-size:48px}
+    .hforb{border-radius:18px}
+    .hshot img{width:780px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    html.mo .hshot{animation:dp-rise .9s cubic-bezier(.2,.7,.2,1) .25s backwards}
+    html.mo .hchecks{animation:dp-rise .8s cubic-bezier(.2,.7,.2,1) .42s backwards}
+  }
 </style>
 </head>
 <body>
@@ -766,7 +790,14 @@
       </a>
       <a class="btn btn-ghost" href="#loss"><span class="ru">Где теряются деньги</span><span class="en">Where the money leaks</span></a>
     </div>
+    <ul class="hchecks">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span class="ru">На вашем сервере</span><span class="en">On your server</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span class="ru">Под вашим брендом</span><span class="en">Under your brand</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span class="ru">Исходный код передаётся</span><span class="en">Source code handed over</span></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span class="ru">Один платёж, без подписки</span><span class="en">One payment, no subscription</span></li>
+    </ul>
     </div>
+    <div class="hshot shot"><img src="shots/registry.jpg" data-en="shots/en/registry.jpg" alt="Domain panel" width="3200" height="2000"></div>
     <aside class="hterms chk">
       <div class="hterms-t"><span class="ru">Ставится из коробки</span><span class="en">Out of the box</span></div>
       <ul>
