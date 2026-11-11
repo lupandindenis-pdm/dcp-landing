@@ -693,21 +693,21 @@
     #more .detailwrap{margin-top:22px}
     #more .detail{max-width:calc(min(64vh,600px) * 1.6);padding:18px 26px}
     #more #s-chips{display:none}
-    #more .toc{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgb(255 255 255 / .1);border-bottom:1px solid rgb(255 255 255 / .1);margin-top:22px}
-    #more .toc > div{padding:16px 22px 16px;border-left:1px dashed rgb(255 255 255 / .12)}
-    #more .toc > div:nth-child(odd){border-left:0;padding-left:0}
-    #more .toc > div:nth-child(n+3){border-top:1px dashed rgb(255 255 255 / .12)}
-    #more .toc h4{margin:0 0 8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5EA6FF;font-weight:500}
-    #more .toc p{margin:0 0 0 -10px;display:flex;flex-wrap:wrap;gap:4px 4px}
-    #more .toc button{font-size:14.5px;line-height:1.3;color:#A3ADBB;padding:5px 10px;border-radius:8px;border:0;background:none;transition:color .15s,background .15s}
-    #more .toc button:hover{color:#fff;background:rgb(255 255 255 / .08)}
-    #more .toc button[aria-pressed="true"]{background:var(--primary);color:#fff;font-weight:600}
+    #more .toc{display:grid;grid-template-columns:repeat(2,auto);justify-content:start;gap:22px 0;margin-top:24px}
+    #more .toc > div{padding:2px 0 2px 20px;margin-left:20px;border-left:1px solid rgb(255 255 255 / .1)}
+    #more .toc > div:nth-child(odd){padding-left:0;margin-left:0;border-left:0}
+    #more .toc h4{display:flex;align-items:center;gap:8px;margin:0 0 12px;white-space:nowrap;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#5EA6FF;font-weight:500}
+    #more .toc h4 svg{width:15px;height:15px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    #more .toc p{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:6px;margin:0}
+    #more .toc > div:nth-child(n+3) p{grid-template-columns:repeat(2,auto)}
+    #more .toc button{text-align:left;white-space:nowrap;font-size:14px;line-height:1.3;color:#C9D0DB;padding:8px 10px;border-radius:9px;border:1px solid rgb(255 255 255 / .12);background:rgb(255 255 255 / .035);transition:color .15s,background .15s,border-color .15s}
+    #more .toc button:hover{color:#fff;background:rgb(255 255 255 / .09);border-color:rgb(255 255 255 / .24)}
+    #more .toc button[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
   }
-  @media (min-width:1100px){
-    #more .toc{grid-template-columns:1.15fr 1.25fr 1fr 1fr}
-    #more .toc > div:nth-child(odd){border-left:1px dashed rgb(255 255 255 / .12);padding-left:22px}
-    #more .toc > div:first-child{border-left:0;padding-left:0}
-    #more .toc > div:nth-child(n+3){border-top:0}
+  @media (min-width:1180px){
+    #more .toc{grid-template-columns:repeat(4,auto);justify-content:space-between;gap:0}
+    #more .toc > div:nth-child(odd){padding-left:20px;margin-left:20px;border-left:1px solid rgb(255 255 255 / .1)}
+    #more .toc > div:first-child{padding-left:0;margin-left:0;border-left:0}
   }
   @media (min-width:1320px){
     #more .slider-nav{position:absolute;inset:0;max-width:none;width:auto;margin:0;padding:0;pointer-events:none;display:block}
@@ -778,7 +778,7 @@
     </aside>
     <ul class="hfacts">
       <li><b>8</b><span><span class="ru">регистраторов: домены, сроки и&nbsp;NS приезжают сами</span><span class="en">registrars: domains, dates and&nbsp;NS arrive on their own</span></span></li>
-      <li><b>40+</b><span><span class="ru">стран: видно, где адрес открывается, а&nbsp;где нет</span><span class="en">countries: you see where the URL opens and where it does&nbsp;not</span></span></li>
+      <li><b>40+</b><span><span class="ru">стран для проверки доступности</span><span class="en">countries for availability checks</span></span></li>
       <li><b><span class="ru">1 час</span><span class="en">1 hour</span></b><span><span class="ru">между проверками лендингов в&nbsp;работе</span><span class="en">between checks of landings in&nbsp;work</span></span></li>
       <li><b>2FA</b><span><span class="ru">роли по&nbsp;проектам и&nbsp;журнал всех правок</span><span class="en">roles per project and a&nbsp;log of every change</span></span></li>
     </ul>
@@ -831,7 +831,7 @@
     <div class="pb">
       <div class="pb-i big">
         <div class="pb-tx"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4"/><path d="M3 4v4h4"/><path d="M12 8v4.5l3 1.8"/></svg></span><h3><span class="ru">Вся история - в карточке домена</span><span class="en">History lives on the domain card</span></h3><p><span class="ru">Кто завёл, кто менял NS и адрес, когда продлевали - видно в самом домене, с датой и автором. <b>Человек ушёл из команды - контекст остался</b></span><span class="en">Who created it, who changed the NS and the URL, when it was renewed - all on the domain itself, with date and author. <b>People leave the team, the context stays</b></span></p></div>
-        <div class="pb-ill pb-hist" aria-hidden="true"><div><i></i><b><span class="ru">Завёл домен</span><span class="en">Created the domain</span></b><em><span class="ru">автор · дата</span><span class="en">author · date</span></em></div><div><i></i><b><span class="ru">Сменил NS</span><span class="en">Changed the NS</span></b><em><span class="ru">автор · дата</span><span class="en">author · date</span></em></div><div><i></i><b><span class="ru">Сменил адрес лендинга</span><span class="en">Changed the landing URL</span></b><em><span class="ru">автор · дата</span><span class="en">author · date</span></em></div><div><i></i><b><span class="ru">Продлил</span><span class="en">Renewed</span></b><em><span class="ru">автор · дата</span><span class="en">author · date</span></em></div></div>
+        <div class="pb-ill pb-hist" aria-hidden="true"><div><i></i><b><span class="ru">Завёл домен</span><span class="en">Created the domain</span></b><em><span class="ru">Анна М. · 12 марта</span><span class="en">Anna M. · 12 Mar</span></em></div><div><i></i><b><span class="ru">Сменил NS</span><span class="en">Changed the NS</span></b><em><span class="ru">Павел К. · 3 апреля</span><span class="en">Pavel K. · 3 Apr</span></em></div><div><i></i><b><span class="ru">Сменил адрес лендинга</span><span class="en">Changed the landing URL</span></b><em><span class="ru">Марина Б. · 19 мая</span><span class="en">Marina B. · 19 May</span></em></div><div><i></i><b><span class="ru">Продлил</span><span class="en">Renewed</span></b><em><span class="ru">Анна М. · 2 июня</span><span class="en">Anna M. · 2 Jun</span></em></div></div>
       </div>
       <div class="pb-i">
         <div class="pb-tx"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></span><h3><span class="ru">Видно, что сломалось</span><span class="en">You see what broke</span></h3><p><span class="ru">Система сама обходит домены и адреса лендингов и показывает, что не открывается - <b>до того, как об этом напишут в чате</b></span><span class="en">The system walks the domains and landing URLs itself and shows what is down - <b>before anyone posts about it in chat</b></span></p></div>
@@ -1126,9 +1126,14 @@
       b.addEventListener('click', function () { go(idx); });
       chips.appendChild(b);
     });
-    if (toc) GROUPS.forEach(function (g) {
+    var TOC_IC = ['<path d="M3 12h4l3-8 4 16 3-8h4"/>',
+      '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 4 5.8 4 9s-1.4 6.2-4 9c-2.6-2.8-4-5.8-4-9s1.4-6.2 4-9z"/>',
+      '<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M16 15h2"/>',
+      '<path d="M12 3l8 3v6c0 4.6-3.2 8-8 9-4.8-1-8-4.4-8-9V6z"/><path d="m9 12 2 2 4-4"/>'];
+    if (toc) GROUPS.forEach(function (g, gi) {
       var col = document.createElement('div'), h = document.createElement('h4'), p = document.createElement('p');
-      tocHeads.push([h, g.t]);
+      h.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' + TOC_IC[gi] + '</svg><span></span>';
+      tocHeads.push([h.lastChild, g.t]);
       g.k.forEach(function (k) {
         var idx = ORDER.indexOf(k), b = document.createElement('button');
         b.type = 'button';
